@@ -1,0 +1,132 @@
+.column {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 20rem;
+  margin: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  .dark & {
+    background-color: #1f2937;
+  }
+}
+
+.header {
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+
+  .dark & {
+    border-color: #374151;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.addButton {
+  color: #4b5563;
+
+  &:hover {
+    color: #1f2937;
+  }
+
+  .dark & {
+    color: #9ca3af;
+
+    &:hover {
+      color: #d1d5db;
+    }
+  }
+}
+
+.deleteButton {
+  color: #ef4444;
+
+  &:hover {
+    color: #dc2626;
+  }
+
+  .dark & {
+    color: #f87171;
+
+    &:hover {
+      color: #ef4444;
+    }
+  }
+}
+
+.taskForm {
+  padding: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+
+  .dark & {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: white;
+  }
+}
+
+.formControls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.cancelButton {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+
+  &:hover {
+    color: #1f2937;
+  }
+
+  .dark & {
+    color: #9ca3af;
+
+    &:hover {
+      color: #d1d5db;
+    }
+  }
+}
+
+.submitButton {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.375rem;
+
+  &:hover {
+    background-color: #2563eb;
+  }
+}
+
+.dropArea {
+  flex: 1;
+  padding: 0.5rem;
+  min-height: 100px;
+
+  &.isDraggingOver {
+    background-color: #eff6ff;
+
+    .dark & {
+      background-color: #374151;
+    }
+  }
+}
