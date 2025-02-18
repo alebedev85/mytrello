@@ -1,0 +1,21 @@
+.task {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+  cursor: grab;
+  transition: transform 200ms ease-in-out;
+}
+
+.task:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .task {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
