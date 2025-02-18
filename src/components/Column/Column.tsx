@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { Column as ColumnType, Task } from '../../types';
 import TaskCard from '../TaskCard/TaskCard';
 import { addTask, removeColumn } from '../../store/boardSlice';
-import { FaTrash, FaPlus } from 'react-icons/fa';
+import { FaPlus} from 'react-icons/fa';
+import { IoClose } from "react-icons/io5";
 import styles from './Column.module.scss';
 
 interface Props {
@@ -55,7 +56,7 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
                 onClick={() => dispatch(removeColumn(column.id))}
                 className={styles.deleteButton}
               >
-                <FaTrash />
+                <IoClose />
               </button>
             </div>
           </div>

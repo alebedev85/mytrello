@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { moveTask, addColumn, toggleTheme } from "../../store/boardSlice";
 import Column from "../Column/Column";
+import AddColumnModal from "../AddColumnModal/AddColumnModal";
 import { FaMoon, FaSun, FaPlus } from "react-icons/fa";
 import styles from "./Board.module.scss";
 
@@ -13,7 +14,8 @@ const Board: React.FC = () => {
     (state: RootState) => state.board
   );
   const [newColumnTitle, setNewColumnTitle] = useState("");
-  const [isAddingColumn, setIsAddingColumn] = useState(false);
+  // const [isAddingColumn, setIsAddingColumn] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result;
@@ -49,7 +51,7 @@ const Board: React.FC = () => {
       };
       dispatch(addColumn(newColumn));
       setNewColumnTitle("");
-      setIsAddingColumn(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -62,7 +64,7 @@ const Board: React.FC = () => {
           <h1 className={styles.title}>Mini Trello</h1>
           <div className={styles.controls}>
             <button
-              onClick={() => setIsAddingColumn(true)}
+              onClick={() => setIsModalOpen(true)}
               className={styles.addButton}
             >
               <FaPlus /> Add Column
@@ -76,30 +78,8 @@ const Board: React.FC = () => {
           </div>
         </div>
 
-        {isAddingColumn && (
-          <div className={styles.columnForm}>
-            <input
-              type="text"
-              value={newColumnTitle}
-              onChange={(e) => setNewColumnTitle(e.target.value)}
-              placeholder="Column title"
-              className={styles.input}
-              onKeyPress={(e) => e.key === "Enter" && handleAddColumn()}
-            />
-            <button
-              onClick={() => setIsAddingColumn(false)}
-              className={styles.cancelButton}
-            >
-              Cancel
-            </button>
-            <button onClick={handleAddColumn} className={styles.addButton}>
-              Add
-            </button>
-          </div>
-        )}
-
-        <div className={styles.main}>
-          <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className={styles.main}>
             <Droppable droppableId="board" type="column" direction="horizontal">
               {(provided) => (
                 <div
@@ -126,8 +106,15 @@ const Board: React.FC = () => {
                 </div>
               )}
             </Droppable>
-          </DragDropContext>
-        </div>
+          </div>
+        </DragDropContext>
+        <AddColumnModal
+          isOpen={isModalOpen}
+          newColumnTitle={newColumnTitle}
+          setNewColumnTitle={setNewColumnTitle}
+          handleAddColumn={handleAddColumn}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </div>
   );

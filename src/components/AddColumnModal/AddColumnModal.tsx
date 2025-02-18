@@ -1,0 +1,66 @@
+import { useEffect } from "react";
+import styles from "./AddColumnModal.module.scss";
+
+interface AddColumnModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  newColumnTitle: string;
+  setNewColumnTitle: (value: string) => void;
+  handleAddColumn: () => void;
+}
+
+const AddColumnModal = ({
+  isOpen,
+  onClose,
+  newColumnTitle,
+  setNewColumnTitle,
+  handleAddColumn,
+}: AddColumnModalProps) => {
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  // Закрытие модального окна по нажатию на Escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
+  return isOpen ? (
+    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+      <div className={styles.modalContent}>
+        <h2>Add New Column</h2>
+        <input
+          type="text"
+          value={newColumnTitle}
+          onChange={(e) => setNewColumnTitle(e.target.value)}
+          placeholder="Column title"
+          className={styles.input}
+          onKeyPress={(e) => e.key === "Enter" && handleAddColumn()}
+        />
+        <div className={styles.modalButtons}>
+          <button onClick={() => onClose()} className={styles.cancelButton}>
+            Cancel
+          </button>
+          <button onClick={handleAddColumn} className={styles.addButton}>
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : null;
+};
+
+export default AddColumnModal;
