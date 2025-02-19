@@ -61,13 +61,13 @@ const Board: React.FC = () => {
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
         <div className={styles.header}>
-          <h1 className={styles.title}>Mini Trello</h1>
+          <h1 className={styles.title}>MyTrello</h1>
           <div className={styles.controls}>
             <button
               onClick={() => setIsModalOpen(true)}
               className={styles.addButton}
             >
-              <FaPlus /> Add Column
+              <FaPlus /> Создать колонку
             </button>
             <button
               onClick={() => dispatch(toggleTheme())}

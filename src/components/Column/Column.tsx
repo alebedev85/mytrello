@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { Droppable, Draggable } from '@hello-pangea/dnd';
-import { useDispatch } from 'react-redux';
-import { Column as ColumnType, Task } from '../../types';
-import TaskCard from '../TaskCard/TaskCard';
-import { addTask, removeColumn } from '../../store/boardSlice';
-import { FaPlus} from 'react-icons/fa';
+import React, { useState } from "react";
+import AddTaskForm from "../AddTaskForm/AddTaskForm";
+import { Droppable, Draggable } from "@hello-pangea/dnd";
+import { useDispatch } from "react-redux";
+import { Column as ColumnType, Task } from "../../types";
+import TaskCard from "../TaskCard/TaskCard";
+import { addTask, removeColumn } from "../../store/boardSlice";
+import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import styles from './Column.module.scss';
+import styles from "./Column.module.scss";
 
 interface Props {
   column: ColumnType;
@@ -16,7 +17,7 @@ interface Props {
 
 const Column: React.FC<Props> = ({ column, tasks, index }) => {
   const dispatch = useDispatch();
-  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [newTaskTitle, setNewTaskTitle] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddTask = () => {
@@ -24,10 +25,10 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
       const newTask: Task = {
         id: `task-${Date.now()}`,
         title: newTaskTitle,
-        description: '',
+        description: "",
       };
       dispatch(addTask({ columnId: column.id, task: newTask }));
-      setNewTaskTitle('');
+      setNewTaskTitle("");
       setIsAdding(false);
     }
   };
@@ -40,53 +41,33 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
           ref={provided.innerRef}
           className={styles.column}
         >
-          <div
-            {...provided.dragHandleProps}
-            className={styles.header}
-          >
+          <div {...provided.dragHandleProps} className={styles.header}>
             <span>{column.title}</span>
             <div className={styles.controls}>
               <button
                 onClick={() => setIsAdding(true)}
-                className={styles.addButton}
+                className={`${styles.addButton} tooltip`}
+                data-tooltip="Новая задачу"
               >
                 <FaPlus />
               </button>
               <button
                 onClick={() => dispatch(removeColumn(column.id))}
-                className={styles.deleteButton}
+                data-tooltip="Удалить колонку"
+                className={`${styles.deleteButton} tooltip`}
               >
                 <IoClose />
               </button>
             </div>
           </div>
 
-          {isAdding && (
-            <div className={styles.taskForm}>
-              <input
-                type="text"
-                value={newTaskTitle}
-                onChange={(e) => setNewTaskTitle(e.target.value)}
-                placeholder="Task title"
-                className={styles.input}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddTask()}
-              />
-              <div className={styles.formControls}>
-                <button
-                  onClick={() => setIsAdding(false)}
-                  className={styles.cancelButton}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleAddTask}
-                  className={styles.submitButton}
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-          )}
+          <AddTaskForm
+            isActive={isAdding}
+            newTaskTitle={newTaskTitle}
+            setNewTaskTitle={setNewTaskTitle}
+            handleAddTask={handleAddTask}
+            onClose={() => setIsAdding(false)}
+          />
 
           <Droppable droppableId={column.id} type="task">
             {(provided, snapshot) => (
@@ -94,7 +75,7 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
                 className={`${styles.dropArea} ${
-                  snapshot.isDraggingOver ? styles.isDraggingOver : ''
+                  snapshot.isDraggingOver ? styles.isDraggingOver : ""
                 }`}
               >
                 {tasks.map((task, index) => (
