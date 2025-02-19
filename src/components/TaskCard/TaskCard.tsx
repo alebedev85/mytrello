@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { Draggable } from '@hello-pangea/dnd';
-import { useDispatch } from 'react-redux';
-import { Task } from '../../types';
-import { updateTask } from '../../store/boardSlice';
-import { FaEdit } from 'react-icons/fa';
-import styles from './TaskCard.module.scss';
+import React, { useState } from "react";
+import { Draggable } from "@hello-pangea/dnd";
+import { useDispatch } from "react-redux";
+import { Task } from "../../types";
+import { updateTask, removeTask } from "../../store/boardSlice";
+import { FaEdit } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import styles from "./TaskCard.module.scss";
 
 interface Props {
   task: Task;
+  columnId: string;
   index: number;
 }
 
-const TaskCard: React.FC<Props> = ({ task, index }) => {
+const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
@@ -37,7 +39,9 @@ const TaskCard: React.FC<Props> = ({ task, index }) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`${styles.task} ${snapshot.isDragging ? styles.isDragging : ''}`}
+          className={`${styles.task} ${
+            snapshot.isDragging ? styles.isDragging : ""
+          }`}
         >
           {isEditing ? (
             <div className={styles.form}>
@@ -62,10 +66,7 @@ const TaskCard: React.FC<Props> = ({ task, index }) => {
                 >
                   Cancel
                 </button>
-                <button
-                  onClick={handleSave}
-                  className={styles.submitButton}
-                >
+                <button onClick={handleSave} className={styles.submitButton}>
                   Save
                 </button>
               </div>
@@ -74,12 +75,26 @@ const TaskCard: React.FC<Props> = ({ task, index }) => {
             <div>
               <div className={styles.header}>
                 <h3 className={styles.title}>{task.title}</h3>
-                <button
-                  onClick={() => setIsEditing(true)}
-                  className={styles.editButton}
-                >
-                  <FaEdit />
-                </button>
+                <div className={styles.buttons}>
+                  <button
+                    onClick={() => setIsEditing(true)}
+                    className={`${styles.button} tooltip`}
+                    data-tooltip="Редактировать задачу"
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        removeTask({ taskId: task.id, columnId})
+                      )
+                    }
+                    className={`${styles.button} tooltip`}
+                    data-tooltip="Удалить задачу"
+                  >
+                    <IoClose />
+                  </button>
+                </div>
               </div>
               {task.description && (
                 <p className={styles.description}>{task.description}</p>

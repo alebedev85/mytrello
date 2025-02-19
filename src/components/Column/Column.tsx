@@ -79,7 +79,7 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
                 }`}
               >
                 {tasks.map((task, index) => (
-                  <TaskCard key={task.id} task={task} index={index} />
+                  <TaskCard key={task.id} task={task} index={index} columnId={column.id}/>
                 ))}
                 {provided.placeholder}
               </div>

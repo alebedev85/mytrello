@@ -32,11 +32,21 @@
   }
 }
 
-.editButton {
-  color: #6b7280;
+.buttons{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 0.1rem;
+  border-radius: 20%;
 
   &:hover {
     color: #374151;
+    cursor: pointer;
+    background-color: #99f6fc;
   }
 
   .dark & {
