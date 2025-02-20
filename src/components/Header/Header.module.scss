@@ -2,13 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 1rem 2rem;
   background-color: #bbbdd6;
   border-radius: 1rem 1rem 0px 0px;
 
   &.dark {
     background-color: #323743;
   }
+}
+.img {
+  width: 120px;
 }
 
 .title {

@@ -1,4 +1,5 @@
 import { FaMoon, FaPlus, FaSun } from "react-icons/fa";
+import Logo from "../../../public/logo.svg";
 import styles from "./Header.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -9,15 +10,14 @@ interface HeaderProps {
 }
 
 export default function Header({ onClick, toggleTheme }: HeaderProps) {
-  const {  theme } = useSelector(
-    (state: RootState) => state.board
-  );
+  const { theme } = useSelector((state: RootState) => state.board);
   return (
     <div className={`${styles.header} ${theme === "dark" ? styles.dark : ""}`}>
-      <h1 className={styles.title}>Мои задачи</h1>
+      <img className={styles.img} src={Logo} alt="Логотип" />
+      {/* <h1 className={styles.title}>Мои задачи</h1> */}
       <div className={styles.controls}>
         <button onClick={onClick} className={styles.addButton}>
-          <FaPlus /> Создать колонку
+          <FaPlus /> Добавить колонку
         </button>
         <button onClick={toggleTheme} className={styles.themeButton}>
           {theme === "light" ? <FaMoon /> : <FaSun />}
