@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "../Header/Header";
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
@@ -59,24 +60,11 @@ const Board: React.FC = () => {
       <div
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
-        <div className={styles.header}>
-          <h1 className={styles.title}>Мои задачи</h1>
-          <div className={styles.controls}>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className={styles.addButton}
-            >
-              <FaPlus /> Создать колонку
-            </button>
-            <button
-              onClick={() => dispatch(toggleTheme())}
-              className={styles.themeButton}
-            >
-              {theme === "light" ? <FaMoon /> : <FaSun />}
-            </button>
-          </div>
-        </div>
-
+        <Header
+        onClick={() => setIsModalOpen(true)}
+        toggleTheme={() => dispatch(toggleTheme())}
+        />
+        
         <DragDropContext onDragEnd={onDragEnd}>
           <div className={styles.main}>
             <Droppable droppableId="board" type="column" direction="horizontal">
