@@ -1,5 +1,5 @@
 import { FaMoon, FaPlus, FaSun } from "react-icons/fa";
-import Logo from "../../../public/logo.svg";
+import Logo from "/logo.svg";
 import styles from "./Header.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
