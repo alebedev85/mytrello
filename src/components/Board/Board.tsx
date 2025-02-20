@@ -14,7 +14,6 @@ const Board: React.FC = () => {
     (state: RootState) => state.board
   );
   const [newColumnTitle, setNewColumnTitle] = useState("");
-  // const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onDragEnd = (result: DropResult) => {
@@ -61,7 +60,7 @@ const Board: React.FC = () => {
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
         <div className={styles.header}>
-          <h1 className={styles.title}>MyTrello</h1>
+          <h1 className={styles.title}>Мои задачи</h1>
           <div className={styles.controls}>
             <button
               onClick={() => setIsModalOpen(true)}
