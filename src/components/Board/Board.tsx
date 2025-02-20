@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import Header from "../Header/Header";
-import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
+import Main from "../Main/Main";
+import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { moveTask, addColumn, toggleTheme } from "../../store/boardSlice";
-import Column from "../Column/Column";
 import AddColumnModal from "../AddColumnModal/AddColumnModal";
-import { FaMoon, FaSun, FaPlus } from "react-icons/fa";
 import styles from "./Board.module.scss";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
-  const { columns, columnOrder, tasks, theme } = useSelector(
-    (state: RootState) => state.board
-  );
+  const { theme } = useSelector((state: RootState) => state.board);
   const [newColumnTitle, setNewColumnTitle] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -61,39 +58,12 @@ const Board: React.FC = () => {
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
         <Header
-        onClick={() => setIsModalOpen(true)}
-        toggleTheme={() => dispatch(toggleTheme())}
+          onClick={() => setIsModalOpen(true)}
+          toggleTheme={() => dispatch(toggleTheme())}
         />
-        
-        <DragDropContext onDragEnd={onDragEnd}>
-          <div className={styles.main}>
-            <Droppable droppableId="board" type="column" direction="horizontal">
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className={styles.boardContainer}
-                >
-                  {columnOrder.map((columnId, index) => {
-                    const column = columns[columnId];
-                    const columnTasks = column.taskIds.map(
-                      (taskId) => tasks[taskId]
-                    );
 
-                    return (
-                      <Column
-                        key={column.id}
-                        column={column}
-                        tasks={columnTasks}
-                        index={index}
-                      />
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Main />
         </DragDropContext>
         <AddColumnModal
           isOpen={isModalOpen}
