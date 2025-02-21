@@ -1,6 +1,8 @@
 .header {
+  position: relative;
+  min-height: 130px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 1rem 2rem;
   background-color: #bbbdd6;
@@ -14,14 +16,10 @@
   width: 120px;
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2937;
-
-  .dark & {
-    color: white;
-  }
+.img {
+  position: absolute;
+  top: 5%;
+  left: 46.2%;
 }
 
 .addButton {
@@ -46,7 +44,9 @@
 
 .themeButton {
   padding: 0.5rem;
-  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background-color: #e5e7eb;
   color: #4b5563;
   cursor: pointer;

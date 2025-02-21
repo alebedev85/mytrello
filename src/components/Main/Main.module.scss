@@ -47,6 +47,22 @@
 
 .boardContainer {
   display: flex;
-  // overflow-x: auto;
+  align-items: flex-start;
   padding-bottom: 1rem;
+  gap: 1rem;
+}
+
+.addColumnButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 0.375rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2563eb;
+  }
 }

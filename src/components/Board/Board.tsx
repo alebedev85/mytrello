@@ -58,12 +58,11 @@ const Board: React.FC = () => {
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
         <Header
-          onClick={() => setIsModalOpen(true)}
           toggleTheme={() => dispatch(toggleTheme())}
         />
 
         <DragDropContext onDragEnd={onDragEnd}>
-          <Main />
+          <Main addColumnButton={() => setIsModalOpen(true)} />
         </DragDropContext>
         <AddColumnModal
           isOpen={isModalOpen}

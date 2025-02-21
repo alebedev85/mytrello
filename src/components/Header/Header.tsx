@@ -5,20 +5,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 interface HeaderProps {
-  onClick: () => void;
   toggleTheme: () => void;
 }
 
-export default function Header({ onClick, toggleTheme }: HeaderProps) {
+export default function Header({ toggleTheme }: HeaderProps) {
   const { theme } = useSelector((state: RootState) => state.board);
   return (
     <div className={`${styles.header} ${theme === "dark" ? styles.dark : ""}`}>
       <img className={styles.img} src={Logo} alt="Логотип" />
-      {/* <h1 className={styles.title}>Мои задачи</h1> */}
       <div className={styles.controls}>
-        <button onClick={onClick} className={styles.addButton}>
-          <FaPlus /> Добавить колонку
-        </button>
         <button onClick={toggleTheme} className={styles.themeButton}>
           {theme === "light" ? <FaMoon /> : <FaSun />}
         </button>

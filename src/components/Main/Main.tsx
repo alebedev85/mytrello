@@ -3,8 +3,13 @@ import styles from "./Main.module.scss";
 import Column from "../Column/Column";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { FaPlus } from "react-icons/fa";
 
-export default function Main() {
+interface MainProps{
+  addColumnButton: ()=>void;
+} 
+
+export default function Main({addColumnButton}:MainProps) {
   const { columns, columnOrder, tasks, theme } = useSelector(
     (state: RootState) => state.board
   );
@@ -31,6 +36,12 @@ export default function Main() {
               );
             })}
             {provided.placeholder}
+            <button
+              className={styles.addColumnButton}
+              onClick={addColumnButton}
+            >
+              <FaPlus /> Добавить колонку
+            </button>
           </div>
         )}
       </Droppable>

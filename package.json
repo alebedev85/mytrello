@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "private": true,
-  "homepage": "https://github.com/alebedev85/mytrello",
+  "homepage": "https://alebedev85.github.io/mytrello/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
