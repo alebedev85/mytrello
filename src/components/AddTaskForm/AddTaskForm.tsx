@@ -1,4 +1,6 @@
+import { useSelector } from "react-redux";
 import styles from "./AddTaskForm.module.scss";
+import { RootState } from "../../store";
 
 interface AddTaskFormProps {
   isActive: boolean;
@@ -15,8 +17,12 @@ export default function AddTaskForm({
   handleAddTask,
   onClose,
 }: AddTaskFormProps) {
+  const { theme } = useSelector((state: RootState) => state.board);
   return isActive ? (
-    <div className={styles.taskForm}>
+    
+    <div className={`${styles.taskForm} ${
+      theme === "dark" ? styles.dark : ""
+    }`}>
       <input
         type="text"
         value={newTaskTitle}

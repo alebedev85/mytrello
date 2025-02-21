@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 import styles from "./AddColumnModal.module.scss";
 
 interface AddColumnModalProps {
@@ -16,6 +18,7 @@ const AddColumnModal = ({
   setNewColumnTitle,
   handleAddColumn,
 }: AddColumnModalProps) => {
+  const { theme } = useSelector((state: RootState) => state.board);
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -39,7 +42,12 @@ const AddColumnModal = ({
     };
   }, [isOpen, onClose]);
   return isOpen ? (
-    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+    <div
+      className={`${styles.modalOverlay} ${
+        theme === "dark" ? styles.dark : ""
+      }`}
+      onClick={handleOverlayClick}
+    >
       <div className={styles.modalContent}>
         <h2>Add New Column</h2>
         <input

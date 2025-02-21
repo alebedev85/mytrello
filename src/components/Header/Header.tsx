@@ -1,4 +1,4 @@
-import { FaMoon, FaPlus, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
 import Logo from "/logo.svg";
 import styles from "./Header.module.scss";
 import { useSelector } from "react-redux";

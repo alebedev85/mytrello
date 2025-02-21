@@ -1,3 +1,5 @@
+@use "../../styles/variables.scss" as *;
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -12,21 +14,25 @@
 }
 
 .modalContent {
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: $light-main;
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
   width: 320px;
   text-align: center;
   animation: fadeIn 0.3s ease-in-out;
+
+  // .dark & {
+  //   background: $dark-main;
+  // }
 }
 
 .input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  padding: $spacing-md;
+  border: 1px solid $light-border;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
 }
 
 .modalButtons {
@@ -36,20 +42,28 @@
 
 .addButton,
 .cancelButton {
-  padding: 8px 16px;
+  padding: $spacing-sm $spacing-md;
   border: none;
-  border-radius: 4px;
+  border-radius: $border-radius-sm;
   cursor: pointer;
 }
 
 .addButton {
-  background: #4caf50;
-  color: white;
+  background: $primary-color;
+  color: $light-text;
+
+  &:hover {
+    background: $primary-hover;
+  }
 }
 
 .cancelButton {
-  background: #f44336;
-  color: white;
+  background: $danger-color;
+  color: $light-text;
+
+  &:hover {
+    background: $danger-hover;
+  }
 }
 
 @keyframes fadeIn {
