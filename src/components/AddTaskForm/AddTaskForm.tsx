@@ -19,7 +19,6 @@ export default function AddTaskForm({
 }: AddTaskFormProps) {
   const { theme } = useSelector((state: RootState) => state.board);
   return isActive ? (
-    
     <div className={`${styles.taskForm} ${
       theme === "dark" ? styles.dark : ""
     }`}>

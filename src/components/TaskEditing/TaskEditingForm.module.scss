@@ -1,0 +1,57 @@
+@use "../../styles/variables.scss" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-sm;
+  border: 1px solid $light-border;
+  border-radius: $border-radius-sm;
+
+  .dark & {
+    background-color: $dark-surface;
+    border-color: $dark-border;
+    color: $dark-text;
+  }
+}
+
+.textarea {
+  @extend .input;
+  resize: vertical;
+}
+
+.formControls {
+  display: flex;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+}
+
+.cancelButton {
+  border: none;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  border-radius: $border-radius-sm;
+  background: $danger-color;
+  color: $light-text;
+
+  .dark & {
+    color: $danger-hover;
+  }
+}
+
+.submitButton {
+  border: none;
+  padding: $spacing-xs $spacing-md;
+  font-size: $font-size-sm;
+  background-color: $primary-color;
+  color: $light-text;
+  border-radius: $border-radius-sm;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}
