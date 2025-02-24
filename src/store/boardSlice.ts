@@ -33,7 +33,7 @@ const boardSlice = createSlice({
       action: PayloadAction<{ columnId: string; task: Task }>
     ) => {
       const { columnId, task } = action.payload;
-      state.tasks[task.id] = task;
+      state.tasks[task.id] = { ...task, createdAt: new Date().toISOString() };
       state.columns[columnId].taskIds.push(task.id);
     },
     updateTask: (state, action: PayloadAction<Task>) => {

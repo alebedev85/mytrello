@@ -97,6 +97,15 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
                     </button>
                   </div>
                 </div>
+                {task.createdAt && (
+                  <p className={styles.description}>Создано: {new Date(task.createdAt).toLocaleString("ru-RU", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}</p>
+                )}
                 {task.description && (
                   <p className={styles.description}>{task.description}</p>
                 )}
