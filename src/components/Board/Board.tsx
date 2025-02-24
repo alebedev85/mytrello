@@ -4,7 +4,7 @@ import Main from "../Main/Main";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import { moveTask, addColumn, toggleTheme } from "../../store/boardSlice";
+import { moveTask, addColumn, toggleTheme, moveColumn } from "../../store/boardSlice";
 import AddColumnModal from "../AddColumnModal/AddColumnModal";
 import styles from "./Board.module.scss";
 
@@ -23,6 +23,16 @@ const Board: React.FC = () => {
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
+      return;
+    }
+
+    if (type === "column") {
+      dispatch(
+        moveColumn({
+          sourceIndex: source.index,
+          destIndex: destination.index,
+        })
+      );
       return;
     }
 

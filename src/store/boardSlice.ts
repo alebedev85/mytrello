@@ -76,6 +76,14 @@ const boardSlice = createSlice({
       state.columns[column.id] = column;
       state.columnOrder.push(column.id);
     },
+    moveColumn: (
+      state,
+      action: PayloadAction<{ sourceIndex: number; destIndex: number }>
+    ) => {
+      const { sourceIndex, destIndex } = action.payload;
+      const [movedColumn] = state.columnOrder.splice(sourceIndex, 1);
+      state.columnOrder.splice(destIndex, 0, movedColumn);
+    },
     removeColumn: (state, action: PayloadAction<string>) => {
       const columnId = action.payload;
       const taskIds = state.columns[columnId].taskIds;
@@ -101,6 +109,7 @@ export const {
   moveTask,
   removeTask,
   addColumn,
+  moveColumn,
   removeColumn,
   toggleTheme,
 } = boardSlice.actions;
