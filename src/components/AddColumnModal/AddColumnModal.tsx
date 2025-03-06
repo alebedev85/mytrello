@@ -41,14 +41,15 @@ const AddColumnModal = ({
       window.removeEventListener("keydown", handleEscape);
     };
   }, [isOpen, onClose]);
+
   return isOpen ? (
     <div
-      className={`${styles.modalOverlay} ${
+      className={`${styles.overlay} ${
         theme === "dark" ? styles.dark : ""
       }`}
       onClick={handleOverlayClick}
     >
-      <div className={styles.modalContent}>
+      <div className={styles.popup}>
         <h2>Add New Column</h2>
         <input
           type="text"
@@ -59,11 +60,11 @@ const AddColumnModal = ({
           onKeyPress={(e) => e.key === "Enter" && handleAddColumn()}
         />
         <div className={styles.modalButtons}>
-          <button onClick={() => onClose()} className={styles.cancelButton}>
-            Cancel
-          </button>
           <button onClick={handleAddColumn} className={styles.addButton}>
-            Add
+            Добавить
+          </button>
+          <button onClick={() => onClose()} className={styles.cancelButton}>
+            Отмена
           </button>
         </div>
       </div>

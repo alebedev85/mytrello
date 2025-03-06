@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import boardReducer from "./boardSlice";
+import popupReducer from "./popupSlice";
 import { loadState, saveState } from "../utils/storageUtils";
 
 const preloadedState = loadState();
@@ -7,6 +8,7 @@ const preloadedState = loadState();
 export const store = configureStore({
   reducer: {
     board: boardReducer,
+    popup: popupReducer,
   },
   preloadedState: preloadedState ? { board: preloadedState.board } : undefined,
 });

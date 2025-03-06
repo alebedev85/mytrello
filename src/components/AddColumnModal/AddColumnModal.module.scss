@@ -1,6 +1,6 @@
 @use "../../styles/variables.scss" as *;
 
-.modalOverlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,14 +13,14 @@
   z-index: 1000;
 }
 
-.modalContent {
+.popup {
   background: $light-main;
   padding: $spacing-lg;
   border-radius: $border-radius-md;
   box-shadow: $shadow-md;
   width: 320px;
   text-align: center;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
 
   // .dark & {
   //   background: $dark-main;
@@ -59,7 +59,7 @@
 
 .cancelButton {
   background: $danger-color;
-  color: $light-text;
+  color: $dark-text; 
 
   &:hover {
     background: $danger-hover;

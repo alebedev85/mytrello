@@ -4,9 +4,15 @@ import Main from "../Main/Main";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import { moveTask, addColumn, toggleTheme, moveColumn } from "../../store/boardSlice";
+import {
+  moveTask,
+  addColumn,
+  toggleTheme,
+  moveColumn,
+} from "../../store/boardSlice";
 import AddColumnModal from "../AddColumnModal/AddColumnModal";
 import styles from "./Board.module.scss";
+import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 
 const Board: React.FC = () => {
   const dispatch = useDispatch();
@@ -67,9 +73,7 @@ const Board: React.FC = () => {
       <div
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
-        <Header
-          toggleTheme={() => dispatch(toggleTheme())}
-        />
+        <Header toggleTheme={() => dispatch(toggleTheme())} />
 
         <DragDropContext onDragEnd={onDragEnd}>
           <Main addColumnButton={() => setIsModalOpen(true)} />
@@ -81,6 +85,7 @@ const Board: React.FC = () => {
           handleAddColumn={handleAddColumn}
           onClose={() => setIsModalOpen(false)}
         />
+        <ConfirmationPopup />
       </div>
     </div>
   );

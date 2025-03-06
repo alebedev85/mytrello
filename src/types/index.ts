@@ -15,7 +15,7 @@ export interface BoardState {
   tasks: { [key: string]: Task };
   columns: { [key: string]: Column };
   columnOrder: string[];
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
 }
 
 export interface TaskNew {
@@ -27,4 +27,15 @@ export interface ColumnNew {
   id: string;
   title: string;
   tasks: TaskNew[];
+}
+
+export interface PopupState {
+  isOpen: boolean;
+  type: "column" | "task" | null;
+  targetId: targetId | null;
+}
+
+export interface targetId {
+  taskId: string;
+  columnId: string;
 }

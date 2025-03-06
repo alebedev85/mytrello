@@ -3,11 +3,11 @@ import { Draggable } from "@hello-pangea/dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { Task } from "../../types";
 import TaskEditingForm from "../TaskEditing/TaskEditingForm";
-import { removeTask } from "../../store/boardSlice";
 import { FaEdit } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import styles from "./TaskCard.module.scss";
 import { RootState } from "../../store";
+import { openPopup } from "../../store/popupSlice";
 
 interface Props {
   task: Task;
@@ -19,6 +19,12 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
   const { theme } = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
+
+  const handleDeleteTask = () => {
+    dispatch(
+      openPopup({ type: "task", targetId: { taskId: task.id, columnId } })
+    );
+  };
 
   return (
     <div className={`${theme === "dark" ? styles.dark : ""}`}>
@@ -50,9 +56,7 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
                       <FaEdit />
                     </button>
                     <button
-                      onClick={() =>
-                        dispatch(removeTask({ taskId: task.id, columnId }))
-                      }
+                      onClick={handleDeleteTask}
                       className={`${styles.button} tooltip`}
                       data-tooltip="Удалить задачу"
                     >

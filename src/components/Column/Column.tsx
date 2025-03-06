@@ -4,11 +4,12 @@ import { Droppable, Draggable } from "@hello-pangea/dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { Column as ColumnType, Task } from "../../types";
 import TaskCard from "../TaskCard/TaskCard";
-import { addTask, removeColumn } from "../../store/boardSlice";
+import { addTask } from "../../store/boardSlice";
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import styles from "./Column.module.scss";
 import { RootState } from "../../store";
+import { openPopup } from "../../store/popupSlice";
 
 interface Props {
   column: ColumnType;
@@ -35,6 +36,10 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
     }
   };
 
+  const handleDeleteColumn = () => {
+    dispatch(openPopup({ type: "column", targetId: { taskId: column.id, columnId: column.id } }));
+  };
+
   return (
     <div className={`${theme === "dark" ? styles.dark : ""}`}>
       <Draggable draggableId={column.id} index={index}>
@@ -55,7 +60,7 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
                   <FaPlus />
                 </button>
                 <button
-                  onClick={() => dispatch(removeColumn(column.id))}
+                  onClick={handleDeleteColumn}
                   data-tooltip="Удалить колонку"
                   className={`${styles.deleteButton} tooltip`}
                 >
