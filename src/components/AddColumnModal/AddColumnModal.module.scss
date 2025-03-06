@@ -20,7 +20,7 @@
   box-shadow: $shadow-md;
   width: 320px;
   text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 
   // .dark & {
   //   background: $dark-main;
@@ -59,7 +59,7 @@
 
 .cancelButton {
   background: $danger-color;
-  color: $dark-text; 
+  color: $light-text;
 
   &:hover {
     background: $danger-hover;

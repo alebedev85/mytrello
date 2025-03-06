@@ -1,32 +1,61 @@
-// store/boardSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PopupState, targetId } from "../types";
+
+interface PopupState {
+  addColumnModal: {
+    isOpen: boolean;
+  };
+  confirmationModal: {
+    isOpen: boolean;
+    type: "column" | "task" | null;
+    targetId: { taskId: string; columnId: string } | null;
+  };
+}
 
 const initialState: PopupState = {
-  isOpen: false,
-  type: null,
-  targetId: null,
+  addColumnModal: {
+    isOpen: false,
+  },
+  confirmationModal: {
+    isOpen: false,
+    type: null,
+    targetId: null,
+  },
 };
 
 const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
-    openPopup(
-      state,
-      action: PayloadAction<{ type: "column" | "task"; targetId: targetId }>
-    ) {
-      state.isOpen = true;
-      state.type = action.payload.type;
-      state.targetId = action.payload.targetId;
+    openAddColumnModal(state) {
+      state.addColumnModal.isOpen = true;
     },
-    closePopup(state) {
-      state.isOpen = false;
-      state.type = null;
-      state.targetId = null;
+    closeAddColumnModal(state) {
+      state.addColumnModal.isOpen  = false;
+    },
+    openConfirmationModal(
+      state,
+      action: PayloadAction<{
+        type: "column" | "task";
+        targetId: { taskId: string; columnId: string };
+      }>
+    ) {
+      state.confirmationModal.isOpen = true;
+      state.confirmationModal.type = action.payload.type;
+      state.confirmationModal.targetId = action.payload.targetId;
+    },
+    closeConfirmationModal(state) {
+      state.confirmationModal.isOpen = false;
+      state.confirmationModal.type = null;
+      state.confirmationModal.targetId = null;
     },
   },
 });
 
-export const { openPopup, closePopup } = popupSlice.actions;
+export const {
+  openAddColumnModal,
+  closeAddColumnModal,
+  openConfirmationModal,
+  closeConfirmationModal,
+} = popupSlice.actions;
+
 export default popupSlice.reducer;

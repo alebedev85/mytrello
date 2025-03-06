@@ -1,60 +1,53 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import { closePopup } from "../../store/popupSlice";
-import styles from "./ConfirmationPopup.module.scss";
+import { closeConfirmationModal } from "../../store/popupSlice";
 import { removeColumn, removeTask } from "../../store/boardSlice";
+import styles from "./ConfirmationPopup.module.scss";
 
 const ConfirmationPopup: React.FC = () => {
   const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.board);
-  const { isOpen, targetId, type } = useSelector(
-    (state: RootState) => state.popup
+  const { isOpen, type, targetId } = useSelector(
+    (state: RootState) => state.popup.confirmationModal
   );
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      dispatch(closePopup());
+      dispatch(closeConfirmationModal());
     }
   };
 
-  // Закрытие модального окна по нажатию на Escape
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        dispatch(closePopup());
+        dispatch(closeConfirmationModal());
       }
     };
 
-    if (isOpen) {
-      window.addEventListener("keydown", handleEscape);
-    }
-
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, closePopup]);
+  }, [dispatch]);
 
   const handleConfirm = () => {
     if (type === "column" && targetId) {
+      // Удаляем колонку
       dispatch(removeColumn(targetId.columnId));
     } else if (type === "task" && targetId) {
-      dispatch(removeTask(targetId));
+      // Удаляем задачу
+      dispatch(
+        removeTask({
+          taskId: targetId.taskId,
+          columnId: targetId.columnId,
+        })
+      );
     }
-    dispatch(closePopup());
+    dispatch(closeConfirmationModal());
   };
 
-  const handleCancel = () => {
-    dispatch(closePopup());
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <div
-      className={`${styles.overlay} ${theme === "dark" ? styles.dark : ""}`}
-      onClick={handleOverlayClick}
-    >
+  return isOpen ? (
+    <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.popup}>
         <h3>Вы уверены?</h3>
         <p>
@@ -65,13 +58,16 @@ const ConfirmationPopup: React.FC = () => {
           <button onClick={handleConfirm} className={styles.confirmButton}>
             Удалить
           </button>
-          <button onClick={handleCancel} className={styles.cancelButton}>
+          <button
+            onClick={() => dispatch(closeConfirmationModal())}
+            className={styles.cancelButton}
+          >
             Отмена
           </button>
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default ConfirmationPopup;

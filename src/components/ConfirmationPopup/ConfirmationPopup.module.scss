@@ -27,14 +27,14 @@
 }
 
 .popup {
-  background: white; // Используем переменную для фона
-  padding: $spacing-lg; // Используем переменную для отступов
-  border-radius: $border-radius-md; // Используем переменную для радиуса
-  box-shadow: $shadow-md; // Используем переменную для тени
+  background: $light-bg;
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
   text-align: center;
   transform: scale(0.9);
   animation: scaleIn 0.3s ease forwards;
-  color: $light-text; // Используем переменную для текста
+  color: $light-text;
 
   .dark & {
     background: $light-surface;
@@ -50,34 +50,34 @@
 .buttons {
   display: flex;
   justify-content: center;
-  gap: $spacing-md; // Используем переменную для отступов
-  margin-top: $spacing-lg; // Используем переменную для отступов
+  gap: $spacing-md; 
+  margin-top: $spacing-lg;
 }
 
 .confirmButton {
-  background: $danger-color; // Используем переменную для цвета
-  color: $dark-text; // Используем переменную для текста
+  background: $danger-color;
+  color: $light-text;
   border: none;
-  padding: $spacing-sm $spacing-md; // Используем переменную для отступов
-  border-radius: $border-radius-sm; // Используем переменную для радиуса
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background: $danger-hover; // Используем переменную для цвета при наведении
+    background: $danger-hover;
   }
 }
 
 .cancelButton {
-  background: $primary-color; // Используем переменную для цвета
-  color: $light-text; // Используем переменную для текста
+  background: $primary-color;
+  color: $light-text;
   border: none;
-  padding: $spacing-sm $spacing-md; // Используем переменную для отступов
-  border-radius: $border-radius-sm; // Используем переменную для радиуса
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover {
     background: $primary-hover;
-  } // Используем переменную для цвета при наведении
+  }
 }

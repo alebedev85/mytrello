@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import {
-  moveTask,
-  addColumn,
-  toggleTheme,
-  moveColumn,
-} from "../../store/boardSlice";
+import { moveTask, toggleTheme, moveColumn } from "../../store/boardSlice";
 import AddColumnModal from "../AddColumnModal/AddColumnModal";
 import styles from "./Board.module.scss";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
@@ -17,8 +12,6 @@ import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 const Board: React.FC = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
-  const [newColumnTitle, setNewColumnTitle] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result;
@@ -55,19 +48,6 @@ const Board: React.FC = () => {
     }
   };
 
-  const handleAddColumn = () => {
-    if (newColumnTitle.trim()) {
-      const newColumn = {
-        id: `column-${Date.now()}`,
-        title: newColumnTitle,
-        taskIds: [],
-      };
-      dispatch(addColumn(newColumn));
-      setNewColumnTitle("");
-      setIsModalOpen(false);
-    }
-  };
-
   return (
     <div className={theme === "dark" ? "dark" : ""}>
       <div
@@ -76,15 +56,9 @@ const Board: React.FC = () => {
         <Header toggleTheme={() => dispatch(toggleTheme())} />
 
         <DragDropContext onDragEnd={onDragEnd}>
-          <Main addColumnButton={() => setIsModalOpen(true)} />
+          <Main />
         </DragDropContext>
-        <AddColumnModal
-          isOpen={isModalOpen}
-          newColumnTitle={newColumnTitle}
-          setNewColumnTitle={setNewColumnTitle}
-          handleAddColumn={handleAddColumn}
-          onClose={() => setIsModalOpen(false)}
-        />
+        <AddColumnModal />
         <ConfirmationPopup />
       </div>
     </div>

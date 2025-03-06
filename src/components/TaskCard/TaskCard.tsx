@@ -7,7 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import styles from "./TaskCard.module.scss";
 import { RootState } from "../../store";
-import { openPopup } from "../../store/popupSlice";
+import { openConfirmationModal } from "../../store/popupSlice";
 
 interface Props {
   task: Task;
@@ -22,7 +22,7 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
 
   const handleDeleteTask = () => {
     dispatch(
-      openPopup({ type: "task", targetId: { taskId: task.id, columnId } })
+      openConfirmationModal({ type: "task", targetId: { taskId: task.id, columnId } })
     );
   };
 

@@ -9,7 +9,7 @@ import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import styles from "./Column.module.scss";
 import { RootState } from "../../store";
-import { openPopup } from "../../store/popupSlice";
+import { openConfirmationModal } from "../../store/popupSlice";
 
 interface Props {
   column: ColumnType;
@@ -37,7 +37,7 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
   };
 
   const handleDeleteColumn = () => {
-    dispatch(openPopup({ type: "column", targetId: { taskId: column.id, columnId: column.id } }));
+    dispatch(openConfirmationModal({ type: "column", targetId: { taskId: column.id, columnId: column.id } }));
   };
 
   return (

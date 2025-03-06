@@ -1,27 +1,23 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// components/AddColumnModal/AddColumnModal.tsx
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
+import { closeAddColumnModal } from "../../store/popupSlice";
+import { addColumn } from "../../store/boardSlice";
 import styles from "./AddColumnModal.module.scss";
 
-interface AddColumnModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  newColumnTitle: string;
-  setNewColumnTitle: (value: string) => void;
-  handleAddColumn: () => void;
-}
-
-const AddColumnModal = ({
-  isOpen,
-  onClose,
-  newColumnTitle,
-  setNewColumnTitle,
-  handleAddColumn,
-}: AddColumnModalProps) => {
+const AddColumnModal = () => {
+  const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
+  const { isOpen } = useSelector((state: RootState) => state.popup.addColumnModal);
+
+  // Состояние для заголовка новой колонки
+  const [newColumnTitle, setNewColumnTitle] = useState("");
+
+  // Обработчик клика на обертку (overlay)
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      onClose();
+      dispatch(closeAddColumnModal());
     }
   };
 
@@ -29,7 +25,7 @@ const AddColumnModal = ({
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
+        dispatch(closeAddColumnModal());
       }
     };
 
@@ -40,13 +36,25 @@ const AddColumnModal = ({
     return () => {
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, dispatch]);
+
+  // Обработчик добавления новой колонки
+  const handleAddColumn = () => {
+    if (newColumnTitle.trim()) {
+      const newColumn = {
+        id: `column-${Date.now()}`,
+        title: newColumnTitle,
+        taskIds: [],
+      };
+      dispatch(addColumn(newColumn));
+      setNewColumnTitle("");
+      dispatch(closeAddColumnModal());
+    }
+  };
 
   return isOpen ? (
     <div
-      className={`${styles.overlay} ${
-        theme === "dark" ? styles.dark : ""
-      }`}
+      className={`${styles.overlay} ${theme === "dark" ? styles.dark : ""}`}
       onClick={handleOverlayClick}
     >
       <div className={styles.popup}>
@@ -63,7 +71,10 @@ const AddColumnModal = ({
           <button onClick={handleAddColumn} className={styles.addButton}>
             Добавить
           </button>
-          <button onClick={() => onClose()} className={styles.cancelButton}>
+          <button
+            onClick={() => dispatch(closeAddColumnModal())}
+            className={styles.cancelButton}
+          >
             Отмена
           </button>
         </div>

@@ -19,9 +19,9 @@ export default function AddTaskForm({
 }: AddTaskFormProps) {
   const { theme } = useSelector((state: RootState) => state.board);
   return isActive ? (
-    <div className={`${styles.taskForm} ${
-      theme === "dark" ? styles.dark : ""
-    }`}>
+    <div
+      className={`${styles.taskForm} ${theme === "dark" ? styles.dark : ""}`}
+    >
       <input
         type="text"
         value={newTaskTitle}
@@ -31,11 +31,11 @@ export default function AddTaskForm({
         onKeyPress={(e) => e.key === "Enter" && handleAddTask()}
       />
       <div className={styles.formControls}>
-        <button onClick={onClose} className={styles.cancelButton}>
-          Cancel
-        </button>
         <button onClick={handleAddTask} className={styles.submitButton}>
-          Add
+          Добавить
+        </button>
+        <button onClick={onClose} className={styles.cancelButton}>
+          Отмена
         </button>
       </div>
     </div>

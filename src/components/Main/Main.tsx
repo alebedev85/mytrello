@@ -1,18 +1,21 @@
 import { Droppable } from "@hello-pangea/dnd";
 import styles from "./Main.module.scss";
 import Column from "../Column/Column";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { openAddColumnModal } from "../../store/popupSlice";
 import { FaPlus } from "react-icons/fa";
 
-interface MainProps{
-  addColumnButton: ()=>void;
-} 
-
-export default function Main({addColumnButton}:MainProps) {
+export default function Main() {
   const { columns, columnOrder, tasks, theme } = useSelector(
     (state: RootState) => state.board
   );
+  const dispatch = useDispatch();
+
+  const handleOpenAddColumnModal = () => {
+    dispatch(openAddColumnModal());
+  };
+
   return (
     <div className={`${styles.main} ${theme === "dark" ? styles.dark : ""}`}>
       <Droppable droppableId="board" type="column" direction="horizontal">
@@ -38,7 +41,7 @@ export default function Main({addColumnButton}:MainProps) {
             {provided.placeholder}
             <button
               className={styles.addColumnButton}
-              onClick={addColumnButton}
+              onClick={handleOpenAddColumnModal}
             >
               <FaPlus /> Добавить колонку
             </button>
