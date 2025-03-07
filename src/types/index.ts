@@ -9,6 +9,7 @@ export interface Column {
   id: string;
   title: string;
   taskIds: string[];
+  color?: string;
 }
 
 export interface BoardState {

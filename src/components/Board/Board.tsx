@@ -54,7 +54,6 @@ const Board: React.FC = () => {
         className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
       >
         <Header toggleTheme={() => dispatch(toggleTheme())} />
-
         <DragDropContext onDragEnd={onDragEnd}>
           <Main />
         </DragDropContext>

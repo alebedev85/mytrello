@@ -8,16 +8,19 @@ const initialState: BoardState = {
       id: "column-1",
       title: "To Do",
       taskIds: [],
+      color: "#10b981",
     },
     "column-2": {
       id: "column-2",
       title: "In Progress",
       taskIds: [],
+      color: "#f59e0b",
     },
     "column-3": {
       id: "column-3",
       title: "Done",
       taskIds: [],
+      color: "#f472b6",
     },
   },
   columnOrder: ["column-1", "column-2", "column-3"],
@@ -97,6 +100,15 @@ const boardSlice = createSlice({
       delete state.columns[columnId];
       state.columnOrder = state.columnOrder.filter((id) => id !== columnId);
     },
+    changeColumnColor(
+      state,
+      action: PayloadAction<{ columnId: string; color: string }>
+    ) {
+      const { columnId, color } = action.payload;
+      if (state.columns[columnId]) {
+        state.columns[columnId].color = color;
+      }
+    },
     toggleTheme: (state) => {
       state.theme = state.theme === "light" ? "dark" : "light";
     },
@@ -111,6 +123,7 @@ export const {
   addColumn,
   moveColumn,
   removeColumn,
+  changeColumnColor,
   toggleTheme,
 } = boardSlice.actions;
 export default boardSlice.reducer;

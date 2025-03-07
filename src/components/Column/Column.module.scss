@@ -19,8 +19,8 @@
   font-weight: bold;
   font-size: $font-size-lg;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: $spacing-md;
   border-bottom: 1px solid $light-border;
 
   .dark & {
@@ -28,10 +28,28 @@
     color: $dark-text;
   }
 }
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .controls {
   display: flex;
   gap: $spacing-sm;
+}
+
+.colorButton{
+  display: flex;
+  align-items: center;
+  border-radius: 20%;
+  padding: 2px;
+
+  &:hover {
+    color: $danger-hover;
+    cursor: pointer;
+    background-color: $light-hover;
+  }
 }
 
 .addButton {
