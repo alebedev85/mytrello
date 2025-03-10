@@ -19,16 +19,6 @@ export interface BoardState {
   theme: "light" | "dark";
 }
 
-export interface TaskNew {
-  id: string;
-  title: string;
-}
-
-export interface ColumnNew {
-  id: string;
-  title: string;
-  tasks: TaskNew[];
-}
 
 export interface PopupState {
   isOpen: boolean;

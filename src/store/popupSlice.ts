@@ -26,12 +26,17 @@ const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
+    // Открытие модального окна добавления колонки
     openAddColumnModal(state) {
       state.addColumnModal.isOpen = true;
     },
+    
+    // Закрытие модального окна добавления колонки
     closeAddColumnModal(state) {
       state.addColumnModal.isOpen  = false;
     },
+
+    // Открытие окна подтверждения удаления колонки или задачи
     openConfirmationModal(
       state,
       action: PayloadAction<{
@@ -43,6 +48,8 @@ const popupSlice = createSlice({
       state.confirmationModal.type = action.payload.type;
       state.confirmationModal.targetId = action.payload.targetId;
     },
+
+    // Закрытие окна подтверждения
     closeConfirmationModal(state) {
       state.confirmationModal.isOpen = false;
       state.confirmationModal.type = null;

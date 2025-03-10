@@ -31,18 +31,23 @@ const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
+    // Добавление новой задачи в указанную колонку
     addTask: (
       state,
       action: PayloadAction<{ columnId: string; task: Task }>
     ) => {
       const { columnId, task } = action.payload;
-      state.tasks[task.id] = { ...task, createdAt: new Date().toISOString() };
-      state.columns[columnId].taskIds.push(task.id);
+      state.tasks[task.id] = { ...task, createdAt: new Date().toISOString() }; // Добавление задачи в список
+      state.columns[columnId].taskIds.push(task.id); // Добавление id задачи в колонку
     },
+
+    // Обновление задачи
     updateTask: (state, action: PayloadAction<Task>) => {
       const task = action.payload;
-      state.tasks[task.id] = task;
+      state.tasks[task.id] = task; // Перезапись задачи
     },
+
+    // Перемещение задачи между колонками или внутри одной колонки
     moveTask: (
       state,
       action: PayloadAction<{
@@ -58,48 +63,54 @@ const boardSlice = createSlice({
       const sourceCol = state.columns[sourceColId];
       const destCol = state.columns[destColId];
 
-      sourceCol.taskIds.splice(sourceIndex, 1);
-      destCol.taskIds.splice(destIndex, 0, taskId);
+      sourceCol.taskIds.splice(sourceIndex, 1); // Удаление id задачи из исходной колонки
+      destCol.taskIds.splice(destIndex, 0, taskId); // Вставка id задачи в новую позицию
     },
+
+    // Удаление задачи
     removeTask: (
       state,
       action: PayloadAction<{ taskId: string; columnId: string }>
     ) => {
       const { taskId, columnId } = action.payload;
 
-      // Удаляем задачу из объекта tasks
-      delete state.tasks[taskId];
-
-      // Удаляем ID задачи из массива taskIds колонки
-      const column = state.columns[columnId];
-      column.taskIds = column.taskIds.filter((id) => id !== taskId);
+      delete state.tasks[taskId]; // Удаление задачи из списка задач
+      state.columns[columnId].taskIds = state.columns[columnId].taskIds.filter(
+        (id) => id !== taskId
+      ); // Удаление id задачи из списка колонки
     },
+
+    // Добавление новой колонки
     addColumn: (state, action: PayloadAction<Column>) => {
       const column = action.payload;
-      state.columns[column.id] = column;
-      state.columnOrder.push(column.id);
+      state.columns[column.id] = column; // Добавление колонки в список
+      state.columnOrder.push(column.id); // Добавление id колонки в порядок отображения
     },
+
+    // Перемещение колонки в новый порядок
     moveColumn: (
       state,
       action: PayloadAction<{ sourceIndex: number; destIndex: number }>
     ) => {
       const { sourceIndex, destIndex } = action.payload;
-      const [movedColumn] = state.columnOrder.splice(sourceIndex, 1);
-      state.columnOrder.splice(destIndex, 0, movedColumn);
+      const [movedColumn] = state.columnOrder.splice(sourceIndex, 1); // Удаление колонки из текущей позиции
+      state.columnOrder.splice(destIndex, 0, movedColumn); // Вставка колонки в новую позицию
     },
+
+    // Удаление колонки и всех её задач
     removeColumn: (state, action: PayloadAction<string>) => {
       const columnId = action.payload;
       const taskIds = state.columns[columnId].taskIds;
 
-      // Remove tasks in the column
       taskIds.forEach((taskId) => {
-        delete state.tasks[taskId];
+        delete state.tasks[taskId]; // Удаление всех задач, связанных с колонкой
       });
 
-      // Remove column
-      delete state.columns[columnId];
-      state.columnOrder = state.columnOrder.filter((id) => id !== columnId);
+      delete state.columns[columnId]; // Удаление колонки
+      state.columnOrder = state.columnOrder.filter((id) => id !== columnId); // Удаление id колонки из порядка отображения
     },
+
+    // Изменение цвета колонки
     changeColumnColor(
       state,
       action: PayloadAction<{ columnId: string; color: string }>
@@ -109,6 +120,8 @@ const boardSlice = createSlice({
         state.columns[columnId].color = color;
       }
     },
+
+    // Переключение темы (светлая/тёмная)
     toggleTheme: (state) => {
       state.theme = state.theme === "light" ? "dark" : "light";
     },
@@ -126,4 +139,5 @@ export const {
   changeColumnColor,
   toggleTheme,
 } = boardSlice.actions;
+
 export default boardSlice.reducer;
