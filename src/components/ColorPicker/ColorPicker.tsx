@@ -1,16 +1,6 @@
 import React from "react";
+import { COLUMN_COLORS as colors} from  "../../utils/constants"  ;
 import styles from "./ColorPicker.module.scss";
-
-const colors = [
-  "", // Сброс цвета
-  "#3b82f6", // Синий
-  "#ef4444", // Красный
-  "#10b981", // Зеленый
-  "#f59e0b", // Оранжевый
-  "#8b5cf6", // Фиолетовый
-  "#f472b6", // Розовый
-  "#6b7280", // Серый
-];
 
 interface ColorPickerProps {
   selectedColor: string;

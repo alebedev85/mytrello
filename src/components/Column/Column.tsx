@@ -4,7 +4,7 @@ import { Droppable, Draggable } from "@hello-pangea/dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { Column as ColumnType, Task } from "../../types";
 import TaskCard from "../TaskCard/TaskCard";
-import { addTask, changeColumnColor } from "../../store/boardSlice";
+import { changeColumnColor } from "../../store/boardSlice";
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import styles from "./Column.module.scss";
@@ -22,29 +22,9 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
   const { theme } = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
   const colorPickerRef = useRef<HTMLDivElement>(null);
-
-  // // Закрытие ColorPicker при клике вне его области
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     const colorButton = document.querySelector(`.${styles.colorButton}`);
-  //     if (
-  //       colorPickerRef.current &&
-  //       !colorPickerRef.current.contains(event.target as Node) &&
-  //       event.target !== colorButton // Игнорируем клик на кнопку смены цвета
-  //     ) {
-  //       setIsColorPickerOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
 
   // Переключение состояния ColorPicker
   const toggleColorPicker = () => {
@@ -54,20 +34,6 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
   // Переключение состояния isAdding
   const toggleAddTask = () => {
     setIsAdding((prev) => !prev); // Переключаем состояние
-  };
-
-  // Добавление новой задачи
-  const handleAddTask = () => {
-    if (newTaskTitle.trim()) {
-      const newTask: Task = {
-        id: `task-${Date.now()}`,
-        title: newTaskTitle,
-        description: "",
-      };
-      dispatch(addTask({ columnId: column.id, task: newTask }));
-      setNewTaskTitle("");
-      setIsAdding(false);
-    }
   };
 
   // Удаление колонки
@@ -135,9 +101,7 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
 
             <AddTaskForm
               isActive={isAdding}
-              newTaskTitle={newTaskTitle}
-              setNewTaskTitle={setNewTaskTitle}
-              handleAddTask={handleAddTask}
+              columnId={column.id}
               onClose={() => setIsAdding(false)}
             />
 

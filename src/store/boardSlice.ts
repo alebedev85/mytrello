@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BoardState, Task, Column } from "../types";
+import { BoardState, Task, Column, Priority } from "../types";
 
 const initialState: BoardState = {
   tasks: {},
@@ -46,7 +46,15 @@ const boardSlice = createSlice({
       const task = action.payload;
       state.tasks[task.id] = task; // Перезапись задачи
     },
-
+    changeTaskPriority(
+      state,
+      action: PayloadAction<{ taskId: string; priority: Priority }>
+    ) {
+      const { taskId, priority } = action.payload;
+      if (state.tasks[taskId]) {
+        state.tasks[taskId].priority = priority;
+      }
+    },
     // Перемещение задачи между колонками или внутри одной колонки
     moveTask: (
       state,
@@ -131,6 +139,7 @@ const boardSlice = createSlice({
 export const {
   addTask,
   updateTask,
+  changeTaskPriority,
   moveTask,
   removeTask,
   addColumn,

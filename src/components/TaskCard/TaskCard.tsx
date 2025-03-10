@@ -3,11 +3,13 @@ import { Draggable } from "@hello-pangea/dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { Task } from "../../types";
 import TaskEditingForm from "../TaskEditing/TaskEditingForm";
+import PriorityMenu from "../PriorityMenu/PriorityMenu";
 import { FaEdit } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import styles from "./TaskCard.module.scss";
 import { RootState } from "../../store";
 import { openConfirmationModal } from "../../store/popupSlice";
+import { PRIORITY_COLORS } from "../../utils/constants";
 
 interface Props {
   task: Task;
@@ -22,7 +24,10 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
 
   const handleDeleteTask = () => {
     dispatch(
-      openConfirmationModal({ type: "task", targetId: { taskId: task.id, columnId } })
+      openConfirmationModal({
+        type: "task",
+        targetId: { taskId: task.id, columnId },
+      })
     );
   };
 
@@ -37,6 +42,13 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
             className={`${styles.task} ${
               snapshot.isDragging ? styles.isDragging : ""
             }`}
+            style={
+              task.priority !== "none"
+                ? {
+                    backgroundColor: PRIORITY_COLORS[task.priority],
+                  }
+                : {}
+            }
           >
             {isEditing ? (
               <TaskEditingForm
@@ -48,6 +60,10 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
                 <div className={styles.header}>
                   <h3 className={styles.title}>{task.title}</h3>
                   <div className={styles.buttons}>
+                    <PriorityMenu
+                      taskId={task.id}
+                      selectedPriority={task.priority}
+                    />
                     <button
                       onClick={() => setIsEditing(true)}
                       className={`${styles.button} tooltip`}

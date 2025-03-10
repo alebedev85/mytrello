@@ -1,7 +1,10 @@
+export type Priority = "high" | "medium" | "low" | "none";
+
 export interface Task {
   id: string;
   title: string;
   description: string;
+  priority: Priority; 
   createdAt?: string;
 }
 
