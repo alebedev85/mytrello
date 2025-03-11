@@ -60,7 +60,10 @@ const Column: React.FC<Props> = ({ column, tasks, index }) => {
             {...provided.draggableProps}
             ref={provided.innerRef}
             className={styles.column}
-            style={column.color ? { backgroundColor: column.color } : {}}
+            style={{
+              ...provided.draggableProps.style, // Объединяем стили из Draggable
+              backgroundColor: column.color || undefined,
+            }}
           >
             <div {...provided.dragHandleProps} className={styles.header}>
               <div className={styles.content}>

@@ -42,13 +42,13 @@ const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
             className={`${styles.task} ${
               snapshot.isDragging ? styles.isDragging : ""
             }`}
-            style={
-              task.priority !== "none"
-                ? {
-                    backgroundColor: PRIORITY_COLORS[task.priority],
-                  }
-                : {}
-            }
+            style={{
+              ...provided.draggableProps.style, // Сначала берем стили из DnD
+              backgroundColor:
+                task.priority !== "none"
+                  ? PRIORITY_COLORS[task.priority]
+                  : undefined, // Добавляем свой цвет
+            }}
           >
             {isEditing ? (
               <TaskEditingForm
