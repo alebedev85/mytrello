@@ -1,9 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./AddTaskForm.module.scss";
-import { RootState } from "../../store";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
 import { Priority, Task } from "../../types";
 import { addTask } from "../../store/boardSlice";
+import { PRIORITY_COLORS } from "../../utils/constants";
+import CustomSelect from "../ui/CustomSelect/CustomSelect";
+
+import styles from "./AddTaskForm.module.scss";
 
 interface AddTaskFormProps {
   isActive: boolean;
@@ -19,21 +22,21 @@ export default function AddTaskForm({
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [priority, setPriority] = useState<Priority>("medium");
+  const [priority, setPriority] = useState<Priority>("none");
 
-    const handleAddTask = () => {
-      if (newTaskTitle.trim()) {
-        const newTask: Task = {
-          id: `task-${Date.now()}`,
-          title: newTaskTitle,
-          description: "",
-          priority: priority, 
-        };
-        dispatch(addTask({ columnId, task: newTask }));
-        setNewTaskTitle("");
-        onClose();
-      }
-    };
+  const handleAddTask = () => {
+    if (newTaskTitle.trim()) {
+      const newTask: Task = {
+        id: `task-${Date.now()}`,
+        title: newTaskTitle,
+        description: "",
+        priority: priority,
+      };
+      dispatch(addTask({ columnId, task: newTask }));
+      setNewTaskTitle("");
+      onClose();
+    }
+  };
   return isActive ? (
     <div
       className={`${styles.taskForm} ${theme === "dark" ? styles.dark : ""}`}
@@ -46,17 +49,10 @@ export default function AddTaskForm({
         className={styles.input}
         onKeyPress={(e) => e.key === "Enter" && handleAddTask()}
       />
-      <select
-        value={priority}
-        onChange={(e) =>
-          setPriority(e.target.value as Priority)
-        }
-        className={styles.select}
-      >
-        <option value="high">Высокий</option>
-        <option value="medium">Средний</option>
-        <option value="low">Низкий</option>
-      </select>
+      <CustomSelect
+      onSelect={(value) => setPriority(value)}
+      selected={priority}
+      />
       <div className={styles.formControls}>
         <button onClick={handleAddTask} className={styles.submitButton}>
           Добавить
