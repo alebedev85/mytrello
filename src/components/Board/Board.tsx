@@ -1,67 +1,54 @@
-import React from "react";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import { DragDropContext, DropResult } from "@hello-pangea/dnd";
-import { useSelector, useDispatch } from "react-redux";
+import { Droppable } from "@hello-pangea/dnd";
+import Column from "../Column/Column";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { moveTask, toggleTheme, moveColumn } from "../../store/boardSlice";
-import AddColumnModal from "../AddColumnModal/AddColumnModal";
+import { openAddColumnModal } from "../../store/popupSlice";
+import { FaPlus } from "react-icons/fa";
+
 import styles from "./Board.module.scss";
-import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 
-const Board: React.FC = () => {
+export default function Board() {
+  const { columns, columnOrder, tasks, theme } = useSelector(
+    (state: RootState) => state.board
+  );
   const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.board);
 
-  const onDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId, type } = result;
-
-    if (!destination) return;
-
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
-
-    if (type === "column") {
-      dispatch(
-        moveColumn({
-          sourceIndex: source.index,
-          destIndex: destination.index,
-        })
-      );
-      return;
-    }
-
-    if (type === "task") {
-      dispatch(
-        moveTask({
-          sourceColId: source.droppableId,
-          destColId: destination.droppableId,
-          sourceIndex: source.index,
-          destIndex: destination.index,
-          taskId: draggableId,
-        })
-      );
-    }
+  const handleOpenAddColumnModal = () => {
+    dispatch(openAddColumnModal());
   };
 
   return (
-    <div className={theme === "dark" ? "dark" : ""}>
-      <div
-        className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
-      >
-        <Header toggleTheme={() => dispatch(toggleTheme())} />
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Main />
-        </DragDropContext>
-        <AddColumnModal />
-        <ConfirmationPopup />
-      </div>
+    <div className={`${styles.main} ${theme === "dark" ? styles.dark : ""}`}>
+      <Droppable droppableId="board" type="column" direction="horizontal">
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className={styles.boardContainer}
+          >
+            {columnOrder.map((columnId, index) => {
+              const column = columns[columnId];
+              const columnTasks = column.taskIds.map((taskId) => tasks[taskId]);
+
+              return (
+                <Column
+                  key={column.id}
+                  column={column}
+                  tasks={columnTasks}
+                  index={index}
+                />
+              );
+            })}
+            {provided.placeholder}
+            <button
+              className={styles.addColumnButton}
+              onClick={handleOpenAddColumnModal}
+            >
+              <FaPlus /> Добавить колонку
+            </button>
+          </div>
+        )}
+      </Droppable>
     </div>
   );
-};
-
-export default Board;
+}

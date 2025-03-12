@@ -4,7 +4,7 @@ export interface Task {
   id: string;
   title: string;
   description: string;
-  priority: Priority; 
+  priority: Priority;
   createdAt?: string;
 }
 
@@ -22,7 +22,6 @@ export interface BoardState {
   theme: "light" | "dark";
 }
 
-
 export interface PopupState {
   isOpen: boolean;
   type: "column" | "task" | null;
@@ -32,4 +31,10 @@ export interface PopupState {
 export interface targetId {
   taskId: string;
   columnId: string;
+}
+
+export interface User {
+  email: string | null;
+  token: string | null;
+  id: string | null;
 }

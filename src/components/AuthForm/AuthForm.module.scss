@@ -1,0 +1,40 @@
+@use "../../styles/variables.scss" as *;
+
+.authContainer {
+  background-color: $light-surface;
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  max-width: 400px;
+  margin: auto;
+}
+
+.title {
+  color: $light-text;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.input {
+  padding: $spacing-sm;
+  border: 1px solid $light-border;
+  border-radius: $border-radius-sm;
+}
+
+.button {
+  background-color: $primary-color;
+  color: white;
+  padding: $spacing-sm;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: $primary-hover;
+}

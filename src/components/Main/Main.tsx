@@ -1,53 +1,54 @@
-import { Droppable } from "@hello-pangea/dnd";
-import styles from "./Main.module.scss";
-import Column from "../Column/Column";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { openAddColumnModal } from "../../store/popupSlice";
-import { FaPlus } from "react-icons/fa";
+import React from "react";
+// import Header from "../Header/Header";
+import Board from "../Board/Board";
+import { DragDropContext, DropResult } from "@hello-pangea/dnd";
+import { useDispatch } from "react-redux";
+// import { RootState } from "../../store";
+import { moveTask, moveColumn } from "../../store/boardSlice";
 
-export default function Main() {
-  const { columns, columnOrder, tasks, theme } = useSelector(
-    (state: RootState) => state.board
-  );
+const Main: React.FC = () => {
   const dispatch = useDispatch();
 
-  const handleOpenAddColumnModal = () => {
-    dispatch(openAddColumnModal());
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source, draggableId, type } = result;
+
+    if (!destination) return;
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    if (type === "column") {
+      dispatch(
+        moveColumn({
+          sourceIndex: source.index,
+          destIndex: destination.index,
+        })
+      );
+      return;
+    }
+
+    if (type === "task") {
+      dispatch(
+        moveTask({
+          sourceColId: source.droppableId,
+          destColId: destination.droppableId,
+          sourceIndex: source.index,
+          destIndex: destination.index,
+          taskId: draggableId,
+        })
+      );
+    }
   };
 
   return (
-    <div className={`${styles.main} ${theme === "dark" ? styles.dark : ""}`}>
-      <Droppable droppableId="board" type="column" direction="horizontal">
-        {(provided) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            className={styles.boardContainer}
-          >
-            {columnOrder.map((columnId, index) => {
-              const column = columns[columnId];
-              const columnTasks = column.taskIds.map((taskId) => tasks[taskId]);
-
-              return (
-                <Column
-                  key={column.id}
-                  column={column}
-                  tasks={columnTasks}
-                  index={index}
-                />
-              );
-            })}
-            {provided.placeholder}
-            <button
-              className={styles.addColumnButton}
-              onClick={handleOpenAddColumnModal}
-            >
-              <FaPlus /> Добавить колонку
-            </button>
-          </div>
-        )}
-      </Droppable>
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Board />
+    </DragDropContext>
   );
-}
+};
+
+export default Main;

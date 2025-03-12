@@ -1,12 +1,75 @@
 @use "../../styles/variables.scss" as *;
 
-.container {
-  height: 100%;
-  background-color: $light-bg;
+.main {
   padding: $spacing-lg;
-  box-sizing: border-box;
+  background-color: $light-main;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+  min-height: 80vh;
 
   &.dark {
-    background-color: $dark-bg;
+    background-color: $dark-main;
+  }
+}
+
+.columnForm {
+  margin-bottom: $spacing-md;
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.input {
+  padding: $spacing-sm;
+  border: 1px solid $light-border;
+  border-radius: $border-radius-sm;
+  background-color: $light-bg;
+
+  .dark & {
+    background-color: $dark-surface;
+    border-color: $dark-border;
+    color: $dark-text;
+  }
+}
+
+.cancelButton {
+  padding: $spacing-sm $spacing-md;
+  color: $light-text-secondary;
+
+  &:hover {
+    color: $light-text;
+  }
+
+  .dark & {
+    color: $dark-text-secondary;
+
+    &:hover {
+      color: $dark-text;
+    }
+  }
+}
+
+.boardContainer {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: $spacing-md;
+  gap: $spacing-md;
+}
+
+.addColumnButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  border: none;
+  padding: $spacing-sm $spacing-md;
+  background-color: $primary-color;
+  color: $light-text;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+
+  .dark & {
+    color: $dark-text;
+  }
+
+  &:hover {
+    background-color: $primary-hover;
   }
 }

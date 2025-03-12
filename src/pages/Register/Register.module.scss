@@ -1,0 +1,25 @@
+@use "../../styles/variables.scss" as *;
+
+.authPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 83vh;
+  background-color: $light-bg;
+}
+
+.link {
+  margin-top: $spacing-md;
+  color: $light-text-secondary;
+  text-align: center;
+}
+
+.link a {
+  color: $primary-color;
+  text-decoration: none;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}

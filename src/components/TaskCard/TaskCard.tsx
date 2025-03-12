@@ -6,10 +6,11 @@ import TaskEditingForm from "../TaskEditing/TaskEditingForm";
 import PriorityMenu from "../PriorityMenu/PriorityMenu";
 import { FaEdit } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import styles from "./TaskCard.module.scss";
 import { RootState } from "../../store";
 import { openConfirmationModal } from "../../store/popupSlice";
 import { PRIORITY_COLORS } from "../../utils/constants";
+
+import styles from "./TaskCard.module.scss";
 
 interface Props {
   task: Task;
