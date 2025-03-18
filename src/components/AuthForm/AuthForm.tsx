@@ -1,46 +1,68 @@
-import { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import styles from "./AuthForm.module.scss";
 
 interface AuthFormProps {
   title: string;
   buttonText: string;
-  onSubmit: (email: string, password: string) => void;
+  onSubmit: (data: { email: string; password: string }) => void;
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, onSubmit }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(email, password);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<{ email: string; password: string }>();
 
   return (
-    <div className={styles.authContainer}>
+    <form
+      autoComplete="off"
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.form}
+    >
       <h2 className={styles.title}>{title}</h2>
-      <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
+
+      <div className={styles.inputGroup}>
+        <label htmlFor="email">Email:</label>
         <input
+          id="email"
           type="email"
-          placeholder="Email"
-          className={styles.input}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           autoComplete="off"
+          {...register("email", {
+            required: "Email обязателен",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Введите корректный email",
+            },
+          })}
         />
+        {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+      </div>
+
+      <div className={styles.inputGroup}>
+        <label htmlFor="password">Пароль:</label>
         <input
+          id="password"
           type="password"
-          placeholder="Пароль"
-          className={styles.input}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           autoComplete="new-password" 
+          {...register("password", {
+            required: "Пароль обязателен",
+            minLength: {
+              value: 6,
+              message: "Пароль должен содержать минимум 6 символа",
+            },
+          })}
         />
-        <button type="submit" className={styles.button}>
-          {buttonText}
-        </button>
-      </form>
-    </div>
+        {errors.password && (
+          <p className={styles.error}>{errors.password.message}</p>
+        )}
+      </div>
+
+      <button type="submit" className={styles.submitButton}>
+        {buttonText}
+      </button>
+    </form>
   );
 };
 

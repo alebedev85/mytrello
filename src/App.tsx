@@ -10,6 +10,7 @@ import { RootState } from "./store";
 import AddColumnModal from "./components/AddColumnModal/AddColumnModal";
 import ConfirmationPopup from "./components/ConfirmationPopup/ConfirmationPopup";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import "./firebase";
 
 import styles from "./App.module.scss";
 

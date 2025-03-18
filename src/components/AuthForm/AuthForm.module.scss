@@ -2,7 +2,7 @@
 
 .authContainer {
   background-color: $light-surface;
-  padding: $spacing-lg;
+  padding: $spacing-md $spacing-xl;
   border-radius: $border-radius-md;
   box-shadow: $shadow-md;
   max-width: 400px;
@@ -15,26 +15,43 @@
 }
 
 .form {
+  background-color: $light-surface;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  max-width: 400px;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: $spacing-md;
+
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    padding: $spacing-sm;
+    border: 1px solid $light-border;
+    border-radius: $border-radius-sm;
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    padding: $spacing-sm;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: $primary-hover;
+  }
 }
 
-.input {
-  padding: $spacing-sm;
-  border: 1px solid $light-border;
-  border-radius: $border-radius-sm;
-}
-
-.button {
-  background-color: $primary-color;
-  color: white;
-  padding: $spacing-sm;
-  border: none;
-  border-radius: $border-radius-sm;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: $primary-hover;
+.error {
+  color: $danger-color;
+  font-size: $font-size-sm;
+  text-align: center;
 }

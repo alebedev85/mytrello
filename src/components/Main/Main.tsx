@@ -1,9 +1,7 @@
 import React from "react";
-// import Header from "../Header/Header";
 import Board from "../Board/Board";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useDispatch } from "react-redux";
-// import { RootState } from "../../store";
 import { moveTask, moveColumn } from "../../store/boardSlice";
 
 const Main: React.FC = () => {

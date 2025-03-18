@@ -8,30 +8,29 @@ interface AuthState {
   user: User;
 }
 
+// Начальное состояние, берем данные из localStorage
+const storedUser = localStorage.getItem("user");
+
 // Начальное состояние
-const initialState: AuthState = {
-  isAuthenticated: false,
-  user: {
-    email: null,
-    token: null,
-    id: null,
-  },
-};
+const initialState: AuthState = storedUser
+  ? { isAuthenticated: true, user: JSON.parse(storedUser) }
+  : {
+      isAuthenticated: false,
+      user: { email: null, token: null, id: null },
+    };
 
 // Создаем слайс аутентификации
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // Действие для входа
+    // Вход пользователя
     login: (state, action: PayloadAction<User>) => {
       state.isAuthenticated = true;
       state.user = action.payload;
     },
-    // Действие для выхода
-    logout: () => {
-      return initialState;
-    },
+    // Выход пользователя
+    logout: () => initialState,
   },
 });
 
