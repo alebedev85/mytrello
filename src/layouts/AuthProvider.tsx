@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { useDispatch } from "react-redux";
-import { login, logout } from "../store/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStart, loginFinish,loginSuccess, logout } from "../store/authSlice";
 import Loader from "../components/Loader/Loader";
+import { RootState } from "../store";
 
 function AuthProvider() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(loginStart());
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         dispatch(
-          login({
+          loginSuccess({
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
@@ -23,18 +25,14 @@ function AuthProvider() {
       } else {
         dispatch(logout());
         navigate("/login", { replace: true });
+        dispatch(loginFinish());
       }
-      setIsLoading(false);
     });
 
     return () => unsubscribe();
   }, [dispatch, navigate]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  return <Outlet />;
+  return isLoading? <Loader /> :<Outlet />;
 }
 
 export default AuthProvider;

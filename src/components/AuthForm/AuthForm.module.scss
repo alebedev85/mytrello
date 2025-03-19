@@ -1,29 +1,21 @@
 @use "../../styles/variables.scss" as *;
 
-.authContainer {
-  background-color: $light-surface;
-  padding: $spacing-md $spacing-xl;
-  border-radius: $border-radius-md;
-  box-shadow: $shadow-md;
-  max-width: 400px;
-  margin: auto;
-}
 
 .title {
   color: $light-text;
   text-align: center;
 }
 
-.form {
+.authForm {
   background-color: $light-surface;
   padding: $spacing-md $spacing-xl;
   border-radius: $border-radius-md;
   box-shadow: $shadow-md;
-  max-width: 400px;
+  width: 385px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-lg;
 
   .inputGroup {
     display: flex;

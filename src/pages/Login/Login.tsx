@@ -1,11 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import { login } from "../../store/authSlice";
+import { loginFailure, loginStart, loginSuccess } from "../../store/authSlice";
 import { login as firebaseLogin } from "../../utils/authService";
 import { useState } from "react";
 
 import styles from "./Login.module.scss";
+import { RootState } from "../../store";
+import Loader from "../../components/Loader/Loader";
 
 interface FormData {
   email: string;
@@ -13,30 +15,37 @@ interface FormData {
 }
 
 const Login = () => {
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state: RootState) => state.auth);
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async ({ email, password }: FormData) => {
+    dispatch(loginStart());
     try {
       const user = await firebaseLogin(email, password);
       dispatch(
-        login({
+        loginSuccess({
           email: user.email,
           id: user.uid,
           token: await user.getIdToken(),
         })
       );
-      navigate("/");
+      navigate("/board");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       setError(error.message);
+      dispatch(loginFailure());
     }
   };
 
   return (
     <div className={styles.authPage}>
-      <AuthForm title="Вход" buttonText="Войти" onSubmit={handleLogin} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <AuthForm title="Вход" buttonText="Войти" onSubmit={handleLogin} />
+      )}
       {error && <p className={styles.error}>Ошибка: {error}</p>}
       <p className={styles.link}>
         Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>

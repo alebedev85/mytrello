@@ -17,9 +17,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, onSubmit }) => {
 
   return (
     <form
-      autoComplete="off"
+      // autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
-      className={styles.form}
+      className={styles.authForm}
     >
       <h2 className={styles.title}>{title}</h2>
 
@@ -28,7 +28,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, onSubmit }) => {
         <input
           id="email"
           type="email"
-          autoComplete="off"
+          // autoComplete="off"
           {...register("email", {
             required: "Email обязателен",
             pattern: {
@@ -45,7 +45,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, onSubmit }) => {
         <input
           id="password"
           type="password"
-          autoComplete="new-password" 
+          // autoComplete="new-password" 
           {...register("password", {
             required: "Пароль обязателен",
             minLength: {
