@@ -55,7 +55,7 @@ function App() {
       >
         <Header />
         <Routes>
-          <Route path="/board" element={<AccountLayout />}>
+          <Route path="board" element={<AccountLayout />}>
             <Route index element={<Main />} />
           </Route>
           <Route path="/" element={<AuthLayout />}>

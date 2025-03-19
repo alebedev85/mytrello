@@ -8,7 +8,7 @@ import { auth } from "../../firebase";
 
 export default function UserMenu() {
   const { theme } = useSelector((state: RootState) => state.board);
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, user} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export default function UserMenu() {
     }
   };
 
-  if (!user) return null; // Если пользователя нет, не отображаем меню
+  if (!isAuthenticated) return null; // Если пользователя нет, не отображаем меню
 
   return (
     <div

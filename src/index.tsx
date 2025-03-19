@@ -9,7 +9,7 @@ import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename="/mytrello">
+    <BrowserRouter basename="/mytrello/">
       <Provider store={store}>
         <App />
       </Provider>

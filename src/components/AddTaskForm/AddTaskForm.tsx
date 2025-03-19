@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Priority, Task } from "../../types";
 import { addTask } from "../../store/boardSlice";
-import { PRIORITY_COLORS } from "../../utils/constants";
 import CustomSelect from "../ui/CustomSelect/CustomSelect";
 
 import styles from "./AddTaskForm.module.scss";
