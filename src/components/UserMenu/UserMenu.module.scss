@@ -1,0 +1,63 @@
+@import "../../styles/variables";
+
+.userMenu {
+  position: relative;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-lg;
+  font-weight: bold;
+  color: $light-text;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .dark & {
+    color: $dark-text;
+  }
+}
+
+.userIcon {
+  font-size: 1.8rem;
+}
+
+.userEmail {
+}
+
+.dropdownMenu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: $spacing-xs;
+  background: white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  padding: $spacing-sm;
+  width: 100%;
+  z-index: 10;
+
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-lg;
+  color: $light-text;
+  width: 100%;
+  padding: $spacing-xs;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

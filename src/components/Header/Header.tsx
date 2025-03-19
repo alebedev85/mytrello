@@ -6,6 +6,7 @@ import { RootState } from "../../store";
 import { toggleTheme } from "../../store/boardSlice";
 
 import styles from "./Header.module.scss";
+import UserMenu from "../UserMenu/UserMenu";
 
 export default function Header() {
   const { theme } = useSelector((state: RootState) => state.board);
@@ -13,10 +14,17 @@ export default function Header() {
 
   return (
     <div className={`${styles.header} ${theme === "dark" ? styles.dark : ""}`}>
-      {theme === "dark"? <img className={styles.img} src={Logo_dark} alt="Логотип" />:
-      <img className={styles.img} src={Logo} alt="Логотип" />}
+      {theme === "dark" ? (
+        <img className={styles.img} src={Logo_dark} alt="Логотип" />
+      ) : (
+        <img className={styles.img} src={Logo} alt="Логотип" />
+      )}
       <div className={styles.controls}>
-        <button onClick={() => dispatch(toggleTheme())} className={styles.themeButton}>
+        <UserMenu />
+        <button
+          onClick={() => dispatch(toggleTheme())}
+          className={styles.themeButton}
+        >
           {theme === "light" ? <FaMoon /> : <FaSun />}
         </button>
       </div>

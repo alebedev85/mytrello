@@ -27,6 +27,7 @@ function App() {
   const { theme } = useSelector((state: RootState) => state.board);
   const { isLoading } = useSelector((state: RootState) => state.auth);
 
+  // проверка пользователя при загрузки приложения
   useEffect(() => {
     dispatch(loginStart());
     const unsubscribe = auth.onAuthStateChanged((user) => {

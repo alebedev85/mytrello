@@ -61,13 +61,9 @@
   border: none;
   padding: $spacing-sm $spacing-md;
   background-color: $primary-color;
-  color: $light-text;
+  color: $dark-text;
   border-radius: $border-radius-sm;
   cursor: pointer;
-
-  .dark & {
-    color: $dark-text;
-  }
 
   &:hover {
     background-color: $primary-hover;
