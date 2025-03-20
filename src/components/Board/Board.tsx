@@ -18,7 +18,7 @@ export default function Board() {
   };
 
   return (
-    <div className={`${styles.main} ${theme === "dark" ? styles.dark : ""}`}>
+    <div className={`${styles.board} ${theme === "dark" ? styles.dark : ""}`}>
       <Droppable droppableId="board" type="column" direction="horizontal">
         {(provided) => (
           <div

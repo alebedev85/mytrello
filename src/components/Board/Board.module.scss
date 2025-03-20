@@ -1,10 +1,10 @@
 @use "../../styles/variables.scss" as *;
 
-.main {
+.board{
   padding: $spacing-lg;
   background-color: $light-main;
   border-radius: 0 0 $border-radius-md $border-radius-md;
-  min-height: 80vh;
+  min-height: $mainHied;
 
   &.dark {
     background-color: $dark-main;

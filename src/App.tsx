@@ -55,11 +55,11 @@ function App() {
       >
         <Header />
         <Routes>
-          <Route path="board" element={<AccountLayout />}>
+          <Route path="/board" element={<AccountLayout />}>
             <Route index element={<Main />} />
           </Route>
           <Route path="/" element={<AuthLayout />}>
-            <Route path="login" element={<Login />} />
+            <Route index path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
