@@ -31,6 +31,11 @@ const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
+    // Установка состояния
+    setState: (state, action: PayloadAction<BoardState>) => {
+      return action.payload;
+    },
+
     // Добавление новой задачи в указанную колонку
     addTask: (
       state,
@@ -137,6 +142,7 @@ const boardSlice = createSlice({
 });
 
 export const {
+  setState,
   addTask,
   updateTask,
   changeTaskPriority,
