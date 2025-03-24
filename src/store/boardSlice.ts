@@ -32,7 +32,7 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     // Установка состояния
-    setState: (state, action: PayloadAction<BoardState>) => {
+    setState: (_state, action: PayloadAction<BoardState>) => {
       return action.payload;
     },
 
@@ -43,7 +43,7 @@ const boardSlice = createSlice({
     ) => {
       const { columnId, task } = action.payload;
       state.tasks[task.id] = { ...task, createdAt: new Date().toISOString() }; // Добавление задачи в список
-      state.columns[columnId].taskIds.push(task.id); // Добавление id задачи в колонку
+      state.columns[columnId].taskIds.unshift(task.id); // Добавление id задачи в колонку
     },
 
     // Обновление задачи

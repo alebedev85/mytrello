@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Droppable } from "@hello-pangea/dnd";
 import Column from "../Column/Column";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { FaPlus } from "react-icons/fa";
 import { loadBoardState } from "../../utils/storageFirebase"; // Хелпер для загрузки
 import { useAuth } from "../../hooks/useAuth"; // Хук для получения пользователя
 import useSaveBoardState from "../../hooks/useSaveBoardState"; // Хук для сохранения в Firebase
+import Loader from "../Loader/Loader";
 
 import styles from "./Board.module.scss";
 
@@ -19,6 +20,7 @@ export default function Board() {
   const board = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
 
   // Загрузка состояния доски при монтировании компонента
   useEffect(() => {
@@ -26,13 +28,19 @@ export default function Board() {
       if (!user?.uid) return;
 
       try {
+        setIsLoading(true);
         const boardState = await loadBoardState(user.uid);
 
-        if (boardState && JSON.stringify(boardState) !== JSON.stringify(board)) {
+        if (
+          boardState &&
+          JSON.stringify(boardState) !== JSON.stringify(board)
+        ) {
           dispatch(setState(boardState));
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Ошибка загрузки состояния доски:", error);
+        setIsLoading(false);
       }
     };
 
@@ -42,7 +50,9 @@ export default function Board() {
   // Хук для сохранения состояния доски при изменении
   useSaveBoardState(user?.uid);
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className={`${styles.board} ${theme === "dark" ? styles.dark : ""}`}>
       <Droppable droppableId="board" type="column" direction="horizontal">
         {(provided) => (
@@ -79,4 +89,3 @@ export default function Board() {
     </div>
   );
 }
-
