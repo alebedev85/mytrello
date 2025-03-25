@@ -20,9 +20,8 @@ import styles from "./App.module.scss";
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isAuthenticated, isLoading } = useSelector(
+  const { isLoading } = useSelector(
     (state: RootState) => state.auth
   );
 
@@ -46,12 +45,6 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (window.location.pathname === "/") {
-      navigate(isAuthenticated ? "/board" : "/login", { replace: true });
-    }
-  }, [isAuthenticated, navigate]);
-
   if (isLoading) return <Loader />;
   return (
     <div className={theme === "dark" ? "dark" : ""}>
@@ -60,12 +53,12 @@ function App() {
       >
         <Header />
         <Routes>
-          <Route path="/board" element={<AccountLayout />}>
-            <Route index element={<Main />} />
-          </Route>
           <Route path="/" element={<AuthLayout />}>
             <Route index path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="/board" element={<AccountLayout />}>
+            <Route index element={<Main />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
