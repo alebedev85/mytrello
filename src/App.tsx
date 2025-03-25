@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
 import Main from "./components/Main/Main";
@@ -14,18 +14,17 @@ import "./firebase";
 import { useEffect } from "react";
 import Loader from "./components/Loader/Loader";
 import { auth } from "./firebase";
-import {
-  loginStart,
-  loginSuccess,
-  logout,
-} from "./store/authSlice";
+import { loginStart, loginSuccess, logout } from "./store/authSlice";
 
 import styles from "./App.module.scss";
 
 function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isLoading } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, isLoading } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   // проверка пользователя при загрузки приложения
   useEffect(() => {
@@ -46,6 +45,12 @@ function App() {
 
     return () => unsubscribe();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (window.location.pathname === "/") {
+      navigate(isAuthenticated ? "/board" : "/login", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   if (isLoading) return <Loader />;
   return (

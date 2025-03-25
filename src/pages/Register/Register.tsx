@@ -17,6 +17,7 @@ interface FormData {
 const Register: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { theme } = useSelector((state: RootState) => state.board);
   const { isLoading } = useSelector((state: RootState) => state.auth);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,7 +35,9 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className={styles.authPage}>
+    <div
+      className={`${styles.authPage} ${theme === "dark" ? styles.dark : ""}`}
+    >
       {isLoading ? (
         <Loader />
       ) : (
@@ -45,7 +48,7 @@ const Register: React.FC = () => {
         />
       )}
       {error && <p className={styles.error}>Ошибка: {error}</p>}
-      <p className={styles.redirect}>
+      <p className={styles.link}>
         Уже есть аккаунт? <a href="/login">Войти</a>
       </p>
     </div>

@@ -7,17 +7,31 @@
   justify-content: center;
   height: $mainHied;
   background-color: $light-bg;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+  padding-bottom: 25px;
+
+  &.dark {
+    background-color: $dark-main;
+  }
 }
 
 .link {
   margin-top: $spacing-md;
   color: $light-text-secondary;
   text-align: center;
+
+  .dark & {
+    color: $dark-text;
+  }
 }
 
 .link a {
   color: $primary-color;
   text-decoration: none;
+
+  .dark & {
+    color: $dark-task;
+  }
 }
 
 .link a:hover {
