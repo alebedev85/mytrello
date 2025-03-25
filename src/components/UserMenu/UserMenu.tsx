@@ -8,7 +8,9 @@ import { auth } from "../../firebase";
 
 export default function UserMenu() {
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isAuthenticated, user} = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, user } = useSelector(
+    (state: RootState) => state.auth
+  );
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -55,13 +57,13 @@ export default function UserMenu() {
         <span className={styles.userEmail}>{user.email}</span>
       </button>
 
-      {menuOpen && (
-        <div className={styles.dropdownMenu}>
-          <button className={styles.logoutButton} onClick={handleLogout}>
-            <FaSignOutAlt /> Выйти
-          </button>
-        </div>
-      )}
+      <div
+        className={`${styles.dropdownMenu} ${menuOpen ? styles.open: ""}`}
+      >
+        <button className={styles.logoutButton} onClick={handleLogout}>
+          <FaSignOutAlt /> Выйти
+        </button>
+      </div>
     </div>
   );
 }
