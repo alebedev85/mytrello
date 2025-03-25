@@ -1,29 +1,27 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./store";
-import Main from "./components/Main/Main";
-import Header from "./components/Header/Header";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import { Route, Routes } from "react-router-dom";
 import AddColumnModal from "./components/AddColumnModal/AddColumnModal";
 import ConfirmationPopup from "./components/ConfirmationPopup/ConfirmationPopup";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Header from "./components/Header/Header";
+import Loader from "./components/Loader/Loader";
+import "./firebase";
+import { auth } from "./firebase";
 import AccountLayout from "./layouts/AccountLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import "./firebase";
-import { useEffect } from "react";
-import Loader from "./components/Loader/Loader";
-import { auth } from "./firebase";
+import Login from "./pages/Login/Login";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Register from "./pages/Register/Register";
+import { RootState } from "./store";
 import { loginStart, loginSuccess, logout } from "./store/authSlice";
 
 import styles from "./App.module.scss";
+import Main from "./components/Main/Main";
 
 function App() {
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isLoading } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const { isLoading } = useSelector((state: RootState) => state.auth);
 
   // проверка пользователя при загрузки приложения
   useEffect(() => {

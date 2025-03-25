@@ -1,0 +1,57 @@
+@use "../../styles/variables.scss" as *;
+
+@keyframes pulse {
+  0% {
+    background-color: var(--pulse-start);
+  }
+  50% {
+    background-color: var(--pulse-middle);
+  }
+  100% {
+    background-color: var(--pulse-start);
+  }
+}
+
+.boardSkeleton {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: $spacing-lg;
+  min-height: $mainHied;
+}
+
+.column {
+  width: 20rem;
+  padding: $spacing-sm;
+  background-color: var(--surface);
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+}
+
+.columnTitle {
+  height: $font-size-lg;
+  width: 60%;
+  margin-bottom: $spacing-sm;
+  border-radius: $border-radius-sm;
+  animation: pulse 1.5s infinite;
+}
+
+.card {
+  height: 80px;
+  margin-bottom: $spacing-sm;
+  border-radius: $border-radius-sm;
+  animation: pulse 1.5s infinite;
+}
+
+// Поддержка светлой и тёмной темы
+:root {
+  --pulse-start: #e0e0e0;
+  --pulse-middle: #f5f5f5;
+  --surface: #{$light-surface};
+}
+
+.dark {
+  --pulse-start: #{$dark-task};
+  --pulse-middle: #{$dark-hover};
+  --surface: #{$dark-surface};
+}
