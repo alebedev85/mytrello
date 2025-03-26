@@ -1,13 +1,13 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { loginFailure, loginStart, loginSuccess } from "../../store/authSlice";
 import { login as firebaseLogin } from "../../utils/authService";
-import { useState } from "react";
 
-import styles from "./Login.module.scss";
-import { RootState } from "../../store";
 import Loader from "../../components/Loader/Loader";
+import { RootState } from "../../store";
+import styles from "./Login.module.scss";
 
 interface FormData {
   email: string;

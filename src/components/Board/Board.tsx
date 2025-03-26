@@ -2,7 +2,7 @@ import { Droppable } from "@hello-pangea/dnd";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useAuth } from "../../hooks/useAuth"; // Хук для получения пользователя
+import useAuth from "../../hooks/useAuth"; // Хук для получения пользователя
 import useSaveBoardState from "../../hooks/useSaveBoardState"; // Хук для сохранения в Firebase
 import { RootState } from "../../store";
 import { setState } from "../../store/boardSlice";

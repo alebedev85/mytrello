@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { register as firebaseRegister } from "../../utils/authService";
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import AuthForm from "../../components/AuthForm/AuthForm";
 import Loader from "../../components/Loader/Loader";
 import { RootState } from "../../store";
 import { loginFinish, loginStart } from "../../store/authSlice";
+import { register as firebaseRegister } from "../../utils/authService";
 import styles from "./Register.module.scss";
 
 interface FormData {

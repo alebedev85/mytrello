@@ -9,6 +9,7 @@ const AuthLayout = () => {
   );
   const navigate = useNavigate();
 
+  //редирект при заходе на базовый роут
   useEffect(() => {
     if (window.location.pathname === "/") {
       navigate(isAuthenticated ? "/board" : "/login", { replace: true });
