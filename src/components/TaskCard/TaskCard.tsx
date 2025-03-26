@@ -1,24 +1,24 @@
-import React, { useState } from "react";
 import { Draggable } from "@hello-pangea/dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { Task } from "../../types";
-import TaskEditingForm from "../TaskEditing/TaskEditingForm";
-import PriorityMenu from "../PriorityMenu/PriorityMenu";
+import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { openConfirmationModal } from "../../store/popupSlice";
+import { Task } from "../../types";
 import { PRIORITY_COLORS } from "../../utils/constants";
+import PriorityMenu from "../PriorityMenu/PriorityMenu";
+import TaskEditingForm from "../TaskEditing/TaskEditingForm";
 
 import styles from "./TaskCard.module.scss";
 
-interface Props {
+interface TaskCardProps {
   task: Task;
   columnId: string;
   index: number;
 }
 
-const TaskCard: React.FC<Props> = ({ task, columnId, index }) => {
+const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
   const { theme } = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);

@@ -1,18 +1,15 @@
 import { useState } from "react";
-import styles from "./TaskEditingForm.module.scss";
+import { useDispatch } from "react-redux";
 import { updateTask } from "../../store/boardSlice";
 import { Task } from "../../types";
-import { useDispatch } from "react-redux";
+import styles from "./TaskEditingForm.module.scss";
 
 interface TaskEditingFormProps {
   task: Task;
   onClose: () => void;
 }
 
-export default function TaskEditingForm({
-  task,
-  onClose,
-}: TaskEditingFormProps) {
+const TaskEditingForm = ({ task, onClose }: TaskEditingFormProps) => {
   const dispatch = useDispatch();
   const [editedTitle, setEditedTitle] = useState(task.title);
   const [editedDescription, setEditedDescription] = useState(task.description);
@@ -55,4 +52,6 @@ export default function TaskEditingForm({
       </div>
     </div>
   );
-}
+};
+
+export default TaskEditingForm;

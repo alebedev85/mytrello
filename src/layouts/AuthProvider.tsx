@@ -1,12 +1,17 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginFinish,loginSuccess, logout } from "../store/authSlice";
+import { Outlet, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader/Loader";
+import { auth } from "../firebase";
 import { RootState } from "../store";
+import {
+  loginFinish,
+  loginStart,
+  loginSuccess,
+  logout,
+} from "../store/authSlice";
 
-function AuthProvider() {
+const AuthProvider = () => {
   const { isLoading } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +37,7 @@ function AuthProvider() {
     return () => unsubscribe();
   }, [dispatch, navigate]);
 
-  return isLoading? <Loader /> :<Outlet />;
-}
+  return isLoading ? <Loader /> : <Outlet />;
+};
 
 export default AuthProvider;

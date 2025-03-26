@@ -1,15 +1,17 @@
 // components/AddColumnModal/AddColumnModal.tsx
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { closeAddColumnModal } from "../../store/popupSlice";
 import { addColumn } from "../../store/boardSlice";
+import { closeAddColumnModal } from "../../store/popupSlice";
 import styles from "./AddColumnModal.module.scss";
 
 const AddColumnModal = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isOpen } = useSelector((state: RootState) => state.popup.addColumnModal);
+  const { isOpen } = useSelector(
+    (state: RootState) => state.popup.addColumnModal
+  );
 
   // Состояние для заголовка новой колонки
   const [newColumnTitle, setNewColumnTitle] = useState("");

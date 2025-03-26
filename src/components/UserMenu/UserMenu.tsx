@@ -1,12 +1,12 @@
-import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../firebase";
 import { RootState } from "../../store";
 import { logout } from "../../store/authSlice";
-import { useEffect, useRef, useState } from "react";
 import styles from "./UserMenu.module.scss";
-import { auth } from "../../firebase";
 
-export default function UserMenu() {
+const UserMenu = () => {
   const { theme } = useSelector((state: RootState) => state.board);
   const { isAuthenticated, user } = useSelector(
     (state: RootState) => state.auth
@@ -57,13 +57,13 @@ export default function UserMenu() {
         <span className={styles.userEmail}>{user.email}</span>
       </button>
 
-      <div
-        className={`${styles.dropdownMenu} ${menuOpen ? styles.open: ""}`}
-      >
+      <div className={`${styles.dropdownMenu} ${menuOpen ? styles.open : ""}`}>
         <button className={styles.logoutButton} onClick={handleLogout}>
           <FaSignOutAlt /> Выйти
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default UserMenu;

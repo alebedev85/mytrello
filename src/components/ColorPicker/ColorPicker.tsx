@@ -1,5 +1,4 @@
-import React from "react";
-import { COLUMN_COLORS as colors} from  "../../utils/constants"  ;
+import { COLUMN_COLORS as colors } from "../../utils/constants";
 import styles from "./ColorPicker.module.scss";
 
 interface ColorPickerProps {
@@ -7,10 +6,7 @@ interface ColorPickerProps {
   onSelectColor: (color: string) => void;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({
-  selectedColor,
-  onSelectColor,
-}) => {
+const ColorPicker = ({ selectedColor, onSelectColor }: ColorPickerProps) => {
   return (
     <div className={styles.colorPicker}>
       {colors.map((color) => (

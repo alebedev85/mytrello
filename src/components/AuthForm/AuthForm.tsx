@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./AuthForm.module.scss";
 
@@ -8,7 +7,7 @@ interface AuthFormProps {
   onSubmit: (data: { email: string; password: string }) => void;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, onSubmit }) => {
+const AuthForm = ({ title, buttonText, onSubmit }: AuthFormProps) => {
   const {
     register,
     handleSubmit,
@@ -45,7 +44,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, onSubmit }) => {
         <input
           id="password"
           type="password"
-          // autoComplete="new-password" 
+          // autoComplete="new-password"
           {...register("password", {
             required: "Пароль обязателен",
             minLength: {

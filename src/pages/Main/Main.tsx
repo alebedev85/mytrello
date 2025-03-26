@@ -1,10 +1,9 @@
-import React from "react";
-import Board from "../Board/Board";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { useDispatch } from "react-redux";
-import { moveTask, moveColumn } from "../../store/boardSlice";
+import Board from "../../components/Board/Board";
+import { moveColumn, moveTask } from "../../store/boardSlice";
 
-const Main: React.FC = () => {
+const Main = () => {
   const dispatch = useDispatch();
 
   const onDragEnd = (result: DropResult) => {

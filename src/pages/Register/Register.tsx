@@ -2,19 +2,19 @@ import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { register as firebaseRegister } from "../../utils/authService";
 
-import styles from "./Register.module.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { loginStart, loginFinish } from "../../store/authSlice";
 import Loader from "../../components/Loader/Loader";
+import { RootState } from "../../store";
+import { loginFinish, loginStart } from "../../store/authSlice";
+import styles from "./Register.module.scss";
 
 interface FormData {
   email: string;
   password: string;
 }
 
-const Register: React.FC = () => {
+const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);

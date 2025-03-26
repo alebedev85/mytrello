@@ -10,15 +10,15 @@ import { auth } from "./firebase";
 import AccountLayout from "./layouts/AccountLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Login/Login";
+import Main from "./pages/Main/Main";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Register from "./pages/Register/Register";
 import { RootState } from "./store";
 import { loginStart, loginSuccess, logout } from "./store/authSlice";
 
 import styles from "./App.module.scss";
-import Main from "./components/Main/Main";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
   const { isLoading } = useSelector((state: RootState) => state.auth);
@@ -65,6 +65,6 @@ function App() {
       <ConfirmationPopup />
     </div>
   );
-}
+};
 
 export default App;

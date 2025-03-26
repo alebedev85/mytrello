@@ -1,24 +1,24 @@
-import React, { useState, useRef } from "react";
-import AddTaskForm from "../AddTaskForm/AddTaskForm";
-import { Droppable, Draggable } from "@hello-pangea/dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { Column as ColumnType, Task } from "../../types";
-import TaskCard from "../TaskCard/TaskCard";
-import { changeColumnColor } from "../../store/boardSlice";
+import { Draggable, Droppable } from "@hello-pangea/dnd";
+import { useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import styles from "./Column.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { changeColumnColor } from "../../store/boardSlice";
 import { openConfirmationModal } from "../../store/popupSlice";
+import { Column as ColumnType, Task } from "../../types";
+import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import ColorPicker from "../ColorPicker/ColorPicker";
+import TaskCard from "../TaskCard/TaskCard";
+import styles from "./Column.module.scss";
 
-interface Props {
+interface ColumnProps {
   column: ColumnType;
   tasks: Task[];
   index: number;
 }
 
-const Column: React.FC<Props> = ({ column, tasks, index }) => {
+const Column = ({ column, tasks, index }: ColumnProps) => {
   const { theme } = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);

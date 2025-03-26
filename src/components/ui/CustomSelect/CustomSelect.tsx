@@ -20,10 +20,10 @@ interface CustomSelectProps {
   onSelect: (value: Priority) => void;
 }
 
-export default function CustomSelect({
+const CustomSelect = ({
   selected,
   onSelect,
-}: CustomSelectProps) {
+}: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -84,3 +84,5 @@ export default function CustomSelect({
     </div>
   );
 }
+
+export default CustomSelect;

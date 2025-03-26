@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { closeConfirmationModal } from "../../store/popupSlice";
 import { removeColumn, removeTask } from "../../store/boardSlice";
+import { closeConfirmationModal } from "../../store/popupSlice";
 import styles from "./ConfirmationPopup.module.scss";
 
-const ConfirmationPopup: React.FC = () => {
+const ConfirmationPopup = () => {
   const dispatch = useDispatch();
   const { isOpen, type, targetId } = useSelector(
     (state: RootState) => state.popup.confirmationModal

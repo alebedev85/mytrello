@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Priority, Task } from "../../types";
 import { addTask } from "../../store/boardSlice";
+import { Priority, Task } from "../../types";
 import CustomSelect from "../ui/CustomSelect/CustomSelect";
 
 import styles from "./AddTaskForm.module.scss";
@@ -13,11 +13,7 @@ interface AddTaskFormProps {
   onClose: () => void;
 }
 
-export default function AddTaskForm({
-  isActive,
-  columnId,
-  onClose,
-}: AddTaskFormProps) {
+const AddTaskForm = ({ isActive, columnId, onClose }: AddTaskFormProps) => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -49,8 +45,8 @@ export default function AddTaskForm({
         onKeyPress={(e) => e.key === "Enter" && handleAddTask()}
       />
       <CustomSelect
-      onSelect={(value) => setPriority(value)}
-      selected={priority}
+        onSelect={(value) => setPriority(value)}
+        selected={priority}
       />
       <div className={styles.formControls}>
         <button onClick={handleAddTask} className={styles.submitButton}>
@@ -62,4 +58,6 @@ export default function AddTaskForm({
       </div>
     </div>
   ) : null;
-}
+};
+
+export default AddTaskForm;

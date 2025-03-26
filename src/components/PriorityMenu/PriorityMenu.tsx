@@ -1,21 +1,17 @@
-// components/PriorityMenu/PriorityMenu.tsx
-import React, { useState, useRef, useEffect } from "react";
-import { PRIORITY_COLORS } from "../../utils/constants";
-import { Priority } from "../../types";
-import styles from "./PriorityMenu.module.scss";
+import { useEffect, useRef, useState } from "react";
 import { FaFlag } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { changeTaskPriority } from "../../store/boardSlice";
+import { Priority } from "../../types";
+import { PRIORITY_COLORS } from "../../utils/constants";
+import styles from "./PriorityMenu.module.scss";
 
 interface PriorityMenuProps {
   selectedPriority: Priority;
   taskId: string;
 }
 
-const PriorityMenu: React.FC<PriorityMenuProps> = ({
-  selectedPriority,
-  taskId,
-}) => {
+const PriorityMenu = ({ selectedPriority, taskId }: PriorityMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const priorityButtonRef = useRef<HTMLButtonElement>(null);
@@ -74,7 +70,11 @@ const PriorityMenu: React.FC<PriorityMenuProps> = ({
             style={{ backgroundColor: PRIORITY_COLORS.low }}
           />
           <button
-            className={`${selectedPriority === "none" || !selectedPriority ? styles.active : ""}`}
+            className={`${
+              selectedPriority === "none" || !selectedPriority
+                ? styles.active
+                : ""
+            }`}
             onClick={() => handlePriorityChange("none")}
             style={{ backgroundColor: PRIORITY_COLORS.none }}
           />

@@ -13,7 +13,7 @@ import Column from "../Column/Column";
 
 import styles from "./Board.module.scss";
 
-export default function Board() {
+const Board = () => {
   const { columns, columnOrder, tasks, theme } = useSelector(
     (state: RootState) => state.board
   );
@@ -89,4 +89,6 @@ export default function Board() {
       </Droppable>
     </div>
   );
-}
+};
+
+export default Board;
