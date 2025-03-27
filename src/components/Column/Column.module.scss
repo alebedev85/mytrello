@@ -37,70 +37,33 @@
 .controls {
   display: flex;
   gap: $spacing-sm;
-}
 
-.colorButton{
-  display: flex;
-  align-items: center;
-  border-radius: 20%;
-  padding: 2px;
-
-  &:hover {
-    color: $danger-hover;
-    cursor: pointer;
-    background-color: $light-hover;
-  }
-}
-
-.addButton {
-  color: $light-text-secondary;
-  display: flex;
-  align-items: center;
-  padding: $spacing-xs;
-  border-radius: 20%;
-
-  &:hover {
-    color: $light-text;
-    cursor: pointer;
-    background-color: $light-hover;
-  }
-}
-
-.deleteButton {
-  display: flex;
-  align-items: center;
-  padding: $spacing-xs;
-  border-radius: 20%;
-
-  &:hover {
-    color: $danger-hover;
-    cursor: pointer;
-    background-color: $light-hover;
-  }
-
-  .dark & {
-    color: $danger-color;
+  button {
+    display: flex;
+    align-items: center;
+    border-radius: 20%;
+    padding: 2px 4px;
 
     &:hover {
-      color: $danger-hover;
+      cursor: pointer;
+      background-color: $light-hover;
     }
   }
 }
 
-.clearButton{
-  display: flex;
-  align-items: center;
-  padding: $spacing-xs;
-  border-radius: 20%;
+.colorButton {
+  padding: 2px;
+}
 
+.deleteButton {
   &:hover {
     color: $danger-hover;
-    cursor: pointer;
-    background-color: $light-hover;
   }
+}
 
-  .dark & {
-    color: $danger-color;
+.clearButton {
+  &:hover {
+    color: $danger-hover;
   }
 }
 

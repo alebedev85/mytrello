@@ -83,6 +83,7 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
                     onClick={toggleColorPicker}
                     className={`${styles.colorButton} tooltip`}
                     data-tooltip="Выбрать цвет колонки"
+                    style={{ padding: "2px" }}
                   >
                     🎨
                   </button>
