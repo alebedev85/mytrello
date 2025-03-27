@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { removeColumn, removeTask } from "../../store/boardSlice";
+import {
+  clearTasksInColumn,
+  removeColumn,
+  removeTask,
+} from "../../store/boardSlice";
 import { closeConfirmationModal } from "../../store/popupSlice";
 import styles from "./ConfirmationPopup.module.scss";
 
@@ -36,33 +40,45 @@ const ConfirmationPopup = () => {
       dispatch(removeColumn(targetId.columnId));
     } else if (type === "task" && targetId) {
       // Удаляем задачу
-      dispatch(
-        removeTask({
-          taskId: targetId.taskId,
-          columnId: targetId.columnId,
-        })
-      );
+      if (targetId.taskId) {
+        dispatch(
+          removeTask({
+            taskId: targetId.taskId,
+            columnId: targetId.columnId,
+          })
+        );
+      }
+    } else if (type === "clear-tasks" && targetId) {
+      // Очистка колонки
+      dispatch(clearTasksInColumn(targetId.columnId));
     }
     dispatch(closeConfirmationModal());
   };
+
+  const confirmationText =
+    type === "column"
+      ? "удалить колонку"
+      : type === "task"
+      ? "удалить задачу"
+      : type === "clear-tasks"
+      ? "очистить колонку"
+      : "выполнить действие";
+
 
   return isOpen ? (
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.popup}>
         <h3>Вы уверены?</h3>
-        <p>
-          Вы действительно хотите удалить{" "}
-          {type === "column" ? "колонку" : "задачу"}?
-        </p>
+        <p>Вы действительно хотите {confirmationText}?</p>
         <div className={styles.buttons}>
           <button onClick={handleConfirm} className={styles.confirmButton}>
-            Удалить
+            Да
           </button>
           <button
             onClick={() => dispatch(closeConfirmationModal())}
             className={styles.cancelButton}
           >
-            Отмена
+            Нет
           </button>
         </div>
       </div>

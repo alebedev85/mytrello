@@ -134,6 +134,15 @@ const boardSlice = createSlice({
       }
     },
 
+    // Очистка колонки
+    clearTasksInColumn: (state, action: PayloadAction<string>) => {
+      const columnId = action.payload;
+      state.columns[columnId].taskIds.forEach((taskId) => {
+        delete state.tasks[taskId];
+      });
+      state.columns[columnId].taskIds = [];
+    },
+
     // Переключение темы (светлая/тёмная)
     toggleTheme: (state) => {
       state.theme = state.theme === "light" ? "dark" : "light";
@@ -152,6 +161,7 @@ export const {
   moveColumn,
   removeColumn,
   changeColumnColor,
+  clearTasksInColumn,
   toggleTheme,
 } = boardSlice.actions;
 

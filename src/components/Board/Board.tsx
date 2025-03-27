@@ -55,6 +55,7 @@ const Board = () => {
     <BoardSkeleton />
   ) : (
     <div className={`${styles.board} ${theme === "dark" ? styles.dark : ""}`}>
+      {/* Droppable - область, куда можно перетаскивать элементы */}
       <Droppable droppableId="board" type="column" direction="horizontal">
         {(provided) => (
           <div
@@ -62,6 +63,7 @@ const Board = () => {
             ref={provided.innerRef}
             className={styles.boardContainer}
           >
+            {/* Отображаем колонки в порядке, заданном в columnOrder */}
             {columnOrder.map((columnId, index) => {
               const column = columns[columnId];
               const columnTasks = column.taskIds.map((taskId) => tasks[taskId]);
@@ -75,6 +77,7 @@ const Board = () => {
                 />
               );
             })}
+            {/* Элемент-заполнитель для корректного отображения DnD */}
             {provided.placeholder}
             <button
               className={styles.addColumnButton}

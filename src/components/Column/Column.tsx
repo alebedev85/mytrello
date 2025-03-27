@@ -1,6 +1,6 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { useRef, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaTrashAlt } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -41,7 +41,17 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
     dispatch(
       openConfirmationModal({
         type: "column",
-        targetId: { taskId: column.id, columnId: column.id },
+        targetId: { columnId: column.id },
+      })
+    );
+  };
+
+  // Очистить колонку
+  const handleClearColumn = () => {
+    dispatch(
+      openConfirmationModal({
+        type: "clear-tasks",
+        targetId: { columnId: column.id },
       })
     );
   };
@@ -82,6 +92,13 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
                     data-tooltip="Новая задача"
                   >
                     <FaPlus />
+                  </button>
+                  <button
+                    data-tooltip="Очистить колонку"
+                    className={`${styles.clearButton} tooltip`}
+                    onClick={handleClearColumn}
+                  >
+                    <FaTrashAlt />
                   </button>
                   <button
                     onClick={handleDeleteColumn}

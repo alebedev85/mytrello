@@ -6,8 +6,8 @@ interface PopupState {
   };
   confirmationModal: {
     isOpen: boolean;
-    type: "column" | "task" | null;
-    targetId: { taskId: string; columnId: string } | null;
+    type: "column" | "task" | "clear-tasks" | null;
+    targetId: { taskId?: string; columnId: string } | null;
   };
 }
 
@@ -30,18 +30,18 @@ const popupSlice = createSlice({
     openAddColumnModal(state) {
       state.addColumnModal.isOpen = true;
     },
-    
+
     // Закрытие модального окна добавления колонки
     closeAddColumnModal(state) {
-      state.addColumnModal.isOpen  = false;
+      state.addColumnModal.isOpen = false;
     },
 
     // Открытие окна подтверждения удаления колонки или задачи
     openConfirmationModal(
       state,
       action: PayloadAction<{
-        type: "column" | "task";
-        targetId: { taskId: string; columnId: string };
+        type: "column" | "task" | "clear-tasks";
+        targetId: { taskId?: string; columnId: string };
       }>
     ) {
       state.confirmationModal.isOpen = true;

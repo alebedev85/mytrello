@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../types";
 import { RootState } from ".";
 
-// Определяем интерфейс для состояния аутентификации
 interface AuthState {
   isAuthenticated: boolean;
   user: User;

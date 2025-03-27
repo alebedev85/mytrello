@@ -87,6 +87,23 @@
   }
 }
 
+.clearButton{
+  display: flex;
+  align-items: center;
+  padding: $spacing-xs;
+  border-radius: 20%;
+
+  &:hover {
+    color: $danger-hover;
+    cursor: pointer;
+    background-color: $light-hover;
+  }
+
+  .dark & {
+    color: $danger-color;
+  }
+}
+
 .dropArea {
   flex: 1;
   padding: $spacing-sm;
