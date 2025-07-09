@@ -29,6 +29,7 @@ const AddTaskForm = ({ isActive, columnId, onClose }: AddTaskFormProps) => {
       };
       dispatch(addTask({ columnId, task: newTask }));
       setNewTaskTitle("");
+      setPriority("none");
       onClose();
     }
   };

@@ -74,7 +74,7 @@ const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
                     </button>
                     <button
                       onClick={handleDeleteTask}
-                      className={`${styles.button} tooltip`}
+                      className={`${styles.deleteButton} tooltip`}
                       data-tooltip="Удалить задачу"
                     >
                       <IoClose />
