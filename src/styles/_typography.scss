@@ -1,0 +1,17 @@
+:root {
+  /* ===== Base ===== */
+  --font-family-base: 'Poppins', sans-serif;
+  --text-color-primary: rgba(250, 250, 250, 1);
+
+  /* ===== Headings ===== */
+  --text-h1: 700 24px/36px var(--font-family-base);
+  --text-h2: 700 18px/27px var(--font-family-base);
+  --text-h3: 700 16px/24px var(--font-family-base);
+
+  /* ===== Body ===== */
+  --text-body: 400 14px/21px var(--font-family-base);
+  --text-body-dull: 500 14px/21px var(--font-family-base);
+
+  /* ===== Letter spacing ===== */
+  --letter-spacing-base: 0.03em;
+}

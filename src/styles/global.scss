@@ -1,0 +1,75 @@
+@use "./_variables.scss" as *;
+@use "./typography" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font: var(--text-body);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
+}
+
+h1 {
+  font: var(--text-h1);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
+}
+
+h2 {
+  font: var(--text-h2);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
+}
+
+h3 {
+  font: var(--text-h3);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
+}
+
+.text-body {
+  font: var(--text-body);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
+}
+
+.text-body-dull {
+  font: var(--text-body-dull);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
+}
+
+button {
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+  z-index: 10;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}

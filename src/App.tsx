@@ -23,6 +23,10 @@ const App = () => {
   const { theme } = useSelector((state: RootState) => state.board);
   const { isLoading } = useSelector((state: RootState) => state.auth);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("theme", theme);
+  }, [theme]);
+
   // проверка пользователя при загрузки приложения
   useEffect(() => {
     dispatch(loginStart());
@@ -33,7 +37,7 @@ const App = () => {
             email: user.email,
             token: user.refreshToken,
             id: user.uid,
-          })
+          }),
         );
       } else {
         dispatch(logout());
@@ -45,10 +49,8 @@ const App = () => {
 
   if (isLoading) return <Loader />;
   return (
-    <div className={theme === "dark" ? "dark" : ""}>
-      <div
-        className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}
-      >
+    <>
+      <div className={styles.container}>
         <Header />
         <Routes>
           <Route path="/" element={<AuthLayout />}>
@@ -63,7 +65,7 @@ const App = () => {
       </div>
       <AddColumnModal />
       <ConfirmationPopup />
-    </div>
+    </>
   );
 };
 
