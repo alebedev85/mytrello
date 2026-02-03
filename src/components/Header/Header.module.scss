@@ -1,37 +1,31 @@
-@use "../../styles/variables.scss" as *; 
+@use "../../styles/variables.scss" as *;
 
 .header {
   position: relative;
-  min-height: 130px;
+  height: 150px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: $spacing-md $spacing-lg;
-  background-color: $light-surface;
-  border-radius: $border-radius-md $border-radius-md 0 0;
-
-  &.dark {
-    background-color: $dark-surface;
-  }
+  padding: 0 56px;
+  background: var(--glass-effect);
+  border-bottom: 1px solid var(--glass-stroke);
+  box-sizing: border-box;
 }
 
 .img {
-  width: 120px;
-}
-
-.img {
+  width: 116px;
   position: absolute;
-  top: 5%;
+  top: 11%;
   left: 46.2%;
 }
 
 .addButton {
   display: flex;
   align-items: center;
-  gap: $spacing-sm; 
-  padding: $spacing-sm $spacing-md; 
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
   background-color: $primary-color;
-  color: $light-text; 
+  color: $light-text;
   border-radius: $border-radius-sm;
   cursor: pointer;
 
@@ -43,28 +37,19 @@
 .controls {
   display: flex;
   align-items: center;
-  gap: $spacing-md; 
+  gap: $spacing-md;
 }
 
 .themeButton {
-  padding: 0.7rem; 
-  width: 40px;
-  height: 40px;
-  border-radius: $border-radius-full;
-  background-color: $light-hover;
-  color: $light-text-secondary; 
-  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  &:hover {
-    background-color: $light-border;
-  }
-
-  .dark & {
-    background-color: $dark-hover;
-    color: $dark-text-secondary; 
-
-    &:hover {
-      background-color: $dark-border;
-    }
+  .themeLogo {
+    width: 40px;
+    height: 40px;
   }
 }

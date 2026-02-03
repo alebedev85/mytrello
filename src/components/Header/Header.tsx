@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { toggleTheme } from "../../store/boardSlice";
 import Logo from "/logo.svg";
-import Logo_dark from "/logo_dark.svg";
+import Moon from "/moon-icon.svg";
 
 import UserMenu from "../UserMenu/UserMenu";
 import styles from "./Header.module.scss";
@@ -13,19 +13,16 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className={`${styles.header} ${theme === "dark" ? styles.dark : ""}`}>
-      {theme === "dark" ? (
-        <img className={styles.img} src={Logo_dark} alt="Логотип" />
-      ) : (
-        <img className={styles.img} src={Logo} alt="Логотип" />
-      )}
+    <div className={styles.header}>
+      <img className={styles.img} src={Logo} alt="Логотип" />
+
       <div className={styles.controls}>
         <UserMenu />
         <button
           onClick={() => dispatch(toggleTheme())}
           className={styles.themeButton}
         >
-          {theme === "light" ? <FaMoon /> : <FaSun />}
+          {theme === "light" ? <img className={styles.themeLogo} src={Moon} alt="Светлая тема" /> : <FaSun />}
         </button>
       </div>
     </div>
