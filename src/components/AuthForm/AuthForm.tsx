@@ -1,15 +1,14 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styles from "./AuthForm.module.scss";
+import { authText } from "./authText";
 
 interface AuthFormProps {
-  title: string;
-  buttonText: string;
   onSubmit: (data: { email: string; password: string }) => void;
   type: "login" | "register";
 }
 
-const AuthForm = ({ title, buttonText, onSubmit, type }: AuthFormProps) => {
+const AuthForm = ({ onSubmit, type }: AuthFormProps) => {
   const {
     register,
     handleSubmit,
@@ -23,7 +22,7 @@ const AuthForm = ({ title, buttonText, onSubmit, type }: AuthFormProps) => {
       className={styles.authForm}
     >
       <div className={styles.formHeader}>
-        <h1>{title}</h1>
+        <h1>{authText[type].title}</h1>
       </div>
       <div className={styles.formContent}>
         <div className={styles.inputGroup}>
@@ -71,13 +70,11 @@ const AuthForm = ({ title, buttonText, onSubmit, type }: AuthFormProps) => {
         </div>
 
         <button className={styles.submitButton} type="submit">
-          <h2>{buttonText} </h2>
+          <h2>{authText[type].buttonText} </h2>
         </button>
-        {type === "login" ?<p className="text-body" style={{ whiteSpace: "nowrap" }}>
-          Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
-        </p> : <p className="text-body" style={{ whiteSpace: "nowrap" }}>
-          Уже есть аккаунт? <Link to="/login">Войти</Link>
-        </p> }
+        <p className="text-body" style={{ whiteSpace: "nowrap" }}>
+          {authText[type].text} <Link to={authText[type].link}>{authText[type].linkText}</Link>
+        </p>
       </div>
     </form>
   );

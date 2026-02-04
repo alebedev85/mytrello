@@ -1,38 +1,13 @@
-@use "../../styles/variables.scss" as *;
-
 .authPage {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: $mainHied;
-}
-
-.link {
-  margin-top: $spacing-md;
-  color: $light-text-secondary;
-  text-align: center;
-
-  .dark & {
-    color: $dark-text;
-  }
-}
-
-.link a {
-  color: $primary-color;
-  text-decoration: none;
-
-  .dark & {
-    color: $dark-task;
-  }
-}
-
-.link a:hover {
-  text-decoration: underline;
 }
 
 .error {
-  color: $danger-color;
-  font-size: $font-size-lg;
+  color: var(--danger-color);
+  font-size: var(--text-body);
   text-align: center;
 }

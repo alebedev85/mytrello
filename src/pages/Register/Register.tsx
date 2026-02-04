@@ -40,12 +40,7 @@ const Register = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <AuthForm
-          title="Регистрация"
-          buttonText="Зарегистрироваться"
-          onSubmit={handleRegister}
-          type={"register"}
-        />
+        <AuthForm onSubmit={handleRegister} type={"register"} />
       )}
       {error && <p className={styles.error}>Ошибка: {error}</p>}
     </div>

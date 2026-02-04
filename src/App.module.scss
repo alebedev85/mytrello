@@ -1,4 +1,6 @@
 .container {
   height: 100vh;
   background: var(--bg-image) center / auto no-repeat, var(--background-color);
+  display: flex;
+  flex-direction: column;
 }

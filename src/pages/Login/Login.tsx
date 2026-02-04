@@ -17,7 +17,6 @@ interface FormData {
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.board);
   const { isLoading } = useSelector((state: RootState) => state.auth);
   const [error, setError] = useState<string | null>(null);
 
@@ -42,12 +41,12 @@ const Login = () => {
 
   return (
     <div
-      className={`${styles.authPage} ${theme === "dark" ? styles.dark : ""}`}
+      className={styles.authPage}
     >
       {isLoading ? (
         <Loader />
       ) : (
-        <AuthForm title="Вход" buttonText="Войти" onSubmit={handleLogin} type={"login"}/>
+        <AuthForm onSubmit={handleLogin} type={"login"} />
       )}
       {error && <p className={styles.error}>Ошибка: {error}</p>}
     </div>
