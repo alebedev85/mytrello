@@ -35,7 +35,7 @@ const Register = () => {
 
   return (
     <div
-      className={`${styles.authPage} ${theme === "dark" ? styles.dark : ""}`}
+      className={styles.authPage}
     >
       {isLoading ? (
         <Loader />

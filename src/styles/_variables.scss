@@ -53,7 +53,6 @@ $breakpoint-xl: 1280px;
 $mainHied: 84vh;
 
 :root {
-  --main-color: rgba(255, 255, 255, 1);
   /* ===== background ===== */
   --background-color: rgba(34, 30, 32, 1);
   --bg-image: url("/background-png.png");
@@ -77,11 +76,13 @@ $mainHied: 84vh;
     linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), var(--button-color);
   --button-border-radius: 20px;
   --button-border: 1px solid var(--glass-stroke);
-  --box-shadow: inset 0 0 6px var(--main-color);
+  --box-shadow: inset 0 0 6px var(--glass-stroke);
   --button-border-hover: 2px solid rgba(90, 85, 254, 1);
   --button-box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.25);
 
   /* ===== colors ===== */
+  --white-color: rgba(255, 255, 255, 1);
+  --main-color: rgba(236, 25, 164, 0.8);
   --danger-color: #ef4444;
   --danger-hover: #dc2626;
 }
