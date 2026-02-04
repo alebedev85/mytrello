@@ -6,13 +6,8 @@
   align-items: center;
   justify-content: center;
   height: $mainHied;
-  background-color: $light-bg;
-  border-radius: 0 0 $border-radius-md $border-radius-md;
-  padding-bottom: 25px;
 
-  &.dark {
-    background-color: $dark-main;
-  }
+
 }
 
 .link {
@@ -20,9 +15,6 @@
   color: $light-text-secondary;
   text-align: center;
 
-  .dark & {
-    color: $dark-text;
-  }
 }
 
 .link a {

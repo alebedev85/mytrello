@@ -1,13 +1,16 @@
 @use "./_variables.scss" as *;
 @use "./typography" as *;
 
+* {
+  box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
 p {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -45,6 +48,7 @@ h3 {
   font: var(--text-body-dull);
   color: var(--text-color-primary);
   letter-spacing: var(--letter-spacing-base);
+  opacity: 0.45;
 }
 
 button {
@@ -52,11 +56,17 @@ button {
   color: var(--main-color);
   background: var(--button-color);
   border: var(--button-border);
+  box-shadow: var(--box-shadow);
   border-radius: var(--button-border-radius);
 
   &:hover {
     background: var(--button-color-hover);
   }
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
 }
 
 .tooltip {

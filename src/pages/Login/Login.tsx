@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { loginFailure, loginStart, loginSuccess } from "../../store/authSlice";
 import { login as firebaseLogin } from "../../utils/authService";
@@ -30,7 +30,7 @@ const Login = () => {
           email: user.email,
           id: user.uid,
           token: await user.getIdToken(),
-        })
+        }),
       );
       navigate("/board");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,12 +47,9 @@ const Login = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <AuthForm title="Вход" buttonText="Войти" onSubmit={handleLogin} />
+        <AuthForm title="Вход" buttonText="Войти" onSubmit={handleLogin} type={"login"}/>
       )}
       {error && <p className={styles.error}>Ошибка: {error}</p>}
-      <p className={styles.link}>
-        Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
-      </p>
     </div>
   );
 };

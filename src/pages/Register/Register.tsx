@@ -44,12 +44,10 @@ const Register = () => {
           title="Регистрация"
           buttonText="Зарегистрироваться"
           onSubmit={handleRegister}
+          type={"register"}
         />
       )}
       {error && <p className={styles.error}>Ошибка: {error}</p>}
-      <p className={styles.link}>
-        Уже есть аккаунт? <a href="/login">Войти</a>
-      </p>
     </div>
   );
 };
