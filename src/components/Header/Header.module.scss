@@ -4,9 +4,6 @@
   position: relative;
   height: 150px;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 56px;
   background: var(--glass-effect);
   border-bottom: 1px solid var(--glass-stroke);
   box-sizing: border-box;
@@ -14,9 +11,7 @@
 
 .img {
   width: 116px;
-  position: absolute;
-  top: 11%;
-  left: 46.2%;
+  margin: auto;
 }
 
 .controls {
@@ -26,6 +21,9 @@
 }
 
 .themeButton {
+  position: absolute;
+  right: 40px;
+  top:50px;
   width: 44px;
   height: 44px;
   border-radius: 50%;

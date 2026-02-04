@@ -67,6 +67,10 @@ button {
 a {
   color: $primary-color;
   text-decoration: none;
+
+  &:hover{
+    opacity: 0.6;
+  }
 }
 
 .tooltip {
