@@ -47,12 +47,11 @@ const App = () => {
     return () => unsubscribe();
   }, [dispatch]);
 
-  if (isLoading) return <Loader />;
   return (
     <>
       <div className={styles.container}>
         <Header />
-        <Routes>
+        {isLoading?<Loader />:<Routes>
           <Route path="/" element={<AuthLayout />}>
             <Route index path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
@@ -61,7 +60,7 @@ const App = () => {
             <Route index element={<Main />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        </Routes>}
       </div>
       <AddColumnModal />
       <ConfirmationPopup />
