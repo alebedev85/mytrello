@@ -14,8 +14,8 @@ import Column from "../Column/Column";
 import styles from "./Board.module.scss";
 
 const Board = () => {
-  const { columns, columnOrder, tasks, theme } = useSelector(
-    (state: RootState) => state.board
+  const { columns, columnOrder, tasks } = useSelector(
+    (state: RootState) => state.board,
   );
   const board = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const Board = () => {
   return isLoading ? (
     <BoardSkeleton />
   ) : (
-    <div className={`${styles.board} ${theme === "dark" ? styles.dark : ""}`}>
+    <div className={styles.board}>
       {/* Droppable - область, куда можно перетаскивать элементы */}
       <Droppable droppableId="board" type="column" direction="horizontal">
         {(provided) => (
@@ -85,7 +85,7 @@ const Board = () => {
                 dispatch(openAddColumnModal());
               }}
             >
-              <FaPlus /> Добавить колонку
+              <FaPlus /> <h3>Добавить колонку</h3>
             </button>
           </div>
         )}

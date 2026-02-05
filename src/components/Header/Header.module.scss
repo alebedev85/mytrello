@@ -16,12 +16,13 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.themeButton {
   position: absolute;
   right: 40px;
   top:50px;
+}
+
+.themeButton {
+  
   width: 44px;
   height: 44px;
   border-radius: 50%;

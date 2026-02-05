@@ -36,8 +36,8 @@ const Main = () => {
     if (type === "task") {
       dispatch(
         moveTask({
-          sourceColId: source.droppableId, // ID колонки, откуда таск был взят
-          destColId: destination.droppableId, // ID колонки, куда таск перемещается
+          sourceColId: source.droppableId, // ID колонки, откуда задача была взят
+          destColId: destination.droppableId, // ID колонки, куда задача перемещается
           sourceIndex: source.index, // Исходный индекс в колонке
           destIndex: destination.index, // Новый индекс в колонке
           taskId: draggableId, // ID перетаскиваемой задачи
