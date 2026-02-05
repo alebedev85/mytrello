@@ -1,63 +1,64 @@
 @use "../../styles/variables.scss" as *;
 
 .task {
-  padding: $spacing-md;
-  margin-bottom: $spacing-sm;
-  border-radius: $border-radius-md;
-  box-shadow: $shadow-sm;
+  margin-bottom: 1rem;
+  border: 2px solid var(--glass-stroke);
+  border-radius: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.6);
   background: var(--glass-effect);
-
-  &.isDragging {
-    background-color: $light-hover;
-  }
-
-  .dark & {
-    background-color: #374151;
-
-    &.isDragging {
-      background-color: $dark-hover;
-    }
-  }
 }
 
 .header {
+  padding: 10px 14px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-}
+  background: var(--glass-effect);
+  border-radius: 25px 25px 0px 0px;
 
-.title {
-  font-weight: 500;
+  .controls {
+  display: flex;
+  gap: 0.5rem;
 
-  .dark & {
-    color: $dark-text;
+  .taskButton {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--glass-stroke);
+    box-shadow: none;
+  }
+
+  .buttonIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .buttonEditIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .deleteButton {
+    &:hover {
+      color: var(--danger-hover);
+    }
   }
 }
-
-.buttons {
-  display: flex;
-  gap: $spacing-sm;
 }
 
-button {
+.body{
+  padding: 0 10px 10px;
   display: flex;
-  align-items: center;
-  padding: $spacing-xs;
-  border-radius: 20%;
-
-  &:hover {
-      background-color: $light-hover;
-    }
+  flex-direction: column;
+  gap:10px;
 }
 
 .description {
   margin-top: $spacing-sm;
   font-size: $font-size-sm;
   color: $light-text-secondary;
-
-  .dark & {
-    color: $dark-text-secondary;
-  }
 }
 
 .form {
@@ -71,12 +72,6 @@ button {
   padding: $spacing-sm;
   border: 1px solid $light-border;
   border-radius: $border-radius-sm;
-
-  .dark & {
-    background-color: $dark-surface;
-    border-color: $dark-border;
-    color: $dark-text;
-  }
 }
 
 .textarea {

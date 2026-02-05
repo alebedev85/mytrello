@@ -6,10 +6,18 @@
 }
 
 .priorityButton {
+  width: 25px;
+  height: 25px;
   display: flex;
   align-items: center;
-  padding: $spacing-xs;
-  border-radius: 20%;
+  justify-content: center;
+  border: 2px solid var(--glass-stroke);
+  box-shadow: none;
+
+  .buttonIcon {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .colorCircle {

@@ -1,9 +1,9 @@
 import { Draggable } from "@hello-pangea/dnd";
+import cn from "classnames";
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useDispatch } from "react-redux";
+import EditIcon from "../../assets/icons/edit-icon.svg";
+import CloseIcon from "../../assets/icons/close-icon.svg";
 import { openConfirmationModal } from "../../store/popupSlice";
 import { Task } from "../../types";
 import { PRIORITY_COLORS } from "../../utils/constants";
@@ -19,7 +19,6 @@ interface TaskCardProps {
 }
 
 const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
-  const { theme } = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -28,61 +27,71 @@ const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
       openConfirmationModal({
         type: "task",
         targetId: { taskId: task.id, columnId },
-      })
+      }),
     );
   };
 
   return (
-    <div className={`${theme === "dark" ? styles.dark : ""}`}>
-      <Draggable draggableId={task.id} index={index}>
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            className={`${styles.task} ${
-              snapshot.isDragging ? styles.isDragging : ""
-            }`}
-            style={{
-              ...provided.draggableProps.style, // Сначала берем стили из DnD
-              backgroundColor:
-                task.priority !== "none"
-                  ? PRIORITY_COLORS[task.priority]
-                  : undefined, // Добавляем свой цвет
-            }}
-          >
-            {isEditing ? (
-              <TaskEditingForm
-                task={task}
-                onClose={() => setIsEditing(false)}
-              />
-            ) : (
-              <div>
-                <div className={styles.header}>
-                  <h3 className={styles.title}>{task.title}</h3>
-                  <div className={styles.buttons}>
-                    <PriorityMenu
-                      taskId={task.id}
-                      selectedPriority={task.priority}
+    <Draggable draggableId={task.id} index={index}>
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          className={styles.task}
+          style={{
+            ...provided.draggableProps.style, // Сначала берем стили из DnD
+            backgroundColor:
+              task.priority !== "none"
+                ? PRIORITY_COLORS[task.priority]
+                : undefined, // Добавляем свой цвет
+          }}
+        >
+          {isEditing ? (
+            <TaskEditingForm task={task} onClose={() => setIsEditing(false)} />
+          ) : (
+            <div>
+              <div className={styles.header}>
+                <div className={styles.controls}>
+                  <PriorityMenu
+                    taskId={task.id}
+                    selectedPriority={task.priority}
+                  />
+                  <button
+                    onClick={() => setIsEditing(true)}
+                    className={cn(styles.taskButton, "tooltip")}
+                    data-tooltip="Редактировать задачу"
+                  >
+                    <img
+                      className={styles.buttonCEditIcon}
+                      src={EditIcon}
+                      alt="Редактировать задачу"
                     />
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className={`${styles.button} tooltip`}
-                      data-tooltip="Редактировать задачу"
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      onClick={handleDeleteTask}
-                      className={`${styles.deleteButton} tooltip`}
-                      data-tooltip="Удалить задачу"
-                    >
-                      <IoClose />
-                    </button>
-                  </div>
+                  </button>
+                  <button
+                    onClick={handleDeleteTask}
+                    className={cn(
+                      styles.taskButton,
+                      styles.closeButton,
+                      "tooltip",
+                    )}
+                    data-tooltip="Удалить задачу"
+                  >
+                    <img
+                      className={styles.buttonIcon}
+                      src={CloseIcon}
+                      alt="Удалить задачу"
+                    />
+                  </button>
                 </div>
+              </div>
+              <div className={styles.body}>
+                <h3>{task.title}</h3>
+                {task.description && (
+                  <p className="text-body">{task.description}</p>
+                )}
                 {task.createdAt && (
-                  <p className={styles.description}>
+                  <p className="text-body-dull">
                     Создано:{" "}
                     {new Date(task.createdAt).toLocaleString("ru-RU", {
                       day: "2-digit",
@@ -93,15 +102,12 @@ const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
                     })}
                   </p>
                 )}
-                {task.description && (
-                  <p className={styles.description}>{task.description}</p>
-                )}
               </div>
-            )}
-          </div>
-        )}
-      </Draggable>
-    </div>
+            </div>
+          )}
+        </div>
+      )}
+    </Draggable>
   );
 };
 

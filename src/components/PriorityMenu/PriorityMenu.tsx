@@ -1,9 +1,11 @@
+import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
-import { FaFlag } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { changeTaskPriority } from "../../store/boardSlice";
 import { Priority } from "../../types";
 import { PRIORITY_COLORS } from "../../utils/constants";
+import artistpaletteIcon from "../../assets/icons/artistpalette-icon.svg";
+
 import styles from "./PriorityMenu.module.scss";
 
 interface PriorityMenuProps {
@@ -46,10 +48,14 @@ const PriorityMenu = ({ selectedPriority, taskId }: PriorityMenuProps) => {
       <button
         ref={priorityButtonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`${styles.priorityButton} tooltip`}
+        className={cn(styles.priorityButton, "tooltip")}
         data-tooltip="Поменять приоритет"
       >
-        <FaFlag />
+        <img
+          className={styles.buttonIcon}
+          src={artistpaletteIcon}
+          alt="Поменять приоритет"
+        />
       </button>
 
       {isOpen && (
