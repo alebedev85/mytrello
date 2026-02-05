@@ -1,16 +1,16 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
+import cn from "classnames";
 import { useRef, useState } from "react";
-import { FaPlus, FaTrashAlt } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useDispatch } from "react-redux";
 import { changeColumnColor } from "../../store/boardSlice";
 import { openConfirmationModal } from "../../store/popupSlice";
 import { Column as ColumnType, Task } from "../../types";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
-import ColorPicker from "../ColorPicker/ColorPicker";
 import TaskCard from "../TaskCard/TaskCard";
 import styles from "./Column.module.scss";
+import Clean from "/clean-icon.svg";
+import Close from "/close-icon.svg";
+import Plus from "/plus-icon.svg";
 
 interface ColumnProps {
   column: ColumnType;
@@ -19,7 +19,6 @@ interface ColumnProps {
 }
 
 const Column = ({ column, tasks, index }: ColumnProps) => {
-  const { theme } = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -42,7 +41,7 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
       openConfirmationModal({
         type: "column",
         targetId: { columnId: column.id },
-      })
+      }),
     );
   };
 
@@ -52,7 +51,7 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
       openConfirmationModal({
         type: "clear-tasks",
         targetId: { columnId: column.id },
-      })
+      }),
     );
   };
 
@@ -63,94 +62,94 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
   };
 
   return (
-    <div className={`${theme === "dark" ? styles.dark : ""}`}>
-      <Draggable draggableId={column.id} index={index}>
-        {(provided) => (
-          <div
-            {...provided.draggableProps}
-            ref={provided.innerRef}
-            className={styles.column}
-            style={{
-              ...provided.draggableProps.style, // Объединяем стили из Draggable
-              backgroundColor: column.color || undefined,
-            }}
-          >
-            <div {...provided.dragHandleProps} className={styles.header}>
-              <div className={styles.content}>
-                <span>{column.title}</span>
-                <div className={styles.controls}>
-                  <button
-                    onClick={toggleColorPicker}
-                    className={`${styles.colorButton} tooltip`}
-                    data-tooltip="Выбрать цвет колонки"
-                    style={{ padding: "2px" }}
-                  >
-                    🎨
-                  </button>
-                  <button
-                    onClick={toggleAddTask}
-                    className={`${styles.addButton} tooltip`}
-                    data-tooltip="Новая задача"
-                  >
-                    <FaPlus />
-                  </button>
-                  <button
-                    data-tooltip="Очистить колонку"
-                    className={`${styles.clearButton} tooltip`}
-                    onClick={handleClearColumn}
-                  >
-                    <FaTrashAlt />
-                  </button>
-                  <button
-                    onClick={handleDeleteColumn}
-                    data-tooltip="Удалить колонку"
-                    className={`${styles.deleteButton} tooltip`}
-                  >
-                    <IoClose />
-                  </button>
-                </div>
-              </div>
-              {isColorPickerOpen && (
-                <div ref={colorPickerRef}>
-                  <ColorPicker
-                    selectedColor={column.color || "#3b82f6"}
-                    onSelectColor={handleColorChange}
-                  />
-                </div>
-              )}
+    <Draggable draggableId={column.id} index={index}>
+      {(provided) => (
+        <div
+          {...provided.draggableProps}
+          ref={provided.innerRef}
+          className={styles.column}
+          // style={{
+          //   ...provided.draggableProps.style, // Объединяем стили из Draggable
+          //   backgroundColor: column.color || undefined,
+          // }}
+        >
+          <div {...provided.dragHandleProps} className={styles.header}>
+            <h2>{column.title}</h2>
+            <div className={styles.controls}>
+              <button
+                onClick={toggleAddTask}
+                className={cn(styles.columnButton, "tooltip")}
+                data-tooltip="Новая задача"
+              >
+                <img
+                  className={styles.buttonIcon}
+                  src={Plus}
+                  alt="Добавить задачу"
+                />
+              </button>
+              <button
+                data-tooltip="Очистить колонку"
+                className={cn(
+                  styles.columnButton,
+                  styles.clearButton,
+                  "tooltip",
+                )}
+                onClick={handleClearColumn}
+              >
+                <img
+                  className={styles.buttonIcon}
+                  src={Clean}
+                  alt="Очистить колонку"
+                />
+              </button>
+              <button
+                onClick={handleDeleteColumn}
+                data-tooltip="Удалить колонку"
+                className={cn(
+                  styles.columnButton,
+                  styles.deleteButton,
+                  "tooltip",
+                )}
+              >
+                <img
+                  className={styles.buttonIcon}
+                  src={Close}
+                  alt="Удалить колонку"
+                />
+              </button>
             </div>
-
-            <AddTaskForm
-              isActive={isAdding}
-              columnId={column.id}
-              onClose={() => setIsAdding(false)}
-            />
-
-            <Droppable droppableId={column.id} type="task">
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  className={`${styles.dropArea} ${
-                    snapshot.isDraggingOver ? styles.isDraggingOver : ""
-                  }`}
-                >
-                  {tasks.map((task, index) => (
-                    <TaskCard
-                      key={task.id}
-                      task={task}
-                      index={index}
-                      columnId={column.id}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
           </div>
-        )}
-      </Draggable>
-    </div>
+
+          <AddTaskForm
+            isActive={isAdding}
+            columnId={column.id}
+            onClose={() => setIsAdding(false)}
+          />
+
+          <Droppable droppableId={column.id} type="task">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className={`${styles.dropArea} ${
+                  snapshot.isDraggingOver ? styles.isDraggingOver : ""
+                }`}
+              >
+                {tasks.map((task, index) => (
+                  <TaskCard
+                    key={task.id}
+                    task={task}
+                    index={index}
+                    columnId={column.id}
+                  />
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
+      )}
+    </Draggable>
   );
 };
 

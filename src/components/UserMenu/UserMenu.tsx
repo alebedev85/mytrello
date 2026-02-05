@@ -54,7 +54,7 @@ const UserMenu = () => {
         onClick={() => setMenuOpen(!menuOpen)}
       >
         <FaUserCircle className={styles.userIcon} />
-        <span className={styles.userEmail}>{user.email}</span>
+        <p className="text-body">{user.email}</p>
       </button>
 
       <div className={`${styles.dropdownMenu} ${menuOpen ? styles.open : ""}`}>

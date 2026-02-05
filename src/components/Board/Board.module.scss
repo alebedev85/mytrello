@@ -1,6 +1,5 @@
 .board {
-  padding: 40px 30px;
-  flex: 1;
+  padding: 40px 40px;
 }
 
 .boardContainer {
@@ -8,7 +7,7 @@
   display: flex;
   align-items: flex-start;
   padding-bottom: 1rem;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .addColumnButton {

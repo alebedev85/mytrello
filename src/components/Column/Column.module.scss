@@ -1,81 +1,57 @@
-@use "../../styles/variables.scss" as *;
-
 .column {
-  background-color: white;
-  border-radius: $border-radius-md;
-  box-shadow: $shadow-md;
-  width: 20rem;
-  margin: 0 $spacing-sm;
+  background: var(--glass-effect);
+  border-radius: 25px;
+  width: 321px;
   display: flex;
   flex-direction: column;
-
-  .dark & {
-    background-color: $dark-surface;
-  }
+  border: 1px solid var(--glass-stroke);
 }
 
 .header {
-  padding: $spacing-md;
-  font-weight: bold;
-  font-size: $font-size-lg;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-  border-bottom: 1px solid $light-border;
-
-  .dark & {
-    border-color: $dark-border;
-    color: $dark-text;
-  }
-}
-.content {
+  padding: 10px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 3px solid var(--glass-stroke);
 }
 
 .controls {
   display: flex;
-  gap: $spacing-sm;
+  gap: 0.5rem;
 
-  button {
+  .columnButton {
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
-    border-radius: 20%;
-    padding: 2px 4px;
+    justify-content: center;
+    border: 2px solid var(--glass-stroke);
+    box-shadow: none;
+  }
 
+  .buttonIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .deleteButton {
     &:hover {
-      background-color: $light-hover;
+      color: var(--danger-hover);
     }
   }
-}
 
-.colorButton {
-  padding: 2px;
-}
-
-.deleteButton {
-  &:hover {
-    color: $danger-hover;
-  }
-}
-
-.clearButton {
-  &:hover {
-    color: $danger-hover;
+  .clearButton {
+    &:hover {
+      color: var(--danger-hover);
+    }
   }
 }
 
 .dropArea {
   flex: 1;
-  padding: $spacing-sm;
-  min-height: 100px;
+  padding: 1rem 1rem 0.5rem;
+  min-height: 47px;
 
   &.isDraggingOver {
-    background-color: $light-bg;
-
-    .dark & {
-      background-color: $dark-surface;
-    }
   }
 }

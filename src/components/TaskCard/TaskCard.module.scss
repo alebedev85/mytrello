@@ -5,7 +5,7 @@
   margin-bottom: $spacing-sm;
   border-radius: $border-radius-md;
   box-shadow: $shadow-sm;
-  background-color: $light-bg;
+  background: var(--glass-effect);
 
   &.isDragging {
     background-color: $light-hover;
