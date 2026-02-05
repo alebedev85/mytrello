@@ -7,10 +7,10 @@ import { openConfirmationModal } from "../../store/popupSlice";
 import { Column as ColumnType, Task } from "../../types";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import TaskCard from "../TaskCard/TaskCard";
+import Clean from "../../assets/icons/clean-icon.svg";
+import Close from "../../assets/icons/close-icon.svg";
+import Plus from "../../assets/icons/plus-icon.svg";
 import styles from "./Column.module.scss";
-import Clean from "/clean-icon.svg";
-import Close from "/close-icon.svg";
-import Plus from "/plus-icon.svg";
 
 interface ColumnProps {
   column: ColumnType;

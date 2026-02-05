@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { toggleTheme } from "../../store/boardSlice";
-import Logo from "/logo.svg";
-import Moon from "/moon-icon.svg";
-import Sun from "/sun-icon.svg";
+import Logo from "../../assets/logo.svg";
+import Moon from "../../assets/icons/moon-icon.svg";
+import Sun from "../../assets/icons/sun-icon.svg";
 
 import UserMenu from "../UserMenu/UserMenu";
 import styles from "./Header.module.scss";
