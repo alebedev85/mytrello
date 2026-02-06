@@ -65,6 +65,13 @@ $mainHied: 84vh;
   );
   --glass-stroke: rgba(239, 239, 239, 1);
 
+  /* ===== task-header ===== */
+  --task-header: linear-gradient(
+    135deg,
+    rgba(239, 239, 239, 0.6),
+    rgba(255, 255, 255, 0.1)
+  );
+
   /* ===== buttons ===== */
   --button-color: linear-gradient(
     135deg,
@@ -85,6 +92,9 @@ $mainHied: 84vh;
   --main-color: rgba(236, 25, 164, 0.8);
   --danger-color: #ef4444;
   --danger-hover: #dc2626;
+
+  --task-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.6);
+  --menu-color:#7d798c;
 }
 
 :root[theme="dark"] {
@@ -93,4 +103,5 @@ $mainHied: 84vh;
     rgba(15.3, 15.3, 15.3, 0.8),
     rgba(0, 0, 0, 0.3)
   );
+  --menu-color:#1e1d21;
 }

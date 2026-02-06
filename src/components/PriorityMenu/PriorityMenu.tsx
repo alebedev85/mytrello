@@ -1,10 +1,10 @@
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import artistpaletteIcon from "../../assets/icons/artistpalette-icon.svg";
 import { changeTaskPriority } from "../../store/boardSlice";
 import { Priority } from "../../types";
 import { PRIORITY_COLORS } from "../../utils/constants";
-import artistpaletteIcon from "../../assets/icons/artistpalette-icon.svg";
 
 import styles from "./PriorityMenu.module.scss";
 
@@ -63,17 +63,17 @@ const PriorityMenu = ({ selectedPriority, taskId }: PriorityMenuProps) => {
           <button
             className={`${selectedPriority === "high" ? styles.active : ""}`}
             onClick={() => handlePriorityChange("high")}
-            style={{ backgroundColor: PRIORITY_COLORS.high }}
+            style={{ background: PRIORITY_COLORS.high }}
           />
           <button
             className={`${selectedPriority === "medium" ? styles.active : ""}`}
             onClick={() => handlePriorityChange("medium")}
-            style={{ backgroundColor: PRIORITY_COLORS.medium }}
+            style={{ background: PRIORITY_COLORS.medium }}
           />
           <button
             className={`${selectedPriority === "low" ? styles.active : ""}`}
             onClick={() => handlePriorityChange("low")}
-            style={{ backgroundColor: PRIORITY_COLORS.low }}
+            style={{ background: PRIORITY_COLORS.low }}
           />
           <button
             className={`${
@@ -82,7 +82,7 @@ const PriorityMenu = ({ selectedPriority, taskId }: PriorityMenuProps) => {
                 : ""
             }`}
             onClick={() => handlePriorityChange("none")}
-            style={{ backgroundColor: PRIORITY_COLORS.none }}
+            style={{ background: PRIORITY_COLORS.none }}
           />
         </div>
       )}

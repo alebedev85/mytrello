@@ -1,5 +1,3 @@
-@use "../../styles/variables.scss" as *;
-
 .priorityMenuContainer {
   position: relative;
   display: inline-block;
@@ -31,28 +29,25 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--menu-color);
+  border-radius: 15px;
+  box-shadow: var(--task-box-shadow);
   z-index: 10;
   display: flex;
-  gap: 4px;
-  padding: 4px;
+  gap: 0.5rem;
+  padding: 0.3rem;
 
   button {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     border: none;
     border-radius: 50%;
+    border: 1px solid var(--white-color);
+
     padding: 0;
 
-    &:hover {
-      opacity: 0.8;
-    }
-
     &.active {
-      border: 2px solid black;
+      border: 2px solid var(--main-color);
     }
   }
 }

@@ -1,10 +1,8 @@
-@use "../../styles/variables.scss" as *;
-
 .task {
   margin-bottom: 1rem;
   border: 2px solid var(--glass-stroke);
   border-radius: 25px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--task-box-shadow);
   background: var(--glass-effect);
 }
 
@@ -13,92 +11,44 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background: var(--glass-effect);
+  background: var(--task-header);
   border-radius: 25px 25px 0px 0px;
 
   .controls {
-  display: flex;
-  gap: 0.5rem;
-
-  .taskButton {
-    width: 25px;
-    height: 25px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--glass-stroke);
-    box-shadow: none;
-  }
+    gap: 0.5rem;
 
-  .buttonIcon {
-    width: 20px;
-    height: 20px;
-  }
+    .taskButton {
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--glass-stroke);
+      box-shadow: none;
+    }
 
-  .buttonEditIcon {
-    width: 16px;
-    height: 16px;
-  }
+    .buttonIcon {
+      width: 20px;
+      height: 20px;
+    }
 
-  .deleteButton {
-    &:hover {
-      color: var(--danger-hover);
+    .buttonEditIcon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .deleteButton {
+      &:hover {
+        color: var(--danger-hover);
+      }
     }
   }
 }
-}
 
-.body{
+.body {
   padding: 0 10px 10px;
   display: flex;
   flex-direction: column;
-  gap:10px;
-}
-
-.description {
-  margin-top: $spacing-sm;
-  font-size: $font-size-sm;
-  color: $light-text-secondary;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-sm;
-}
-
-.input {
-  width: 100%;
-  padding: $spacing-sm;
-  border: 1px solid $light-border;
-  border-radius: $border-radius-sm;
-}
-
-.textarea {
-  @extend .input;
-  resize: vertical;
-}
-
-.formControls {
-  display: flex;
-  justify-content: flex-end;
-  gap: $spacing-sm;
-}
-
-.deleteButton {
-  &:hover {
-    color: $danger-hover;
-  }
-}
-
-.submitButton {
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
-  background-color: $primary-color;
-  color: $light-text;
-  border-radius: $border-radius-sm;
-
-  &:hover {
-    background-color: $primary-hover;
-  }
+  gap: 10px;
 }

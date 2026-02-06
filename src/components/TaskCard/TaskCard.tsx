@@ -2,8 +2,8 @@ import { Draggable } from "@hello-pangea/dnd";
 import cn from "classnames";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import EditIcon from "../../assets/icons/edit-icon.svg";
 import CloseIcon from "../../assets/icons/close-icon.svg";
+import EditIcon from "../../assets/icons/edit-icon.svg";
 import { openConfirmationModal } from "../../store/popupSlice";
 import { Task } from "../../types";
 import { PRIORITY_COLORS } from "../../utils/constants";
@@ -41,50 +41,53 @@ const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
           className={styles.task}
           style={{
             ...provided.draggableProps.style, // Сначала берем стили из DnD
-            backgroundColor:
+            background:
               task.priority !== "none"
                 ? PRIORITY_COLORS[task.priority]
                 : undefined, // Добавляем свой цвет
           }}
         >
-          {isEditing ? (
-            <TaskEditingForm task={task} onClose={() => setIsEditing(false)} />
-          ) : (
-            <div>
-              <div className={styles.header}>
-                <div className={styles.controls}>
-                  <PriorityMenu
-                    taskId={task.id}
-                    selectedPriority={task.priority}
+          <div>
+            <div className={styles.header}>
+              <div className={styles.controls}>
+                <PriorityMenu
+                  taskId={task.id}
+                  selectedPriority={task.priority}
+                />
+                <button
+                  onClick={() => setIsEditing(!isEditing)}
+                  className={cn(styles.taskButton, "tooltip")}
+                  data-tooltip="Редактировать задачу"
+                >
+                  <img
+                    className={styles.buttonCEditIcon}
+                    src={EditIcon}
+                    alt="Редактировать задачу"
                   />
-                  <button
-                    onClick={() => setIsEditing(true)}
-                    className={cn(styles.taskButton, "tooltip")}
-                    data-tooltip="Редактировать задачу"
-                  >
-                    <img
-                      className={styles.buttonCEditIcon}
-                      src={EditIcon}
-                      alt="Редактировать задачу"
-                    />
-                  </button>
-                  <button
-                    onClick={handleDeleteTask}
-                    className={cn(
-                      styles.taskButton,
-                      styles.closeButton,
-                      "tooltip",
-                    )}
-                    data-tooltip="Удалить задачу"
-                  >
-                    <img
-                      className={styles.buttonIcon}
-                      src={CloseIcon}
-                      alt="Удалить задачу"
-                    />
-                  </button>
-                </div>
+                </button>
+                <button
+                  onClick={handleDeleteTask}
+                  className={cn(
+                    styles.taskButton,
+                    styles.closeButton,
+                    "tooltip",
+                  )}
+                  data-tooltip="Удалить задачу"
+                >
+                  <img
+                    className={styles.buttonIcon}
+                    src={CloseIcon}
+                    alt="Удалить задачу"
+                  />
+                </button>
               </div>
+            </div>
+            {isEditing ? (
+              <TaskEditingForm
+                task={task}
+                onClose={() => setIsEditing(false)}
+              />
+            ) : (
               <div className={styles.body}>
                 <h3>{task.title}</h3>
                 {task.description && (
@@ -103,8 +106,8 @@ const TaskCard = ({ task, columnId, index }: TaskCardProps) => {
                   </p>
                 )}
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
     </Draggable>
