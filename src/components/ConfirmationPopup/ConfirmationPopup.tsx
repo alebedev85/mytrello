@@ -7,12 +7,14 @@ import {
   removeTask,
 } from "../../store/boardSlice";
 import { closeConfirmationModal } from "../../store/popupSlice";
+import PopupContainer from "../ui/PopupContainer/PopupContainer";
+
 import styles from "./ConfirmationPopup.module.scss";
 
 const ConfirmationPopup = () => {
   const dispatch = useDispatch();
   const { isOpen, type, targetId } = useSelector(
-    (state: RootState) => state.popup.confirmationModal
+    (state: RootState) => state.popup.confirmationModal,
   );
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -45,7 +47,7 @@ const ConfirmationPopup = () => {
           removeTask({
             taskId: targetId.taskId,
             columnId: targetId.columnId,
-          })
+          }),
         );
       }
     } else if (type === "clear-tasks" && targetId) {
@@ -59,29 +61,31 @@ const ConfirmationPopup = () => {
     type === "column"
       ? "удалить колонку"
       : type === "task"
-      ? "удалить задачу"
-      : type === "clear-tasks"
-      ? "очистить колонку"
-      : "выполнить действие";
+        ? "удалить задачу"
+        : type === "clear-tasks"
+          ? "очистить колонку"
+          : "выполнить действие";
 
+  const capitalize = (str: string) =>
+    str ? str[0].toUpperCase() + str.slice(1) : "";
 
   return isOpen ? (
     <div className={styles.overlay} onClick={handleOverlayClick}>
-      <div className={styles.popup}>
-        <h3>Вы уверены?</h3>
-        <p>Вы действительно хотите {confirmationText}?</p>
+      <PopupContainer>
+        <h2>Вы уверены?</h2>
+        <p className="text-body">Вы действительно хотите {confirmationText}?</p>
         <div className={styles.buttons}>
-          <button onClick={handleConfirm} className={styles.confirmButton}>
-            Да
+          <button onClick={handleConfirm} className="mainButton">
+            <h3>{capitalize(confirmationText.split(" ")[0])}</h3>
           </button>
           <button
             onClick={() => dispatch(closeConfirmationModal())}
-            className={styles.cancelButton}
+            className="mainButton"
           >
-            Нет
+            <h3>Отмена</h3>
           </button>
         </div>
-      </div>
+      </PopupContainer>
     </div>
   ) : null;
 };

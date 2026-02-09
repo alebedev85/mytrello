@@ -1,4 +1,3 @@
-@use "../../styles/variables.scss" as *; 
 .loader {
   display: flex;
   justify-content: center;
@@ -6,7 +5,7 @@
   flex: 1;
 
   .spinner {
-    border: 4px solid $light-border;  // Используем светлую границу для светлой темы
+    border: 4px solid var(--white-color);  // Используем светлую границу для светлой темы
     border-top: 4px solid var(--main-color);  // Используем основной цвет для вращающегося верхнего сегмента
     border-radius: 50%;
     width: 50px;

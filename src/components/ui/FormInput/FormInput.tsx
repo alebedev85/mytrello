@@ -1,28 +1,29 @@
-import { FieldError } from "react-hook-form";
 import styles from "./FormInput.module.scss";
 
-interface AuthInputProps {
+interface FormInputProps {
   id: string;
-  label: string;
+  label?: string;
   type?: string;
   placeholder?: string;
-  error?: FieldError;
+  error?: string;
   registerProps: object;
 }
 
-const AuthInput = ({
+const FormInput = ({
   id,
   label,
   type = "text",
   placeholder,
   error,
   registerProps,
-}: AuthInputProps) => {
+}: FormInputProps) => {
   return (
     <div className={styles.inputGroup}>
-      <label htmlFor={id}>
-        <h2>{label}</h2>
-      </label>
+      {label && (
+        <label htmlFor={id}>
+          <h2>{label}</h2>
+        </label>
+      )}
 
       <input
         id={id}
@@ -32,9 +33,9 @@ const AuthInput = ({
         {...registerProps}
       />
 
-      {error && <p className={styles.error}>{error.message}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };
 
-export default AuthInput;
+export default FormInput;

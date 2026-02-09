@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { addColumn } from "../../store/boardSlice";
 import { closeAddColumnModal } from "../../store/popupSlice";
+import FormInput from "../ui/FormInput/FormInput";
+import PopupContainer from "../ui/PopupContainer/PopupContainer";
 import styles from "./AddColumnModal.module.scss";
 
 const AddColumnModal = () => {
   const dispatch = useDispatch();
   const { isOpen } = useSelector(
-    (state: RootState) => state.popup.addColumnModal
+    (state: RootState) => state.popup.addColumnModal,
   );
 
   // Состояние для заголовка новой колонки
@@ -54,32 +56,35 @@ const AddColumnModal = () => {
   };
 
   return isOpen ? (
-    <div
-      className={styles.overlay}
-      onClick={handleOverlayClick}
-    >
-      <div className={styles.popup}>
-        <h2>Add New Column</h2>
-        <input
-          type="text"
-          value={newColumnTitle}
-          onChange={(e) => setNewColumnTitle(e.target.value)}
-          placeholder="Column title"
-          className={styles.input}
-          onKeyPress={(e) => e.key === "Enter" && handleAddColumn()}
+    <div className={styles.overlay} onClick={handleOverlayClick}>
+      <PopupContainer>
+        <h2>Название колонки</h2>
+        <FormInput
+          id="columnTitle"
+          placeholder="Введите название"
+          registerProps={{
+            value: newColumnTitle,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+              setNewColumnTitle(e.target.value),
+            onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+              if (e.key === "Enter") {
+                handleAddColumn();
+              }
+            },
+          }}
         />
         <div className={styles.modalButtons}>
-          <button onClick={handleAddColumn} className={styles.addButton}>
-            Добавить
+          <button onClick={handleAddColumn} className="mainButton">
+            <h3>Добавить</h3>
           </button>
           <button
             onClick={() => dispatch(closeAddColumnModal())}
-            className={styles.cancelButton}
+            className="mainButton"
           >
-            Отмена
+            <h3>Отмена</h3>
           </button>
         </div>
-      </div>
+      </PopupContainer>
     </div>
   ) : null;
 };

@@ -110,5 +110,5 @@ $mainHied: 84vh;
     rgba(15.3, 15.3, 15.3, 0.8),
     rgba(0, 0, 0, 0.3)
   );
-  --menu-color: #1e1d21;
+  --menu-color: var(--background-color);
 }

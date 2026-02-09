@@ -26,7 +26,7 @@ const AuthForm = ({ onSubmit, type }: AuthFormProps) => {
         label="Email:"
         type="email"
         placeholder="Введите Email"
-        error={errors.email}
+        error={errors.email?.message}
         registerProps={register("email", {
           required: "Email обязателен",
           pattern: {
@@ -41,7 +41,7 @@ const AuthForm = ({ onSubmit, type }: AuthFormProps) => {
         label="Пароль:"
         type="password"
         placeholder="Введите пароль"
-        error={errors.password}
+        error={errors.password?.message}
         registerProps={register("password", {
           required: "Пароль обязателен",
           minLength: {
