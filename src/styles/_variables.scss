@@ -94,7 +94,14 @@ $mainHied: 84vh;
   --danger-hover: #dc2626;
 
   --task-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.6);
-  --menu-color:#7d798c;
+  --menu-color: #7d798c;
+
+  /* ===== colors ===== */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
 }
 
 :root[theme="dark"] {
@@ -103,5 +110,5 @@ $mainHied: 84vh;
     rgba(15.3, 15.3, 15.3, 0.8),
     rgba(0, 0, 0, 0.3)
   );
-  --menu-color:#1e1d21;
+  --menu-color: #1e1d21;
 }

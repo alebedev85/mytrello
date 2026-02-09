@@ -8,7 +8,6 @@ import styles from "./AddColumnModal.module.scss";
 
 const AddColumnModal = () => {
   const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.board);
   const { isOpen } = useSelector(
     (state: RootState) => state.popup.addColumnModal
   );
@@ -56,7 +55,7 @@ const AddColumnModal = () => {
 
   return isOpen ? (
     <div
-      className={`${styles.overlay} ${theme === "dark" ? styles.dark : ""}`}
+      className={styles.overlay}
       onClick={handleOverlayClick}
     >
       <div className={styles.popup}>

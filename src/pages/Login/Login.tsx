@@ -17,8 +17,7 @@ interface FormData {
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state: RootState) => state.auth);
-  const [error, setError] = useState<string | null>(null);
+  const { isLoading, error } = useSelector((state: RootState) => state.auth);
 
   const handleLogin = async ({ email, password }: FormData) => {
     dispatch(loginStart());
@@ -34,8 +33,7 @@ const Login = () => {
       navigate("/board");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      setError(error.message);
-      dispatch(loginFailure());
+      dispatch(loginFailure(error.message));
     }
   };
 
