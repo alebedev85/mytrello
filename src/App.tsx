@@ -51,16 +51,20 @@ const App = () => {
     <>
       <div className={styles.container}>
         <Header />
-        {isLoading?<Loader />:<Routes>
-          <Route path="/" element={<AuthLayout />}>
-            <Route index path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
-          <Route path="/board" element={<AccountLayout />}>
-            <Route index element={<Main />} />
-          </Route>
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Routes>
+            <Route path="/" element={<AuthLayout />}>
+              <Route index path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+            <Route path="/board" element={<AccountLayout />}>
+              <Route index element={<Main />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        )}
       </div>
       <AddColumnModal />
       <ConfirmationPopup />

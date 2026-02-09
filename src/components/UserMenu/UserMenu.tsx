@@ -9,7 +9,7 @@ import styles from "./UserMenu.module.scss";
 const UserMenu = () => {
   const { theme } = useSelector((state: RootState) => state.board);
   const { isAuthenticated, user } = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state.auth,
   );
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,7 +59,8 @@ const UserMenu = () => {
 
       <div className={`${styles.dropdownMenu} ${menuOpen ? styles.open : ""}`}>
         <button className={styles.logoutButton} onClick={handleLogout}>
-          <FaSignOutAlt /> Выйти
+          <FaSignOutAlt />
+          <h3>Выйти</h3>
         </button>
       </div>
     </div>

@@ -1,10 +1,8 @@
-@use "../../styles/variables.scss" as *;
-
 .content {
-  height: $mainHied;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: $spacing-xl;
+  gap: 2rem;
 }
