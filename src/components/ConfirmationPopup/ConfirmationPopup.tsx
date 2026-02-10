@@ -73,7 +73,9 @@ const ConfirmationPopup = () => {
     <div className={styles.overlay} onClick={handleOverlayClick}>
       <PopupContainer onClose={() => dispatch(closeConfirmationModal())}>
         <h2>Вы уверены?</h2>
-        <p className="text-body">Вы действительно хотите {confirmationText}?</p>
+        <p className="text-body" style={{ textAlign: "center" }}>
+          Вы действительно хотите {confirmationText}?
+        </p>
         <div className={styles.buttons}>
           <button onClick={handleConfirm} className="mainButton">
             <h3>{capitalize(confirmationText.split(" ")[0])}</h3>

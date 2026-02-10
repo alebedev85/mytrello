@@ -10,14 +10,20 @@ interface PopupContainerProps {
 const PopupContainer = ({ children, onClose }: PopupContainerProps) => {
   return (
     <div className={styles.popup}>
-      <button
-        onClick={onClose}
-        data-tooltip="Удалить колонку"
-        className={styles.columnButton}
-      >
-        <img className={styles.buttonIcon} src={Close} alt="Удалить колонку" />
-      </button>
-      {children}
+      <div className={styles.header}>
+        <button
+          onClick={onClose}
+          data-tooltip="Удалить колонку"
+          className={styles.closeButton}
+        >
+          <img
+            className={styles.buttonIcon}
+            src={Close}
+            alt="Удалить колонку"
+          />
+        </button>
+      </div>
+      <div className={styles.body}>{children}</div>
     </div>
   );
 };
