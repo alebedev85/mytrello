@@ -1,0 +1,15 @@
+.inputs{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--spacing-md);
+  gap: var(--spacing-lg);
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--spacing-xl);
+  gap: var(--spacing-lg);
+  align-items: center
+}

@@ -1,15 +1,14 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import cn from "classnames";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeColumnColor } from "../../store/boardSlice";
+import Clean from "../../assets/icons/clean-icon.svg";
+import Close from "../../assets/icons/close-icon.svg";
+import Plus from "../../assets/icons/plus-icon.svg";
 import { openConfirmationModal } from "../../store/popupSlice";
 import { Column as ColumnType, Task } from "../../types";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import TaskCard from "../TaskCard/TaskCard";
-import Clean from "../../assets/icons/clean-icon.svg";
-import Close from "../../assets/icons/close-icon.svg";
-import Plus from "../../assets/icons/plus-icon.svg";
 import styles from "./Column.module.scss";
 
 interface ColumnProps {
@@ -20,16 +19,7 @@ interface ColumnProps {
 
 const Column = ({ column, tasks, index }: ColumnProps) => {
   const dispatch = useDispatch();
-  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
-
-  const colorPickerRef = useRef<HTMLDivElement>(null);
-
-  // Переключение состояния ColorPicker
-  const toggleColorPicker = () => {
-    setIsColorPickerOpen((prev) => !prev); // Переключаем состояние
-  };
-
   // Переключение состояния isAdding
   const toggleAddTask = () => {
     setIsAdding((prev) => !prev); // Переключаем состояние
@@ -53,12 +43,6 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
         targetId: { columnId: column.id },
       }),
     );
-  };
-
-  // Изменение цвета колонки
-  const handleColorChange = (color: string) => {
-    dispatch(changeColumnColor({ columnId: column.id, color }));
-    setIsColorPickerOpen(false);
   };
 
   return (

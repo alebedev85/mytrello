@@ -1,36 +1,38 @@
 .inputGroup {
-  margin-top: 20px;
   width: 100%;
-}
 
-input {
-  margin-top: 15px;
-  padding: 10px;
-  width: 100%;
-  height: 41px;
-  border: 2px solid rgba(239, 239, 239, 1);
-  border-radius: 25px;
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
-  background: linear-gradient(
-    135deg,
-    rgba(239, 239, 239, 0.05) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
-  font: var(--text-body-dull);
-  color: var(--text-color-primary);
-  letter-spacing: var(--letter-spacing-base);
+  h2 {
+    margin-bottom: var(--spacing-md);
+  }
 
-  &::placeholder {
+  input {
+    padding: var(--spacing-md);
+    width: 100%;
+    height: 41px;
+    border: 2px solid rgba(239, 239, 239, 1);
+    border-radius: 25px;
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+      135deg,
+      rgba(239, 239, 239, 0.05) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
     font: var(--text-body-dull);
     color: var(--text-color-primary);
     letter-spacing: var(--letter-spacing-base);
-    opacity: 0.45;
-  }
-}
 
-.error {
-  margin-top: 6px;
-  color: var(--danger-color);
-  font-size: var(--text-body);
-  text-align: center;
+    &::placeholder {
+      font: var(--text-body-dull);
+      color: var(--text-color-primary);
+      letter-spacing: var(--letter-spacing-base);
+      opacity: 0.45;
+    }
+  }
+
+  .error {
+    margin-top: 6px;
+    color: var(--danger-color);
+    font-size: var(--text-body);
+    text-align: center;
+  }
 }

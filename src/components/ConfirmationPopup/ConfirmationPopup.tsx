@@ -71,7 +71,7 @@ const ConfirmationPopup = () => {
 
   return isOpen ? (
     <div className={styles.overlay} onClick={handleOverlayClick}>
-      <PopupContainer>
+      <PopupContainer onClose={() => dispatch(closeConfirmationModal())}>
         <h2>Вы уверены?</h2>
         <p className="text-body">Вы действительно хотите {confirmationText}?</p>
         <div className={styles.buttons}>
