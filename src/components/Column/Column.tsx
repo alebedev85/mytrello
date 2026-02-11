@@ -52,10 +52,6 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
           {...provided.draggableProps}
           ref={provided.innerRef}
           className={styles.column}
-          // style={{
-          //   ...provided.draggableProps.style, // Объединяем стили из Draggable
-          //   backgroundColor: column.color || undefined,
-          // }}
         >
           <div {...provided.dragHandleProps} className={styles.header}>
             <h2>{column.title}</h2>
