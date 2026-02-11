@@ -97,15 +97,23 @@ $mainHied: 84vh;
 
   --task-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.6);
   --menu-color: #7d798c;
-  --popup-bg: linear-gradient(135deg, #fffafa9c 0%, rgb(213 213 213 / 21%) 100%);
+  --popup-bg: linear-gradient(
+    135deg,
+    #fffafa9c 0%,
+    rgb(213 213 213 / 21%) 100%
+  );
   --popup-bg-filter: blur(10px);
 
-  /* ===== colors ===== */
+  /* ===== spacing ===== */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
+
+  /* ===== skeleton ===== */
+  --pulse-start: rgba(255, 255, 255, 0.4);
+  --pulse-middle: rgba(255, 255, 255, 0.2);
 }
 
 :root[theme="dark"] {
@@ -116,4 +124,7 @@ $mainHied: 84vh;
   );
   --menu-color: var(--background-color);
   --popup-bg: linear-gradient(135deg, #221e1f 0%, rgba(34, 30, 31, 0.6) 100%);
+
+  --pulse-start: rgba(15.3, 15.3, 15.3 0.4);
+  --pulse-middle: rgba(15.3, 15.3, 15.3 0.2);
 }
