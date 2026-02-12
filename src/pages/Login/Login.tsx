@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../../components/AuthForm/AuthForm";
@@ -38,9 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div
-      className={styles.authPage}
-    >
+    <div className={styles.authPage}>
       {isLoading ? (
         <Loader />
       ) : (

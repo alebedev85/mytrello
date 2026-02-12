@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AddColumnModal from "./components/AddColumnModal/AddColumnModal";
 import ConfirmationPopup from "./components/ConfirmationPopup/ConfirmationPopup";
 import Header from "./components/Header/Header";
@@ -55,8 +55,9 @@ const App = () => {
           <Loader />
         ) : (
           <Routes>
+            <Route path="/" element={<Navigate to="/board" replace />} />
             <Route path="/" element={<AuthLayout />}>
-              <Route index path="login" element={<Login />} />
+              <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
             </Route>
             <Route path="/board" element={<AccountLayout />}>

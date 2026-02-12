@@ -16,7 +16,6 @@ interface FormData {
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.board);
   const { isLoading } = useSelector((state: RootState) => state.auth);
   const [error, setError] = useState<string | null>(null);
 

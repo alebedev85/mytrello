@@ -57,7 +57,7 @@ const AddColumnModal = () => {
 
   return isOpen ? (
     <div className={styles.overlay} onClick={handleOverlayClick}>
-      <PopupContainer>
+      <PopupContainer onClose={() => dispatch(closeAddColumnModal())}>
         <h2>Название колонки</h2>
         <FormInput
           id="columnTitle"
