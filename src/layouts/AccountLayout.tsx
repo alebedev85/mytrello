@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../store";
 
 const AccountLayout = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated,
+  const isAuthorized = useSelector(
+    (state: RootState) => state.auth.isAuthorized,
   );
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+  return isAuthorized ? <Outlet /> : <Navigate to="/login" replace />;
 };
 
 export default AccountLayout;

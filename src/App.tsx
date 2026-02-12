@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -21,7 +22,9 @@ import styles from "./App.module.scss";
 const App = () => {
   const dispatch = useDispatch();
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isLoading } = useSelector((state: RootState) => state.auth);
+  const { isLoading, isAuthorized } = useSelector(
+    (state: RootState) => state.auth,
+  );
 
   useEffect(() => {
     document.documentElement.setAttribute("theme", theme);
@@ -49,7 +52,7 @@ const App = () => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={cn(styles.container, isAuthorized && styles.authorized)}>
         <Header />
         {isLoading ? (
           <Loader />

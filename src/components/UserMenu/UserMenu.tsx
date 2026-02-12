@@ -8,9 +8,7 @@ import styles from "./UserMenu.module.scss";
 
 const UserMenu = () => {
   const { theme } = useSelector((state: RootState) => state.board);
-  const { isAuthenticated, user } = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const { isAuthorized, user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -42,7 +40,7 @@ const UserMenu = () => {
     }
   };
 
-  if (!isAuthenticated) return null; // Если пользователя нет, не отображаем меню
+  if (!isAuthorized) return null; // Если пользователя нет, не отображаем меню
 
   return (
     <div

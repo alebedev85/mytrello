@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../store";
 
 const AuthLayout = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated,
+  const isAuthorized = useSelector(
+    (state: RootState) => state.auth.isAuthorized,
   );
 
-  return isAuthenticated ? <Navigate to="/board" replace /> : <Outlet />;
+  return isAuthorized ? <Navigate to="/board" replace /> : <Outlet />;
 };
 
 export default AuthLayout;

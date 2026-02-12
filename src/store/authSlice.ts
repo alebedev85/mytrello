@@ -3,7 +3,7 @@ import { RootState } from ".";
 import { User } from "../types";
 
 interface AuthState {
-  isAuthenticated: boolean;
+  isAuthorized: boolean;
   user: User;
   isLoading: boolean;
   error: null | string;
@@ -15,13 +15,13 @@ const storedUser = localStorage.getItem("user");
 // Начальное состояние
 const initialState: AuthState = storedUser
   ? {
-      isAuthenticated: true,
+      isAuthorized: true,
       user: JSON.parse(storedUser),
       isLoading: false,
       error: null,
     }
   : {
-      isAuthenticated: false,
+      isAuthorized: false,
       user: { email: null, token: null, id: null },
       isLoading: false,
       error: null,
@@ -40,7 +40,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     },
     loginSuccess: (state, action: PayloadAction<User>) => {
-      state.isAuthenticated = true;
+      state.isAuthorized = true;
       state.user = action.payload;
       state.isLoading = false;
     },
