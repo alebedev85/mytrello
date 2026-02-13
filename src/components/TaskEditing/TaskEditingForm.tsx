@@ -21,7 +21,7 @@ const TaskEditingForm = ({ task, onClose }: TaskEditingFormProps) => {
           ...task,
           title: editedTitle,
           description: editedDescription,
-        })
+        }),
       );
       onClose();
     }
@@ -43,11 +43,11 @@ const TaskEditingForm = ({ task, onClose }: TaskEditingFormProps) => {
         rows={3}
       />
       <div className={styles.formControls}>
-        <button className={styles.cancelButton} onClick={onClose}>
-          Cancel
+        <button className={styles.button} onClick={onClose}>
+          <p className="text-body">Сохранить</p>
         </button>
-        <button onClick={handleSave} className={styles.submitButton}>
-          Save
+        <button onClick={handleSave} className={styles.button}>
+          <p className="text-body">Отмена</p>
         </button>
       </div>
     </div>

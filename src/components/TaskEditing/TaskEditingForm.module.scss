@@ -1,57 +1,47 @@
-@use "../../styles/variables.scss" as *;
-
 .form {
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
 }
 
 .input {
+  padding: var(--spacing-md);
   width: 100%;
-  padding: $spacing-sm;
-  border: 1px solid $light-border;
-  border-radius: $border-radius-sm;
+  height: 41px;
+  border: 2px solid rgba(239, 239, 239, 1);
+  border-radius: 25px;
+  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(
+    135deg,
+    rgba(239, 239, 239, 0.05) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  font: var(--text-body-dull);
+  color: var(--text-color-primary);
+  letter-spacing: var(--letter-spacing-base);
 
-  .dark & {
-    background-color: $dark-surface;
-    border-color: $dark-border;
-    color: $dark-text;
+  &::placeholder {
+    font: var(--text-body-dull);
+    color: var(--text-color-primary);
+    letter-spacing: var(--letter-spacing-base);
+    opacity: 0.45;
   }
 }
 
 .textarea {
   @extend .input;
   resize: vertical;
+  min-height: 82px;
 }
 
 .formControls {
   display: flex;
-  justify-content: flex-end;
-  gap: $spacing-sm;
+  justify-content: flex-start;
+  gap: var(--spacing-sm);
 }
 
-.cancelButton {
-  border: none;
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
-  border-radius: $border-radius-sm;
-  background: $danger-color;
-  color: $light-text;
-
-  .dark & {
-    color: $danger-hover;
-  }
+.button {
+  padding: 8px 20px;
 }
 
-.submitButton {
-  border: none;
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
-  background-color: $primary-color;
-  color: $light-text;
-  border-radius: $border-radius-sm;
-
-  &:hover {
-    background-color: $primary-hover;
-  }
-}
