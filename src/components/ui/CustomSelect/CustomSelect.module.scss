@@ -5,8 +5,7 @@
 
 .selected {
   border-radius: 15px;
-  border: var(--button-border);
-  box-shadow: var(--box-shadow);
+  border: var(--border);
   padding: var(--spacing-xs) var(--spacing-sm);
   transition:
     background-color 0.2s,

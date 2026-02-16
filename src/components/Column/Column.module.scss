@@ -4,7 +4,7 @@
   width: 321px;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--glass-stroke);
+  border: var(--button-border);
 }
 
 .header {
