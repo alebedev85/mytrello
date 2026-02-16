@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../../store/boardSlice";
 import { Task } from "../../types";
+import FormInput from "../ui/FormInput/FormInput";
+import FormTextarea from "../ui/FormTextarea/FormTextarea";
 import styles from "./TaskEditingForm.module.scss";
 
 interface TaskEditingFormProps {
@@ -9,48 +11,59 @@ interface TaskEditingFormProps {
   onClose: () => void;
 }
 
+type TEditForm = Pick<Task, "title" | "description">;
+
 const TaskEditingForm = ({ task, onClose }: TaskEditingFormProps) => {
   const dispatch = useDispatch();
-  const [editedTitle, setEditedTitle] = useState(task.title);
-  const [editedDescription, setEditedDescription] = useState(task.description);
 
-  const handleSave = () => {
-    if (editedTitle.trim()) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TEditForm>({
+    defaultValues: {
+      title: task.title,
+      description: task.description,
+    },
+  });
+
+  const onSubmit = ({ title, description }: TEditForm) => {
+    if (title.trim()) {
       dispatch(
         updateTask({
           ...task,
-          title: editedTitle,
-          description: editedDescription,
+          title: title,
+          description: description,
         }),
       );
       onClose();
     }
   };
   return (
-    <div className={styles.form}>
-      <input
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <FormInput
+        id="title"
         type="text"
-        value={editedTitle}
-        onChange={(e) => setEditedTitle(e.target.value)}
-        className={styles.input}
-        placeholder="Task title"
+        placeholder="Заголовок задачи"
+        error={errors.title?.message}
+        registerProps={register("title", {
+          required: "Заголовок обязателен",
+        })}
       />
-      <textarea
-        value={editedDescription}
-        onChange={(e) => setEditedDescription(e.target.value)}
-        className={styles.textarea}
-        placeholder="Description"
-        rows={3}
+      <FormTextarea
+        id="description"
+        placeholder="Описание задачи"
+        registerProps={register("description")}
       />
       <div className={styles.formControls}>
-        <button className={styles.button} onClick={onClose}>
+        <button className={styles.button} type="submit">
           <p className="text-body">Сохранить</p>
         </button>
-        <button onClick={handleSave} className={styles.button}>
+        <button onClick={onClose} className={styles.button} type="button">
           <p className="text-body">Отмена</p>
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
