@@ -1,59 +1,22 @@
-@use "../../styles/variables.scss" as *;
-
 .taskForm {
-  padding: 1rem;
-  margin: 0.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  background-color: $light-bg;
-
-  &.dark {
-    background-color: $dark-task;
-  }
-}
-
-.input {
-  width: 100%;
-  padding: $spacing-sm;
-  border: 1px solid $light-border;
-  border-radius: $border-radius-sm;
-  margin-bottom: $spacing-sm;
-
-  // .dark & {
-  //   background-color: $dark-surface;
-  //   border-color: $dark-border;
-  //   color: $dark-text;
-  // }
+  border: 2px solid var(--glass-stroke);
+  border-radius: 25px;
+  box-shadow: var(--task-box-shadow);
+  background: var(--glass-effect);
+  margin: var(--spacing-md) var(--spacing-md) 0;
+  padding: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
 }
 
 .formControls {
   display: flex;
-  justify-content: flex-end;
-  gap: $spacing-sm;
+  justify-content: flex-start;
+  gap: var(--spacing-sm);
 }
 
-.cancelButton {
-  border: none;
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
-  border-radius: $border-radius-sm;
-  background: $danger-color;
-  color: $light-text;
-
-  &:hover {
-    background: $danger-hover;
-  }
-}
-
-.submitButton {
-  border: none;
-  padding: $spacing-xs $spacing-md;
-  font-size: $font-size-sm;
-  background-color: $primary-color;
-  color: $light-text;
-  border-radius: $border-radius-sm;
-
-  &:hover {
-    background-color: $primary-hover;
-  }
+.button {
+  padding: 8px 20px;
 }

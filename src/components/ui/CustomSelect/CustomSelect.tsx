@@ -3,31 +3,22 @@ import styles from "./CustomSelect.module.scss";
 import { PRIORITY_COLORS } from "../../../utils/constants";
 import { Priority } from "../../../types";
 
-interface Option {
-  value: string;
-  label: string;
+interface CustomSelectProps {
+  value: Priority;
+  onChange: (value: Priority) => void;
 }
 
-const options: Option[] = [
+const options = [
   { value: "none", label: "Без приоритета" },
   { value: "high", label: "Высокий" },
   { value: "medium", label: "Средний" },
   { value: "low", label: "Низкий" },
 ];
 
-interface CustomSelectProps {
-  selected: Priority;
-  onSelect: (value: Priority) => void;
-}
-
-const CustomSelect = ({
-  selected,
-  onSelect,
-}: CustomSelectProps) => {
+const CustomSelect = ({ value, onChange }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
-  // Закрытие селектора по клику вне
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -38,14 +29,10 @@ const CustomSelect = ({
       }
     }
 
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
       document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
+  }, []);
 
   return (
     <div
@@ -54,12 +41,13 @@ const CustomSelect = ({
     >
       <div
         className={styles.selected}
-        style={{ backgroundColor: PRIORITY_COLORS[selected] || "#fff" }}
-        onClick={() => setIsOpen(!isOpen)}
+        style={{ background: PRIORITY_COLORS[value] || "#fff" }}
+        onClick={() => setIsOpen((prev) => !prev)}
       >
-        {options.find((opt) => opt.value === selected)?.label ||
+        {options.find((opt) => opt.value === value)?.label ||
           "Выберите приоритет"}
       </div>
+
       {isOpen && (
         <ul className={styles.options}>
           {options.map((option) => (
@@ -67,12 +55,11 @@ const CustomSelect = ({
               key={option.value}
               className={styles.option}
               style={{
-                backgroundColor: PRIORITY_COLORS[option.value as Priority],
+                background:
+                  PRIORITY_COLORS[option.value as Priority],
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               onClick={() => {
-                onSelect(option.value as Priority);
+                onChange(option.value as Priority);
                 setIsOpen(false);
               }}
             >
@@ -83,6 +70,6 @@ const CustomSelect = ({
       )}
     </div>
   );
-}
+};
 
 export default CustomSelect;

@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useForm, Controller } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { addTask } from "../../store/boardSlice";
-import { Priority, Task } from "../../types";
+import { Task } from "../../types";
 import CustomSelect from "../ui/CustomSelect/CustomSelect";
+import FormInput from "../ui/FormInput/FormInput";
+import FormTextarea from "../ui/FormTextarea/FormTextarea";
 
 import styles from "./AddTaskForm.module.scss";
 
@@ -13,51 +14,71 @@ interface AddTaskFormProps {
   onClose: () => void;
 }
 
+type TNewTask = Pick<Task, "title" | "description" | "priority">;
+
 const AddTaskForm = ({ isActive, columnId, onClose }: AddTaskFormProps) => {
   const dispatch = useDispatch();
-  const { theme } = useSelector((state: RootState) => state.board);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [priority, setPriority] = useState<Priority>("none");
 
-  const handleAddTask = () => {
-    if (newTaskTitle.trim()) {
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<TNewTask>({defaultValues: {
+    priority: "none",
+  },});
+
+  const handleClose = () => {
+  reset();
+  onClose();
+};
+
+  const onSubmit = ({ title, description, priority }: TNewTask) => {
+    if (title.trim()) {
       const newTask: Task = {
         id: `task-${Date.now()}`,
-        title: newTaskTitle,
-        description: "",
+        title: title,
+        description: description,
         priority: priority,
       };
       dispatch(addTask({ columnId, task: newTask }));
-      setNewTaskTitle("");
-      setPriority("none");
+      reset();
       onClose();
     }
   };
   return isActive ? (
-    <div
-      className={`${styles.taskForm} ${theme === "dark" ? styles.dark : ""}`}
-    >
-      <input
+    <form className={styles.taskForm} onSubmit={handleSubmit(onSubmit)}>
+      <FormInput
+        id="title"
         type="text"
-        value={newTaskTitle}
-        onChange={(e) => setNewTaskTitle(e.target.value)}
-        placeholder="Task title"
-        className={styles.input}
-        onKeyPress={(e) => e.key === "Enter" && handleAddTask()}
+        placeholder="Заголовок задачи"
+        error={errors.title?.message}
+        registerProps={register("title", {
+          required: "Заголовок обязателен",
+        })}
       />
-      <CustomSelect
-        onSelect={(value) => setPriority(value)}
-        selected={priority}
+      <FormTextarea
+        id="description"
+        placeholder="Описание задачи"
+        registerProps={register("description")}
+      />
+      <Controller
+        name="priority"
+        control={control}
+        render={({ field }) => (
+          <CustomSelect value={field.value} onChange={field.onChange} />
+        )}
       />
       <div className={styles.formControls}>
-        <button onClick={handleAddTask} className={styles.submitButton}>
-          Добавить
+        <button type="submit" className={styles.button}>
+          <p className="text-body">Добавить</p>
         </button>
-        <button onClick={onClose} className={styles.cancelButton}>
-          Отмена
+        <button type="button" onClick={handleClose} className={styles.button}>
+          <p className="text-body">Отмена</p>
         </button>
       </div>
-    </div>
+    </form>
   ) : null;
 };
 
