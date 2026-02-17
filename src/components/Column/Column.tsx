@@ -9,6 +9,7 @@ import { openConfirmationModal } from "../../store/popupSlice";
 import { Column as ColumnType, Task } from "../../types";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import TaskCard from "../TaskCard/TaskCard";
+import ColumnControls from "../ColumnControls/ColumnControls";
 import styles from "./Column.module.scss";
 
 interface ColumnProps {
@@ -55,7 +56,8 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
         >
           <div {...provided.dragHandleProps} className={styles.header}>
             <h2>{column.title}</h2>
-            <div className={styles.controls}>
+            <ColumnControls/>
+            {/* <div className={styles.controls}>
               <button
                 onClick={toggleAddTask}
                 className={cn(styles.columnButton, "tooltip")}
@@ -97,7 +99,7 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
                   alt="Удалить колонку"
                 />
               </button>
-            </div>
+            </div> */}
           </div>
 
           <AddTaskForm

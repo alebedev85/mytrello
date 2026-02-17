@@ -7,7 +7,6 @@ import { logout } from "../../store/authSlice";
 import styles from "./UserMenu.module.scss";
 
 const UserMenu = () => {
-  const { theme } = useSelector((state: RootState) => state.board);
   const { isAuthorized, user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -45,7 +44,7 @@ const UserMenu = () => {
   return (
     <div
       ref={menuRef}
-      className={`${styles.userMenu} ${theme === "dark" ? styles.dark : ""}`}
+      className={styles.userMenu}
     >
       <button
         className={styles.userButton}

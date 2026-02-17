@@ -1,0 +1,108 @@
+.controlsWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.burger {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  background: none;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+
+  &:hover {
+    background: none;
+    border: var(--button-border);
+    box-shadow: var(--box-shadow);
+  }
+
+  span {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    height: 2px;
+    background: var(--text-color-primary);
+    transition: 0.3s ease;
+  }
+
+  span:nth-child(1) {
+    top: 10px;
+  }
+  span:nth-child(2) {
+    top: 17px;
+  }
+  span:nth-child(3) {
+    top: 24px;
+  }
+}
+
+.open span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 17px;
+}
+
+.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 17px;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+
+  position: absolute;
+  right: 0;
+
+  transform: translateX(20px);
+  opacity: 0;
+  pointer-events: none;
+
+  border: var(--button-border);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--button-border-radius);
+  padding: 5px 40px 5px 5px;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  .columnButton {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--glass-stroke);
+    box-shadow: none;
+  }
+
+  .buttonIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .deleteButton {
+    &:hover {
+      color: var(--danger-hover);
+    }
+  }
+
+  .clearButton {
+    &:hover {
+      color: var(--danger-hover);
+    }
+  }
+}
+
+.controlsOpen {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
