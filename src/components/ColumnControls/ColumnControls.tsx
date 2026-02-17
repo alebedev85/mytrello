@@ -12,12 +12,10 @@ export default function ColumnControls() {
     setIsMenuOpen((prev) => !prev);
   };
   return (
-    <div className={styles.controlsWrapper}>
+    <div className={cn(styles.controlsWrapper, { [styles.open]: isMenuOpen })}>
       {/* Панель */}
       <div
-        className={cn(styles.controls, {
-          [styles.controlsOpen]: isMenuOpen,
-        })}
+        className={styles.controls}
       >
         <button
           // onClick={toggleAddTask}
