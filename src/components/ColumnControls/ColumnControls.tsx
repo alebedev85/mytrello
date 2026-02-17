@@ -5,7 +5,13 @@ import Close from "../../assets/icons/close-icon.svg";
 import Plus from "../../assets/icons/plus-icon.svg";
 import styles from "./ColumnControls.module.scss";
 
-export default function ColumnControls() {
+interface ColumnControlsProps {
+  onAdd: () => void;
+  onClear: () => void;
+  onDelete: () => void;
+}
+
+export default function ColumnControls({onAdd, onClear, onDelete}:ColumnControlsProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -18,7 +24,7 @@ export default function ColumnControls() {
         className={styles.controls}
       >
         <button
-          // onClick={toggleAddTask}
+          onClick={onAdd}
           className={cn(styles.columnButton, "tooltip")}
           data-tooltip="Новая задача"
         >
@@ -28,13 +34,13 @@ export default function ColumnControls() {
         <button
           data-tooltip="Очистить колонку"
           className={cn(styles.columnButton, styles.clearButton, "tooltip")}
-          // onClick={handleClearColumn}
+          onClick={onClear}
         >
           <img className={styles.buttonIcon} src={Clean} alt="" />
         </button>
 
         <button
-          // onClick={handleDeleteColumn}
+          onClick={onDelete}
           data-tooltip="Удалить колонку"
           className={cn(styles.columnButton, styles.deleteButton, "tooltip")}
         >

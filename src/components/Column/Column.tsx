@@ -1,15 +1,11 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import cn from "classnames";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import Clean from "../../assets/icons/clean-icon.svg";
-import Close from "../../assets/icons/close-icon.svg";
-import Plus from "../../assets/icons/plus-icon.svg";
 import { openConfirmationModal } from "../../store/popupSlice";
 import { Column as ColumnType, Task } from "../../types";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
-import TaskCard from "../TaskCard/TaskCard";
 import ColumnControls from "../ColumnControls/ColumnControls";
+import TaskCard from "../TaskCard/TaskCard";
 import styles from "./Column.module.scss";
 
 interface ColumnProps {
@@ -56,50 +52,11 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
         >
           <div {...provided.dragHandleProps} className={styles.header}>
             <h2>{column.title}</h2>
-            <ColumnControls/>
-            {/* <div className={styles.controls}>
-              <button
-                onClick={toggleAddTask}
-                className={cn(styles.columnButton, "tooltip")}
-                data-tooltip="Новая задача"
-              >
-                <img
-                  className={styles.buttonIcon}
-                  src={Plus}
-                  alt="Добавить задачу"
-                />
-              </button>
-              <button
-                data-tooltip="Очистить колонку"
-                className={cn(
-                  styles.columnButton,
-                  styles.clearButton,
-                  "tooltip",
-                )}
-                onClick={handleClearColumn}
-              >
-                <img
-                  className={styles.buttonIcon}
-                  src={Clean}
-                  alt="Очистить колонку"
-                />
-              </button>
-              <button
-                onClick={handleDeleteColumn}
-                data-tooltip="Удалить колонку"
-                className={cn(
-                  styles.columnButton,
-                  styles.deleteButton,
-                  "tooltip",
-                )}
-              >
-                <img
-                  className={styles.buttonIcon}
-                  src={Close}
-                  alt="Удалить колонку"
-                />
-              </button>
-            </div> */}
+            <ColumnControls
+              onAdd={toggleAddTask}
+              onClear={handleClearColumn}
+              onDelete={handleDeleteColumn}
+            />
           </div>
 
           <AddTaskForm

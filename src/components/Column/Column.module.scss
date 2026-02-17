@@ -15,38 +15,6 @@
   border-bottom: 3px solid var(--glass-stroke);
 }
 
-.controls {
-  display: flex;
-  gap: 0.5rem;
-
-  .columnButton {
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--glass-stroke);
-    box-shadow: none;
-  }
-
-  .buttonIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .deleteButton {
-    &:hover {
-      color: var(--danger-hover);
-    }
-  }
-
-  .clearButton {
-    &:hover {
-      color: var(--danger-hover);
-    }
-  }
-}
-
 .dropArea {
   flex: 1;
   padding: 1rem;
