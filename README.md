@@ -4,7 +4,7 @@
 
 Это веб-приложение для управления задачами, где пользователи могут создавать, перемещать и изменять задачи между колонками (например, "To Do", "In Progress", "Done").
 
-
+[Макет этого проекта в Figma](https://www.figma.com/design/ooBO0kJ5BOy8t2VArS9jH0/MyTrello?node-id=0-1&t=OrVKkJY6S5KffsXc-1)
 
 ## Функционал:
 
