@@ -52,11 +52,13 @@ const Column = ({ column, tasks, index }: ColumnProps) => {
         >
           <div {...provided.dragHandleProps} className={styles.header}>
             <h2>{column.title}</h2>
-            <ColumnControls
-              onAdd={toggleAddTask}
-              onClear={handleClearColumn}
-              onDelete={handleDeleteColumn}
-            />
+            <div className={styles.controls}>
+              <ColumnControls
+                onAdd={toggleAddTask}
+                onClear={handleClearColumn}
+                onDelete={handleDeleteColumn}
+              />
+            </div>
           </div>
 
           <AddTaskForm
