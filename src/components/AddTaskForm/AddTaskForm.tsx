@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../store/boardSlice";
 import { Task } from "../../types";
@@ -25,14 +25,16 @@ const AddTaskForm = ({ isActive, columnId, onClose }: AddTaskFormProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TNewTask>({defaultValues: {
-    priority: "none",
-  },});
+  } = useForm<TNewTask>({
+    defaultValues: {
+      priority: "none",
+    },
+  });
 
   const handleClose = () => {
-  reset();
-  onClose();
-};
+    reset();
+    onClose();
+  };
 
   const onSubmit = ({ title, description, priority }: TNewTask) => {
     if (title.trim()) {
@@ -63,13 +65,16 @@ const AddTaskForm = ({ isActive, columnId, onClose }: AddTaskFormProps) => {
         placeholder="Описание задачи"
         registerProps={register("description")}
       />
-      <Controller
-        name="priority"
-        control={control}
-        render={({ field }) => (
-          <CustomSelect value={field.value} onChange={field.onChange} />
-        )}
-      />
+      <div className={styles.priority}>
+        <p className="text-body">Приоритет:</p>
+        <Controller
+          name="priority"
+          control={control}
+          render={({ field }) => (
+            <CustomSelect value={field.value} onChange={field.onChange} />
+          )}
+        />
+      </div>
       <div className={styles.formControls}>
         <button type="submit" className={styles.button}>
           <p className="text-body">Добавить</p>

@@ -11,6 +11,15 @@
   gap: var(--spacing-sm);
 }
 
+.priority{
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  border: var(--button-border);
+  border-radius: var(--section-border-radius);
+  padding-left: var(--spacing-sm);
+}
+
 .formControls {
   display: flex;
   justify-content: flex-start;
