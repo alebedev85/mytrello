@@ -85,19 +85,18 @@
   display: flex;
   gap: 0.5rem;
 
-  overflow: hidden;
-  max-width: 0;
+  transform: translateX(20px);
   opacity: 0;
+  pointer-events: none;
 
-  transition:
-    max-width 0.3s ease,
-    opacity 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.2s ease;
 }
 
 /* выезд справа → налево */
 .controlsWrapper.open .controls {
-  max-width: 200px; // подстрой под свои кнопки
+  transform: translateX(0);
   opacity: 1;
+  pointer-events: auto;
 }
 
 .controls .columnButton {
