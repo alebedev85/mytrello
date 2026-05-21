@@ -1,7 +1,8 @@
 :root {
   /* ===== Base ===== */
-  --font-family-base: 'Poppins', sans-serif;
+  --font-family-base: "Poppins", sans-serif;
   --text-color-primary: rgba(250, 250, 250, 1);
+  --text-color-form: #494045;
 
   /* ===== Headings ===== */
   --text-h1: 700 24px/36px var(--font-family-base);
@@ -14,4 +15,8 @@
 
   /* ===== Letter spacing ===== */
   --letter-spacing-base: 0.03em;
+}
+
+:root[theme="dark"] {
+  --text-color-form: rgba(250, 250, 250, 1);
 }

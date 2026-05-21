@@ -17,9 +17,14 @@
       rgba(239, 239, 239, 0.05) 0%,
       rgba(255, 255, 255, 0.01) 100%
     );
-    font: var(--text-body-dull);
-    color: var(--text-color-primary);
+    font: var(--text-h3);
+    color: var(--text-color-form);
     letter-spacing: var(--letter-spacing-base);
+
+    &:focus {
+      outline: 2px solid var(--text-color-form);
+      border: 1px solid var(--text-color-form);
+    }
 
     &::placeholder {
       font: var(--text-body-dull);
